@@ -1,0 +1,10 @@
+# Ignore python environment
+venv
+
+# Ignore python cache
+__pycache__
+
+# Ignore built package wheel
+dist
+build
+*.egg-info
