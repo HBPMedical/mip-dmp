@@ -22,6 +22,7 @@ $ virtualenv venv -p python3.9
 
 ```bash
 $ source ./venv/bin/activate
+(venv) $ python setup.py bdist_wheel
 (venv) $ pip install -e .
 ```
 
