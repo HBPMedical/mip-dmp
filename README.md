@@ -25,7 +25,7 @@ $ source ./venv/bin/activate
 (venv) $ pip install -e .
 ```
 
-## How to use the installed scripts?
+## Available tools
 
 ### `mip_update_cdes_json`
 
