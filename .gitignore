@@ -8,3 +8,10 @@ __pycache__
 dist
 build
 *.egg-info
+
+# Ignore IDE files
+.idea
+.vscode
+
+# Ignore QT Designer files
+*.ui
