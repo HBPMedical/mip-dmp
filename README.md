@@ -48,7 +48,7 @@ Available commands:
 
 - `remove_dashes_and_underscores`: Remove dashes and underscores.
 
-### `mip_dataset_mapper_ui `:
+### `mip_dataset_mapper_ui `
 
 Script to start the MIP Dataset Mapper UI, a tool to support members of a MIP Federation in the task of mapping their dataset to the Common Data Elements schema of the MIP Federation.
 
@@ -62,7 +62,8 @@ $ mip_dataset_mapper_ui
 This will display a window that consists of four main component in grid layout fashion.
 
 The task of mapping the dataset would consist of the following tasks:
-- Load a input CSV dataset (top left)
-- Load a CDEs schema in .xlxs format (bottom left)
+
+- Load a input CSV dataset in `.csv` format (top left)
+- Load a CDEs schema in `.xlxs` format (bottom left)
 - Edit the columns / CDEs mapping table (top right)
 - Configure output directory / filename and create the output CSV dataset mapped to the CDEs schema (bottom right)
