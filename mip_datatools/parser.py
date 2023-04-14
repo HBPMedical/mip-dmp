@@ -18,9 +18,14 @@ def create_parser():
         description="Script to remove dashes and underscores in the handsons CDEs."
     )
     p.add_argument(
-        "--cdes_file",
+        "--cdes_json_file",
         required=True,
         help="Common data elements (CDEs) file in JSON format.",
+    )
+    p.add_argument(
+        "--cdes_excel_file",
+        required=True,
+        help="Common data elements (CDEs) file in EXCEL format.",
     )
     p.add_argument(
         "--command",
@@ -29,10 +34,17 @@ def create_parser():
         help="Command to be performed on the CDEs.",
     )
     p.add_argument(
-        "--output_json_suffix",
+        "--output_dir",
+        required=False,
+        default="None",
+        help="Directory where the output CDEs files will be saved. "
+        "If not provided, the output files will be saved in the same directory as the CDEs JSON file.",
+    )
+    p.add_argument(
+        "--output_suffix",
         required=False,
         default="corrected",
-        help="Suffix added to the original name for the output CDEs in JSON format.",
+        help="Suffix added to the original name for the output CDEs in JSON or EXCEL format.",
     )
     p.add_argument(
         "--output_json_indent",
