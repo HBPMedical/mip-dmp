@@ -27,11 +27,10 @@ from PySide2.QtWidgets import (
 )
 import pkg_resources
 
-from mip_datatools.dataset.mapping import initialize_mapping_table, map_dataset
-from mip_datatools.qt5.model.table_model import (
-    NoEditorDelegate,
+from mip_dmp.dataset.mapping import initialize_mapping_table, map_dataset
+from mip_dmp.qt5.model.table_model import (
+    # NoEditorDelegate,
     PandasTableModel,
-    QComboBoxDelegate,
 )
 
 
@@ -109,7 +108,7 @@ class MIPDatasetMapperWindow(object):
         mainWindow.resize(1024, 768)
         # Set the window Qt Style Sheet
         styleSheetFile = pkg_resources.resource_filename(
-            "mip_datatools", os.path.join("qt5", "assets", "stylesheet.qss")
+            "mip_dmp", os.path.join("qt5", "assets", "stylesheet.qss")
         )
         with open(styleSheetFile, "r") as fh:
             mainWindow.setStyleSheet(fh.read())
@@ -216,7 +215,7 @@ class MIPDatasetMapperWindow(object):
         self.mapButton = QAction(
             QIcon(
                 pkg_resources.resource_filename(
-                    "mip_datatools", os.path.join("qt5", "assets", "map.png")
+                    "mip_dmp", os.path.join("qt5", "assets", "map.png")
                 )
             ),
             "Map",
@@ -241,7 +240,7 @@ class MIPDatasetMapperWindow(object):
         self.inputDatasetLoadButton = QAction(
             QIcon(
                 pkg_resources.resource_filename(
-                    "mip_datatools", "qt5/assets/load_dataset.png"
+                    "mip_dmp", "qt5/assets/load_dataset.png"
                 )
             ),
             "Load dataset",
@@ -277,9 +276,7 @@ class MIPDatasetMapperWindow(object):
         self.targetCDEsFormLayout.setContentsMargins(0, 0, 0, 0)
         self.targetCDEsLoadButton = QAction(
             QIcon(
-                pkg_resources.resource_filename(
-                    "mip_datatools", "qt5/assets/load_cdes.png"
-                )
+                pkg_resources.resource_filename("mip_dmp", "qt5/assets/load_cdes.png")
             ),
             "Load CDE file",
             mainWindow,
@@ -315,7 +312,7 @@ class MIPDatasetMapperWindow(object):
         self.mappingLoadButton = QAction(
             QIcon(
                 pkg_resources.resource_filename(
-                    "mip_datatools", "qt5/assets/load_mapping.png"
+                    "mip_dmp", "qt5/assets/load_mapping.png"
                 )
             ),
             "Load mapping file",
@@ -351,7 +348,7 @@ class MIPDatasetMapperWindow(object):
         self.mappingSaveButton = QAction(
             QIcon(
                 pkg_resources.resource_filename(
-                    "mip_datatools", "qt5/assets/save_mapping.png"
+                    "mip_dmp", "qt5/assets/save_mapping.png"
                 )
             ),
             "Save mapping file",
@@ -363,7 +360,7 @@ class MIPDatasetMapperWindow(object):
         self.mappingCheckButton = QAction(
             QIcon(
                 pkg_resources.resource_filename(
-                    "mip_datatools", "qt5/assets/check_mapping.png"
+                    "mip_dmp", "qt5/assets/check_mapping.png"
                 )
             ),
             "Check Columns / CDEs mapping",
@@ -744,12 +741,12 @@ class MIPDatasetMapperWindow(object):
         # Set the model of the table view to the pandas model
         self.mappingTableView.setModel(self.columnsCDEsMappingPandasModel)
         # Set a custom delegates for the columns of the mapping table
-        self.mappingSourceDatasetColumnDelegate = NoEditorDelegate(
-            self.mappingTableView
-        )
-        self.mappingTableView.setItemDelegateForColumn(
-            0, self.mappingSourceDatasetColumnDelegate
-        )
+        # self.mappingSourceDatasetColumnDelegate = NoEditorDelegate(
+        #     self.mappingTableView
+        # )
+        # self.mappingTableView.setItemDelegateForColumn(
+        #     0, self.mappingSourceDatasetColumnDelegate
+        # )
         for index, row in self.columnsCDEsMappingData.iterrows():
             c = QComboBox()
             c.addItems(

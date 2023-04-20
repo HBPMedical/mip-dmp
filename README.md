@@ -1,6 +1,6 @@
-# mip_datatools
+# mip_dmp: MIP Dataset Mapper
 
-Python tools to manipulate Metadata schema of Common Data Elements for the federations of the Medical Informatics Platform (MIP). 
+Python tool with Graphical User Interface to map datasets to specific Common Data Elements (CDEs)metadata schema of a federation of the Medical Informatics Platform (MIP). It is developed to support members of a MIP Federation in the task of mapping their dataset to the CDEs schema of this federation. 
 
 ## How to install?
 
@@ -25,32 +25,11 @@ $ source ./venv/bin/activate
 (venv) $ pip install -e .
 ```
 
-## Available tools
-
-### `mip_update_cdes_json`
-
-Script to update the CDES JSON/EXCEL file pair to make this process more reproducible. 
-
-**Usage**
-
-In a terminal, you can run it with the folllowing command:
-```
-$ mip_update_cdes_json \
-    --cdes_json_file "/path/to/CDEsMetadata.json" \
-    --cdes_excel_file "/path/to/myCDEs.xlxs" \
-    --command "remove_dashes_and_underscores" \
-    --output_suffix "updated" \
-    --log_file "/path/to/CDEs_update.log" 
-```
-**Note:** You can use the option `-h`to show more details about usage documentation.
-
-Available commands:
-
-- `remove_dashes_and_underscores`: Remove dashes and underscores.
+## Usage
 
 ### `mip_dataset_mapper_ui `
 
-Script to start the MIP Dataset Mapper UI, a tool to support members of a MIP Federation in the task of mapping their dataset to the Common Data Elements schema of the MIP Federation.
+You can use the installed `mip_dataset_mapper_ui ` script to start the MIP Dataset Mapper UI application.
 
 **Usage**
 
