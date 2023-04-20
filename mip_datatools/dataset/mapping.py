@@ -168,7 +168,27 @@ def apply_transform_scale(dataset_column, cde_code, cde_type, scaling_factor):
     return dataset_column
 
 
-def initialize_mapping_table(dataset, schema):
+# Define the function to find fuzzy matches
+def fuzzy_match(x, choices):
+    """Find the fuzzy matches for the given string.
+
+    Parameters
+    ----------
+    x : str
+        String for which the fuzzy matches are found.
+
+    choices : list
+        List of strings to be matched.
+
+    Returns
+    -------
+    list
+        List of fuzzy matches.
+    """
+    return [(m, fuzz.ratio(x, m), -fuzz.ratio(x, m)) for m in choices]
+
+
+def initialize_mapping_table(dataset, schema, nb_fuzzy_matches=10):
     """Initialize the mapping table.
 
     Parameters
@@ -179,10 +199,17 @@ def initialize_mapping_table(dataset, schema):
     schema : pandas.DataFrame
         Schema to which the dataset is mapped.
 
+    nb_fuzzy_matches : int
+        Number of fuzzy matches to store for each dataset column.
+
     Returns
     -------
     pandas.DataFrame
         Mapping table represented as a Pandas DataFrame.
+
+    fuzzy_matched_cde_codes : dict
+        Dictionary with tuple of the first 10 fuzzy matched CDE codes with
+        corresponding fuzzy ratio (value) for each dataset column (key).
     """
     # Create the mapping table.
     MAPPING_TABLE_COLUMNS = {
@@ -197,18 +224,61 @@ def initialize_mapping_table(dataset, schema):
     # Add the dataset columns.
     mapping_table["dataset_column"] = dataset.columns
 
+    # Initialize a dictionary to store the results of the
+    # first 10 fuzzy matched CDE codes for each dataset column.
+    fuzzy_matched_cde_codes = {}
+
     # Add the CDE codes with fuzzy matching.
     # The CDE codes are sorted by the similarity to the dataset column name,
     # and the nb_dataset_columns first CDE codes are selected.
-    mapping_table["cde_code"] = mapping_table["dataset_column"].apply(
-        lambda dataset_column: sorted(
-            schema["code"],
-            key=lambda cde_code: fuzz.ratio(dataset_column, cde_code),
-            reverse=True,
-        )[
-            0
-        ]  # Select the first matched CDE code.
+    # matches = pd.Series(dataset.columns).apply(
+    #     fuzzy_match, args=(schema["code"].tolist(),)
+    # )
+
+    # # Extract the matched values and match ratios into separate columns
+    # for i in range(nb_fuzzy_matches):
+    #     # Sort the matches by the match ratio.
+    #     matches_sorted = matches.apply(
+    #         lambda x, i=i: sorted(x, key=lambda y: y[2])[i] if len(x) > i else None
+    #     )
+    #     # Store the first matched CDE code in the DataFrame.
+    #     mapping_table[f"cde_code"] = [match[0] for match in matches_sorted if match]
+    #     # Store the first nb_fuzy_matches matched CDE codes in the dictionary.
+    #     for dataset_column in dataset.columns:
+    #         if matches_sorted[dataset_column]:
+    #             fuzzy_matched_cde_codes[dataset_column] = [
+    #                 match[:nb_fuzzy_matches]
+    #                 for match in matches_sorted[dataset_column]
+    #                 if match
+    #             ]
+    #     print("Fuzzy matching: ")
+    #     print(fuzzy_matched_cde_codes)
+
+    matches = mapping_table["dataset_column"].apply(
+        lambda dataset_column: str(
+            sorted(
+                schema["code"],
+                key=lambda cde_code: fuzz.ratio(dataset_column, cde_code),
+                reverse=True,
+            )[
+                0:nb_fuzzy_matches
+            ]  # Select the nb_fuzzy_matches first matched CDE codes.
+        )
     )
+    matches = matches.apply(lambda x: eval(x))
+
+    # Store the first nb_fuzy_matches matched CDE codes in the dictionary.
+    for i, dataset_column in enumerate(dataset.columns):
+        fuzzy_matched_cde_codes[dataset_column] = (
+            matches[i][:nb_fuzzy_matches],
+            [
+                fuzz.ratio(dataset_column, match)
+                for match in matches[i][:nb_fuzzy_matches]
+            ],
+        )
+
+    # Add the first fuzzy matched CDE code for each dataset_column.
+    mapping_table["cde_code"] = [match[0] for match in matches]
 
     # Add the CDE type corresponding to the CDE code proposed by fuzzy matching.
     mapping_table["cde_type"] = [
@@ -230,7 +300,7 @@ def initialize_mapping_table(dataset, schema):
         )
     ]
 
-    return mapping_table
+    return (mapping_table, fuzzy_matched_cde_codes)
 
 
 def make_initial_transform(dataset, schema, dataset_column, cde_code):
@@ -338,7 +408,7 @@ def generate_initial_transform(dataset_column_values, cde_code_values, dataset_c
         cde_code_values = [
             sorted(
                 cde_code_values,
-                key=lambda cde_code_value: fuzz.ratio(
+                key=lambda cde_code_value, dataset_column_value=dataset_column_value: fuzz.ratio(
                     dataset_column_value, cde_code_value
                 ),
                 reverse=True,

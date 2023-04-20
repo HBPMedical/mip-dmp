@@ -571,9 +571,10 @@ class MIPDatasetMapperWindow(object):
     def updateColumnCDEsMapping(self):
         """Update the column/CDEs mapping."""
         # Create a first mapping table based on fuzzy matching
-        self.columnsCDEsMappingData = initialize_mapping_table(
-            dataset=self.inputDataset, schema=self.targetCDEs
-        )
+        (
+            self.columnsCDEsMappingData,
+            fuzzy_matched_cde_codes,
+        ) = initialize_mapping_table(dataset=self.inputDataset, schema=self.targetCDEs)
         # Create a pandas model for the mapping table
         self.columnsCDEsMappingPandasModel = PandasTableModel(
             self.columnsCDEsMappingData
