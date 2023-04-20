@@ -2,7 +2,9 @@
 
 import sys
 from PySide2.QtWidgets import QApplication, QMainWindow
-from mip_datatools.qt5.components.dataset_mapper_window import MIPDatasetMapperWindow
+from mip_datatools.qt5.components.dataset_mapper_window import (
+    MIPDatasetMapperWindow,
+)
 
 
 class MIPDatasetMapperUI(QMainWindow):
@@ -10,8 +12,7 @@ class MIPDatasetMapperUI(QMainWindow):
 
     def __init__(self):
         super(MIPDatasetMapperUI, self).__init__()
-        self.ui = MIPDatasetMapperWindow()
-        self.ui.setupUi(self)
+        self.ui = MIPDatasetMapperWindow(self)
 
 
 def main():
