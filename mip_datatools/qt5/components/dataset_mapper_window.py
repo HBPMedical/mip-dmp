@@ -1,5 +1,6 @@
 """Class for the main window of the MIP Dataset Mapper UI application."""
 
+import ast
 import os
 import json
 from pathlib import Path
@@ -62,6 +63,7 @@ class MIPDatasetMapperWindow(object):
         "mappingFormLayoutWidget",
         "mappingLoadButton",
         "mappingSaveButton",
+        "mappingCheckButton",
         "mappingTableView",
         "outputDirectoryLabel",
         "outputDirectorySelectButton",
@@ -133,6 +135,10 @@ class MIPDatasetMapperWindow(object):
         # Search recursively for all child objects of the given object, and
         # connect matching signals from them to slots of object
         QMetaObject.connectSlotsByName(mainWindow)
+        # Set the initial state of the UI where the save mapping and
+        # map buttons are disabled
+        self.mappingSaveButton.setEnabled(False)
+        self.mapButton.setEnabled(False)
 
     def createComponents(self, mainWindow):
         """Create the UI components.
@@ -194,8 +200,9 @@ class MIPDatasetMapperWindow(object):
         mappingToolLabel = QLabel("3. Mapping file:")
         mappingToolLabel.setStyleSheet("QLabel { font-weight: bold; color: #222222;}")
         self.toolBar.addWidget(mappingToolLabel)
-        self.toolBar.addAction(self.mappingLoadButton)
+        self.toolBar.addAction(self.mappingCheckButton)
         self.toolBar.addAction(self.mappingSaveButton)
+        self.toolBar.addAction(self.mappingLoadButton)
         # Add a spacer to the tool bar
         spacer3 = QWidget()
         spacer3.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
@@ -353,6 +360,16 @@ class MIPDatasetMapperWindow(object):
         self.mappingSaveButton.setToolTip(
             "Save Columns / CDEs mapping file (.json format)"
         )
+        self.mappingCheckButton = QAction(
+            QIcon(
+                pkg_resources.resource_filename(
+                    "mip_datatools", "qt5/assets/check_mapping.png"
+                )
+            ),
+            "Check Columns / CDEs mapping",
+            mainWindow,
+        )
+        self.mappingCheckButton.setToolTip("Check Columns / CDEs mapping")
         # self.mappingSaveButton.setGeometry(QRect(300, 310, 81, 31))
         # Set text of the components
         self.columnsCDEsMappingGroupBox.setTitle(
@@ -463,6 +480,7 @@ class MIPDatasetMapperWindow(object):
         self.inputDatasetLoadButton.triggered.connect(self.loadInputDataset)
         self.targetCDEsLoadButton.triggered.connect(self.loadCDEsFile)
         self.mappingLoadButton.triggered.connect(self.loadMapping)
+        self.mappingCheckButton.triggered.connect(self.checkMapping)
         self.mappingSaveButton.triggered.connect(self.saveMapping)
         self.mapButton.triggered.connect(self.map)
 
@@ -478,20 +496,28 @@ class MIPDatasetMapperWindow(object):
                     f"{WINDOW_NAME}", "<Please load a CSV file...>", None
                 )
             )
+            err_msg = (
+                f"The input dataset file {self.inputDatasetPath[0]} does not exist. "
+                "Please select a valid file!"
+            )
             QMessageBox.warning(
                 None,
                 "Error",
-                "The input dataset file does not exist. Please select a valid file.",
+                err_msg,
             )
+            self.updateStatusbar(err_msg)
+            self.disableSaveMappingAndMapButtons()
         else:
             self.inputDataset = pd.read_csv(self.inputDatasetPath[0])
             self.inputDatasetColumns = self.inputDataset.columns.tolist()
             self.inputDatasetPandasModel = PandasTableModel(self.inputDataset)
             self.inputDatasetTableView.setModel(self.inputDatasetPandasModel)
+            self.updateStatusbar(f"Loaded input dataset {self.inputDatasetPath[0]}")
             if hasattr(self, "targetCDEsPath") and os.path.exists(
                 self.targetCDEsPath[0]
             ):
                 self.updateColumnCDEsMapping()
+            self.disableSaveMappingAndMapButtons()
 
     def loadCDEsFile(self):
         """Load the CDEs file."""
@@ -505,19 +531,28 @@ class MIPDatasetMapperWindow(object):
                     f"{WINDOW_NAME}", "<Please load a CDEs file in .xlxs>", None
                 )
             )
+            err_msg = (
+                f"The CDEs file {self.targetCDEsPath[0]} does not exist. "
+                "Please select a valid file!"
+            )
             QMessageBox.warning(
                 None,
                 "Error",
-                "The CDEs file does not exist. Please select a valid file.",
+                err_msg,
             )
+            self.updateStatusbar(err_msg)
+            self.disableSaveMappingAndMapButtons()
         else:
             self.targetCDEs = pd.read_excel(self.targetCDEsPath[0])
             self.targetCDEsPandasModel = PandasTableModel(self.targetCDEs)
             self.targetCDEsTableView.setModel(self.targetCDEsPandasModel)
+            success_msg = f"Loaded CDEs file {self.targetCDEsPath[0]}"
+            self.updateStatusbar(success_msg)
             if hasattr(self, "inputDatasetPath") and os.path.exists(
                 self.inputDatasetPath[0]
             ):
                 self.updateColumnCDEsMapping()
+            self.disableSaveMappingAndMapButtons()
 
     def loadMapping(self):
         """Load the mapping file."""
@@ -533,11 +568,24 @@ class MIPDatasetMapperWindow(object):
                     None,
                 )
             )
+            err_msg = (
+                f"The mapping file {self.mappingFilePath[0]} does not exist. "
+                "Please select a valid file!"
+            )
             QMessageBox.warning(
                 None,
                 "Error",
-                "The mapping file does not exist. Please select a valid file.",
+                err_msg,
             )
+            self.updateStatusbar(err_msg)
+            self.disableSaveMappingAndMapButtons()
+        else:
+            success_msg = (
+                f"Loaded mapping file {self.mappingFilePath[0]}. "
+                "Please check the mapping and click on the Map button to map the input dataset."
+            )
+            self.updateStatusbar(success_msg)
+            self.disableSaveMappingAndMapButtons()
 
     def saveMapping(self):
         """Save the mapping file."""
@@ -546,10 +594,14 @@ class MIPDatasetMapperWindow(object):
         )
         path = Path(self.mappingFilePath[0])
         if path.suffix != ".json":
+            err_msg = (
+                f"The mapping file {self.mappingFilePath[0]} does not have a .json extension. "
+                "Please select a valid file!"
+            )
             QMessageBox.warning(
                 None,
                 "Error",
-                "The mapping file must be a .json file. Please enter a valid .json file extension.",
+                err_msg,
             )
             return
         # Create the directories if they do not exist
@@ -560,9 +612,126 @@ class MIPDatasetMapperWindow(object):
         )
         print(f"Mapping saved to {self.mappingFilePath[0]}")
         self.mappingFilePathLabel.setText(self.mappingFilePath[0])
+        success_msg = f"Mapping saved to {self.mappingFilePath[0]}!"
+        self.updateStatusbar(success_msg)
+        self.mapButton.setEnabled(True)
+
+    def disableSaveMappingAndMapButtons(self):
+        """Disable the save mapping and map buttons."""
+        self.mappingSaveButton.setEnabled(False)
+        self.mapButton.setEnabled(False)
+
+    def checkMapping(self):
+        """Check the mapping."""
+        # Check if the mapping contains unique column / CDE pairs
+        if (
+            len(self.columnsCDEsMappingData["cde_code"].unique())
+            != len(self.columnsCDEsMappingData["cde_code"])
+        ) or (
+            len(self.columnsCDEsMappingData["dataset_column"].unique())
+            != len(self.columnsCDEsMappingData["dataset_column"])
+        ):
+            err_msg = (
+                "The mapping is not valid. "
+                "Please check it and remove any mapping row "
+                "that might re-map a CDE code or a column of "
+                "the source dataset!"
+            )
+            QMessageBox.warning(
+                None,
+                "Error: Duplicate Column / CDEs Pairs",
+                err_msg,
+            )
+            self.updateStatusbar(err_msg)
+            self.disableSaveMappingAndMapButtons()
+            return
+        # Check if the mapping contains only valid CDE codes
+        if self.columnsCDEsMappingData[
+            self.columnsCDEsMappingData["cde_code"].isin(self.targetCDEs["code"])
+        ].empty:
+            err_msg = (
+                "The mapping is not valid. "
+                "Please check it and remove any invalid CDE code!"
+            )
+            QMessageBox.warning(
+                None,
+                "Error: Invalid CDE Codes",
+                err_msg,
+            )
+            self.updateStatusbar(err_msg)
+            self.disableSaveMappingAndMapButtons()
+            return
+        # Check if the mapping transform is correctly formatted
+        transform_list = self.columnsCDEsMappingData["transform"].tolist()
+
+        def is_invalid_map_transform(transform):
+            """Check if the transform is an invalid map transform.
+
+            We expect the transform to be a valid Python dictionary or
+            a valid Python literal. If it is not, it is invalid.
+
+            Parameters
+            ----------
+            transform : str
+                The transform to check.
+            """
+            try:
+                ast.literal_eval(f'"{transform}"')
+                return False
+            except ValueError:
+                return True
+
+        is_invalid_transform = list(map(is_invalid_map_transform, transform_list))
+        if any(is_invalid_transform):
+            df_invalidtransform_with_index = pd.DataFrame(
+                {
+                    "transform": [
+                        transform_list[i]
+                        for i in range(len(transform_list))
+                        if is_invalid_transform[i]
+                    ],
+                    "mapping_row": [
+                        i + 1
+                        for i in range(len(transform_list))
+                        if is_invalid_transform[i]
+                    ],
+                }
+            )
+            err_msg = (
+                "The mapping is not valid. "
+                "Please check it and correct "
+                "any invalid transform!"
+                f" (invalid transforms: {df_invalidtransform_with_index})"
+            )
+            QMessageBox.warning(
+                None,
+                "Error: Invalid Transform",
+                err_msg,
+            )
+            self.updateStatusbar(err_msg)
+            self.disableSaveMappingAndMapButtons()
+            return
+        # If the mapping is valid, display a success message
+        success_msg = (
+            "The mapping is valid! "
+            "You can now save it and use it to map the source dataset."
+        )
+        QMessageBox.information(
+            None,
+            "Success",
+            success_msg,
+        )
+        self.updateStatusbar(success_msg)
+        self.mappingSaveButton.setEnabled(True)
+        self.mapButton.setEnabled(False)
 
     def updateColumnCDEsMapping(self):
         """Update the column/CDEs mapping."""
+        info_msg = (
+            "The mapping is being created / updated. "
+            "Please wait until the process is finished."
+        )
+        self.updateStatusbar(info_msg)
         # Create a first mapping table based on fuzzy matching
         (
             self.columnsCDEsMappingData,
@@ -602,6 +771,10 @@ class MIPDatasetMapperWindow(object):
         # "mappingTargetCDETypeColumnDelegate"
         # "mappingTransformTypeColumnDelegate"
         # "mappingTransformColumnDelegate"
+        info_msg = (
+            "The mapping has been created. You can now edit, validate, and save it!"
+        )
+        self.updateStatusbar(info_msg)
 
     def selectOutputFilename(self):
         """Select the output filename."""
@@ -609,20 +782,30 @@ class MIPDatasetMapperWindow(object):
             None, "Select the output filename", "", "CSV files (*.csv)"
         )
         if self.outputFilename[0] == "":
+            err_msg = "Please select a valid output filename."
             QMessageBox.warning(
                 None,
                 "Error",
-                "Please select a valid output filename.",
+                err_msg,
             )
+            self.updateStatusbar(err_msg)
             return False
         if not self.outputFilename[0].endswith(".csv"):
             self.outputFilename = self.outputFilename[0] + ".csv"
+            success_msg = (
+                "The output filename has been updated to: " + self.outputFilename + "."
+            )
             QMessageBox.information(
                 None,
-                "Information",
-                "The output filename has been updated to: " + self.outputFilename,
+                success_msg,
             )
+            self.updateStatusbar(success_msg)
         return True
+
+    def updateStatusbar(self, message):
+        """Update the statusbar with the given message."""
+        self.statusbar.showMessage(message)
+        self.statusbar.repaint()
 
     def map(self):
         """Map the input dataset to the target CDEs."""
@@ -632,25 +815,28 @@ class MIPDatasetMapperWindow(object):
             return
         # Check if the input dataset and the mapping file are loaded
         if not os.path.exists(self.inputDatasetPathLabel.text()):
+            warn_msg = "Please load the input dataset!"
             QMessageBox.warning(
                 None,
                 "Warning",
-                "Please load the input dataset!",
+                warn_msg,
                 QMessageBox.Ok,
             )
+            self.updateStatusbar(warn_msg)
             return
         if not os.path.exists(self.mappingFilePathLabel.text()):
+            warn_msg = "Please save the mapping file of load an existing one!"
             QMessageBox.warning(
                 None,
                 "Warning",
-                "Please save the mapping file of load an existing one!",
+                warn_msg,
                 QMessageBox.Ok,
             )
+            self.updateStatusbar(warn_msg)
             return
         # Proceed with the mapping
         self.mapButton.setEnabled(False)
-        self.statusbar.showMessage("Mapping in progress...")
-        self.statusbar.repaint()
+        self.updateStatusbar("Mapping in progress...")
         # Load the input dataset
         input_dataset = pd.read_csv(self.inputDatasetPathLabel.text())
         # Load the mapping file
@@ -663,15 +849,17 @@ class MIPDatasetMapperWindow(object):
             self.outputFilename[0],
             index=False,
         )
-        self.mapButton.setEnabled(True)
-        self.statusbar.showMessage("Mapping Done!")
-        self.statusbar.repaint()
         # Show a message box to inform the user that the mapping has
         # been done successfully
+        success_msg = (
+            "The mapping has been done successfully and "
+            "the output dataset has been saved to: " + self.outputFilename[0] + "."
+        )
         QMessageBox.information(
             None,
             "Success",
-            "The mapping has been done successfully and "
-            "the output dataset has been saved to: " + self.outputFilename[0],
+            success_msg,
             QMessageBox.Ok,
         )
+        self.updateStatusbar(success_msg)
+        self.mapButton.setEnabled(True)
