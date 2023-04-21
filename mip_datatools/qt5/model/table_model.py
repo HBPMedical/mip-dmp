@@ -2,6 +2,7 @@
 
 from PySide2 import QtCore
 from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QItemDelegate, QLineEdit, QComboBox
 
 
 class PandasTableModel(QtCore.QAbstractTableModel):
@@ -57,3 +58,57 @@ class PandasTableModel(QtCore.QAbstractTableModel):
             return True
 
         return False
+
+
+class QComboBoxDelegate(QItemDelegate):
+    """Class to define a custom item delegate with QComboBox editor."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.items = []
+
+    def setItems(self, items):
+        self.items[:] = items
+
+    def createEditor(self, parent, opt, index):
+        comboBox = QComboBox(parent)
+        comboBox.addItems(self.items)
+        comboBox.setCurrentIndex(1)
+        comboBox.currentTextChanged.connect(lambda: self.commitData.emit(comboBox))
+        return comboBox
+
+    # def setEditorData(self, editor, index):
+    #     """Set the editor data for the given index."""
+    #     value = index.model().data(index, Qt.EditRole)
+    #     editor.setCurrentIndex(value)
+
+    # def setModelData(self, editor, model, index):
+    #     """Set the model data for the given index."""
+    #     value = editor.currentIndex()
+    #     model.setData(index, value, Qt.EditRole)
+
+    # def updateEditorGeometry(self, editor, option, index):
+    #     """Update the editor geometry for the given index."""
+    #     editor.setGeometry(option.rect)
+
+
+class NoEditorDelegate(QItemDelegate):
+    """Class to define a custom item delegate with no editor."""
+
+    def createEditor(self, parent, opt, index):
+        """Create the editor for the given index."""
+        return None
+
+    # def setEditorData(self, editor, index):
+    #     """Set the editor data for the given index."""
+    #     value = index.model().data(index, Qt.EditRole)
+    #     editor.setText(value)
+
+    # def setModelData(self, editor, model, index):
+    #     """Set the model data for the given index."""
+    #     value = editor.text()
+    #     model.setData(index, value, Qt.EditRole)
+
+    # def updateEditorGeometry(self, editor, option, index):
+    #     """Update the editor geometry for the given index."""
+    #     editor.setGeometry(option.rect)

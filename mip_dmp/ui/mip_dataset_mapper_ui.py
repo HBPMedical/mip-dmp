@@ -2,7 +2,7 @@
 
 import sys
 from PySide2.QtWidgets import QApplication, QMainWindow
-from mip_datatools.qt5.components.dataset_mapper_window import (
+from mip_dmp.qt5.components.dataset_mapper_window import (
     MIPDatasetMapperWindow,
 )
 
