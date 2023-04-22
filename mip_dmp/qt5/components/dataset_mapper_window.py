@@ -109,22 +109,15 @@ class MIPDatasetMapperWindow(object):
     ]
 
     def __init__(self, mainWindow):
-        """Initialize the main window of the MIP Dataset Mapper UI application."""
-        if not mainWindow.objectName():
-            mainWindow.setObjectName(f"{WINDOW_NAME}")
-        mainWindow.resize(1024, 768)
-        # Set the window Qt Style Sheet
-        styleSheetFile = pkg_resources.resource_filename(
-            "mip_dmp", os.path.join("qt5", "assets", "stylesheet.qss")
-        )
-        with open(styleSheetFile, "r") as fh:
-            mainWindow.setStyleSheet(fh.read())
-        # Set the window icon
-        # mainWindow.setWindowIcon(QIcon(":/images/mip_logo.png"))
-        # Set the window title
-        mainWindow.setWindowTitle(
-            QCoreApplication.translate(f"{WINDOW_NAME}", f"{WINDOW_NAME}", None)
-        )
+        """Initialize the main window of the MIP Dataset Mapper UI application.
+
+        Parameters
+        ----------
+        mainWindow : QMainWindow
+            The main window of the application.
+        """
+        # Adjust the window size, Qt Style Sheet, and title
+        self.adjustWindow(mainWindow)
         # Create the UI components
         self.createComponents(mainWindow)
         # Create the tool bar
@@ -145,6 +138,29 @@ class MIPDatasetMapperWindow(object):
         # map buttons are disabled
         self.mappingSaveButton.setEnabled(False)
         self.mapButton.setEnabled(False)
+    def adjustWindow(self, mainWindow):
+        """Adjust the window size, Qt Style Sheet, and title.
+
+        Parameters
+        ----------
+        mainWindow : QMainWindow
+            The main window of the application.
+        """
+        if not mainWindow.objectName():
+            mainWindow.setObjectName(f"{WINDOW_NAME}")
+        mainWindow.resize(1024, 768)
+        # Set the window Qt Style Sheet
+        styleSheetFile = pkg_resources.resource_filename(
+            "mip_dmp", os.path.join("qt5", "assets", "stylesheet.qss")
+        )
+        with open(styleSheetFile, "r") as fh:
+            mainWindow.setStyleSheet(fh.read())
+        # Set the window icon
+        # mainWindow.setWindowIcon(QIcon(":/images/mip_logo.png"))
+        # Set the window title
+        mainWindow.setWindowTitle(
+            QCoreApplication.translate(f"{WINDOW_NAME}", f"{WINDOW_NAME}", None)
+        )
 
     def createComponents(self, mainWindow):
         """Create the UI components.
