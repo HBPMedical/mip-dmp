@@ -19,6 +19,10 @@ class PandasTableModel(QtCore.QAbstractTableModel):
         super(PandasTableModel, self).__init__()
         self._data = data
 
+    def setData(self, data):
+        self._data = data
+        self.layoutChanged.emit()
+
     def data(self, index, role):
         """Return the data for the given index and role."""
         if role == Qt.DisplayRole:
@@ -37,11 +41,12 @@ class PandasTableModel(QtCore.QAbstractTableModel):
         """Return the flags for the given index."""
         if not index.isValid():
             return Qt.ItemIsEnabled
-
-        return super().flags(index) | Qt.ItemIsEditable  # add editable flag.
+        return (
+            super().flags(index) | Qt.ItemIsEditable | Qt.ItemIsSelectable
+        )  # add editable and selectable flag.
 
     def headerData(self, section, orientation, role):
-        """Return the header data for the given section and orientation."""
+        """Return the header data for the given section."""
         # section is the index of the column/row.
         if role == Qt.DisplayRole:
             if orientation == Qt.Horizontal:
@@ -55,6 +60,7 @@ class PandasTableModel(QtCore.QAbstractTableModel):
         if role == Qt.EditRole:
             # Set the value into the frame.
             self._data.iloc[index.row(), index.column()] = value
+            self.dataChanged.emit(index, index, [role])
             return True
 
         return False

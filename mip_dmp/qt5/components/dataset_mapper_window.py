@@ -24,6 +24,8 @@ from PySide2.QtWidgets import (
     QComboBox,
     QToolBar,
     QSizePolicy,
+    QLineEdit,
+    QHeaderView,
 )
 import pkg_resources
 
@@ -327,23 +329,17 @@ class MIPDatasetMapperWindow(object):
         # Set the mapping table
         self.mappingTableView = QTableView(self.columnsCDEsMappingGroupBox)
         self.mappingTableView.setGeometry(QRect(10, 70, 371, 231))
-        # # Create group box for entering a new entry to the mapping table
-        # self.newMappingGroupBox = QGroupBox()
-        # # Set the layout of the new entry group box
-        # self.newMappingGroupBoxLayout = QGridLayout()
-        # # Create a widget to hold combo boxes for column and CDE
-        # self.newMappingFormLayoutWidget = QWidget(self.newMappingGroupBox)
-        # self.newMappingFormLayoutWidget.setGeometry(QRect(10, 30, 371, 31))
-        # # Create the form layout for the combo boxes
-        # self.newMappingFormLayout = QFormLayout(self.newMappingFormLayoutWidget)
-        # self.newMappingFormLayout.setContentsMargins(0, 0, 0, 0)
-        # # Create the combo boxe for column
-        # self.newMappingColumnComboBox = QComboBox(self.newMappingFormLayoutWidget)
-        # # Create the combo box for CDE
-        # self.newMappingCDEComboBox = QComboBox(self.newMappingFormLayoutWidget)
-        # # Create the add button
-        # self.newMappingAddButton = QPushButton(self.newMappingGroupBox)
-        # self.newMappingAddButton.setGeometry(QRect(300, 70, 81, 31))
+        self.mappingTableView.horizontalHeader().setSectionResizeMode(
+            QHeaderView.Stretch
+        )
+        self.mappingTableView.horizontalHeader().setVisible(True)
+        # Create group box for entering a new entry to the mapping table
+        self.mappingTableRowUpdateGroupBox = QGroupBox()
+        # Create a form widget to edit row of mapping table
+        self.createMappingTableRowViewComponents()
+        self.mappingTableRowUpdateGroupBox.setTitle(
+            QCoreApplication.translate(f"{WINDOW_NAME}", "Mapping Row Editor", None)
+        )
         # Create the save button
         self.mappingSaveButton = QAction(
             QIcon(
@@ -392,6 +388,43 @@ class MIPDatasetMapperWindow(object):
         #     QCoreApplication.translate(f"{WINDOW_NAME}", "New Column/CDE Mapping", None)
         # )
 
+    def createMappingTableRowViewComponents(self):
+        """Create the components of the mapping table row editor group box."""
+        # Create a form layout for the mapping group box
+        self.mappingTableRowUpdateGroupBoxLayout = QFormLayout()
+        # Setup the widgets
+        self.mappingRowIndex = QLabel(self.columnsCDEsMappingGroupBox)
+        self.datasetColumn = QLabel(self.columnsCDEsMappingGroupBox)
+        self.cdeCode = QComboBox(self.columnsCDEsMappingGroupBox)
+        self.cdeType = QLabel(self.columnsCDEsMappingGroupBox)
+        self.transformType = QLabel(self.columnsCDEsMappingGroupBox)
+        self.transform = QLineEdit(self.columnsCDEsMappingGroupBox)
+        self.updateMappingRowButton = QPushButton(
+            "Update row", self.columnsCDEsMappingGroupBox
+        )
+        # Add widgets to the form layout
+        self.mappingTableRowUpdateGroupBoxLayout.addRow(
+            QLabel("Mapping Table Row Index"), self.mappingRowIndex
+        )
+        self.mappingTableRowUpdateGroupBoxLayout.addRow(
+            QLabel("Dataset Column"), self.datasetColumn
+        )
+        self.mappingTableRowUpdateGroupBoxLayout.addRow(
+            QLabel("CDE Code"), self.cdeCode
+        )
+        self.mappingTableRowUpdateGroupBoxLayout.addRow(
+            QLabel("CDE Type"), self.cdeType
+        )
+        self.mappingTableRowUpdateGroupBoxLayout.addRow(
+            QLabel("Transform Type"), self.transformType
+        )
+        self.mappingTableRowUpdateGroupBoxLayout.addRow(
+            QLabel("Transform"), self.transform
+        )
+        self.mappingTableRowUpdateGroupBoxLayout.addRow(
+            QLabel(), self.updateMappingRowButton
+        )
+
     def adjustWidgetsAndLayouts(self):
         """Add widgets to the layouts of the UI elements."""
         # Handle the splitters
@@ -426,9 +459,8 @@ class MIPDatasetMapperWindow(object):
             self.targetCDEsFormLayoutWidget, 1, 0, 1, 1
         )
         self.leftCentralWidgetSplitter.addWidget(self.targetCDEsGroupBox)
-        # Handle the widgets of the columns CDEs mapping group box (top right)
+        # Handle the widgets of the columns CDEs mapping group box (right)
         self.columnsCDEsMappingGroupBox.setLayout(self.columnsCDEsMappingGroupBoxLayout)
-
         self.mappingFormLayout.setWidget(
             0, QFormLayout.FieldRole, self.mappingFilePathLabel
         )
@@ -471,6 +503,10 @@ class MIPDatasetMapperWindow(object):
         # self.outputGroupBoxLayout.addWidget(self.outputFormLayoutWidget, 1, 0, 1, 1)
         # # self.outputGroupBoxLayout.addWidget(self.mapButton, 3, 0, 1, 1)
         # self.rightCentralWidgetSplitter.addWidget(self.outputGroupBox)
+        self.mappingTableRowUpdateGroupBox.setLayout(
+            self.mappingTableRowUpdateGroupBoxLayout
+        )
+        self.columnsCDEsMappingSplitter.addWidget(self.mappingTableRowUpdateGroupBox)
 
     def connectButtons(self):
         """Connect the buttons to their corresponding functions."""
@@ -480,6 +516,71 @@ class MIPDatasetMapperWindow(object):
         self.mappingCheckButton.triggered.connect(self.checkMapping)
         self.mappingSaveButton.triggered.connect(self.saveMapping)
         self.mapButton.triggered.connect(self.map)
+        self.updateMappingRowButton.clicked.connect(self.updateMappingTableRow)
+
+    def initializeMappingEditForm(self, index):
+        # Get the data for the current row and update the widgets in the form
+        rowData = self.columnsCDEsMappingData.iloc[index.row(), :]
+        self.mappingRowIndex.setText(str(index.row()))
+        self.datasetColumn.setText(str(rowData["dataset_column"]))
+        columnFuzzyMatches = self.fuzzyMatchedCdeCodes[rowData["dataset_column"]][0]
+        self.cdeCode.clear()
+        self.cdeCode.addItems(columnFuzzyMatches)
+        ind = columnFuzzyMatches.index(rowData["cde_code"])
+        self.cdeCode.setCurrentIndex(ind)
+        cdeType = self.targetCDEs[self.targetCDEs["code"] == columnFuzzyMatches[ind]][
+            "type"
+        ].unique()[0]
+        self.cdeType.setText(cdeType)
+        if cdeType == "real" or cdeType == "integer":
+            self.transformType.setText("scale")
+            self.transform.setText(str(rowData["transform"]))
+        else:
+            self.transformType.setText("map")
+            self.transform.setText(str(rowData["transform"]))
+
+    def updateMappingEditForm(self, index):
+        # Get the data for the current row and update the widgets in the form
+        rowIndex = int(self.mappingRowIndex.text())
+        rowData = self.columnsCDEsMappingData.iloc[rowIndex, :]
+        columnFuzzyMatches = self.fuzzyMatchedCdeCodes[rowData["dataset_column"]][0]
+        cdeType = self.targetCDEs[self.targetCDEs["code"] == columnFuzzyMatches[index]][
+            "type"
+        ].unique()[0]
+        self.cdeType.setText(cdeType)
+        if cdeType == "real" or cdeType == "integer":
+            if self.cdeCode.currentText() == rowData["cde_code"]:
+                self.transformType.setText("scale")
+                self.transform.setText(str(rowData["transform"]))
+            else:
+                self.transformType.setText("scale")
+                self.transform.setText("1.0")
+        else:
+            if self.cdeCode.currentText() == rowData["cde_code"]:
+                self.transformType.setText("map")
+                self.transform.setText(str(rowData["transform"]))
+            else:
+                self.transformType.setText("map")
+                self.transform.setText('{ "X": "Y", "Y": "X" }')
+
+    def updateMappingTableRow(self):
+        # Get the data from the form
+        rowIndex = int(self.mappingRowIndex.text())
+        datasetColumn = self.datasetColumn.text()
+        cdeCode = self.cdeCode.currentText()
+        cdeType = self.cdeType.text()
+        transformType = self.transformType.text()
+        transform = self.transform.text()
+        # Update the data in the table
+        self.columnsCDEsMappingData.iloc[rowIndex, :] = [
+            datasetColumn,
+            cdeCode,
+            cdeType,
+            transformType,
+            transform,
+        ]
+        # Update the table
+        self.mappingTableView.model().layoutChanged.emit()
 
     def loadInputDataset(self):
         """Load the input dataset."""
@@ -732,7 +833,7 @@ class MIPDatasetMapperWindow(object):
         # Create a first mapping table based on fuzzy matching
         (
             self.columnsCDEsMappingData,
-            fuzzy_matched_cde_codes,
+            self.fuzzyMatchedCdeCodes,
         ) = initialize_mapping_table(dataset=self.inputDataset, schema=self.targetCDEs)
         # Create a pandas model for the mapping table
         self.columnsCDEsMappingPandasModel = PandasTableModel(
@@ -769,6 +870,20 @@ class MIPDatasetMapperWindow(object):
         # "mappingTransformTypeColumnDelegate"
         # "mappingTransformColumnDelegate"
         info_msg = (
+        self.mappingTableView.setSelectionBehavior(self.mappingTableView.SelectRows)
+        self.mappingTableView.setSelectionMode(self.mappingTableView.SingleSelection)
+        self.mappingTableView.setEditTriggers(
+            self.mappingTableView.NoEditTriggers
+        )  # disable editing
+        # Handle the mapping table view row selection changed signal
+        self.mappingTableView.selectionModel().currentRowChanged.connect(
+            self.initializeMappingEditForm
+        )
+        # Select the first row of the mapping table view at the beginning
+        indexRow = 0
+        self.mappingTableView.selectRow(indexRow)
+        # Handle the combox box current index changed signal for the CDE code column
+        self.cdeCode.currentIndexChanged.connect(self.updateMappingEditForm)
             "The mapping has been created. You can now edit, validate, and save it!"
         )
         self.updateStatusbar(info_msg)
