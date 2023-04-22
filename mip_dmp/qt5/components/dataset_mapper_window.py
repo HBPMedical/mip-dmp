@@ -136,8 +136,8 @@ class MIPDatasetMapperWindow(object):
         QMetaObject.connectSlotsByName(mainWindow)
         # Set the initial state of the UI where the save mapping and
         # map buttons are disabled
-        self.mappingSaveButton.setEnabled(False)
-        self.mapButton.setEnabled(False)
+        self.disableSaveMappingAndMapButtons()
+
     def adjustWindow(self, mainWindow):
         """Adjust the window size, Qt Style Sheet, and title.
 
@@ -384,7 +384,6 @@ class MIPDatasetMapperWindow(object):
             mainWindow,
         )
         self.mappingCheckButton.setToolTip("Check Columns / CDEs mapping")
-        # self.mappingSaveButton.setGeometry(QRect(300, 310, 81, 31))
         # Set text of the components
         self.columnsCDEsMappingGroupBox.setTitle(
             QCoreApplication.translate(f"{WINDOW_NAME}", "Columns / CDEs Mapping", None)
@@ -396,18 +395,6 @@ class MIPDatasetMapperWindow(object):
                 None,
             )
         )
-        # self.newMappingCDEComboBox.setItemText(
-        #     0, QCoreApplication.translate(f"{WINDOW_NAME}", "Select a CDE", None)
-        # )
-        # self.newMappingColumnComboBox.setItemText(
-        #     0, QCoreApplication.translate(f"{WINDOW_NAME}", "Select a column", None)
-        # )
-        # self.newMappingAddButton.setText(
-        #     QCoreApplication.translate(f"{WINDOW_NAME}", "Add", None)
-        # )
-        # self.newMappingGroupBox.setTitle(
-        #     QCoreApplication.translate(f"{WINDOW_NAME}", "New Column/CDE Mapping", None)
-        # )
 
     def createMappingTableRowViewComponents(self):
         """Create the components of the mapping table row editor group box."""
@@ -457,9 +444,6 @@ class MIPDatasetMapperWindow(object):
         self.inputDatasetGroupBoxLayout.addWidget(
             self.inputDatasetTableView, 0, 0, 1, 1
         )
-        # self.inputDatasetFormLayout.setWidget(
-        #     0, QFormLayout.LabelRole, self.inputDatasetLoadButton
-        # )
         self.inputDatasetFormLayout.setWidget(
             0, QFormLayout.FieldRole, self.inputDatasetPathLabel
         )
@@ -470,9 +454,6 @@ class MIPDatasetMapperWindow(object):
         # Handle the widgets of the target CDEs group box (bottom left)
         self.targetCDEsGroupBox.setLayout(self.targetCDEsGroupBoxLayout)
         self.targetCDEsGroupBoxLayout.addWidget(self.targetCDEsTableView, 0, 0, 1, 1)
-        # self.targetCDEsFormLayout.setWidget(
-        #     0, QFormLayout.LabelRole, self.targetCDEsLoadButton
-        # )
         self.targetCDEsFormLayout.setWidget(
             0, QFormLayout.FieldRole, self.targetCDEsPathLabel
         )
@@ -494,36 +475,6 @@ class MIPDatasetMapperWindow(object):
         )
 
         self.rightCentralWidgetSplitter.addWidget(self.columnsCDEsMappingGroupBox)
-        # # Create group box for entering a new entry to the mapping table
-        # # Set the layout of the new entry group box
-        # self.newMappingGroupBox.setLayout(self.newMappingGroupBoxLayout)
-        # # Add the column combo boxe to the form layout
-        # self.newMappingFormLayout.setWidget(
-        #     0, QFormLayout.LabelRole, self.newMappingColumnComboBox
-        # )
-        # # Add the CDE combo box to the form layout
-        # self.newMappingFormLayout.setWidget(
-        #     0, QFormLayout.FieldRole, self.newMappingCDEComboBox
-        # )
-        # # Add the form layout widget to the group box layout
-        # self.newMappingGroupBoxLayout.addWidget(
-        #     self.newMappingFormLayoutWidget, 0, 0, 1, 1
-        # )
-        # # Add the add button to the group box layout
-        # self.newMappingGroupBoxLayout.addWidget(self.newMappingAddButton, 1, 0, 1, 1)
-        # # Add the new entry group box to the tableview/new entry group splitter
-        # self.columnsCDEsMappingSplitter.addWidget(self.newMappingGroupBox)
-        # Handle the widgets of the output group box (bottom right)
-        # self.outputGroupBox.setLayout(self.outputGroupBoxLayout)
-        # self.outputFormLayout.setWidget(
-        #     2, QFormLayout.LabelRole, self.outputFilenameLabel
-        # )
-        # self.outputFormLayout.setWidget(
-        #     2, QFormLayout.FieldRole, self.outputFilenameSelectButton
-        # )
-        # self.outputGroupBoxLayout.addWidget(self.outputFormLayoutWidget, 1, 0, 1, 1)
-        # # self.outputGroupBoxLayout.addWidget(self.mapButton, 3, 0, 1, 1)
-        # self.rightCentralWidgetSplitter.addWidget(self.outputGroupBox)
         self.mappingTableRowUpdateGroupBox.setLayout(
             self.mappingTableRowUpdateGroupBoxLayout
         )
@@ -615,16 +566,16 @@ class MIPDatasetMapperWindow(object):
                     f"{WINDOW_NAME}", "<Please load a CSV file...>", None
                 )
             )
-            err_msg = (
+            errMsg = (
                 f"The input dataset file {self.inputDatasetPath[0]} does not exist. "
                 "Please select a valid file!"
             )
             QMessageBox.warning(
                 None,
                 "Error",
-                err_msg,
+                errMsg,
             )
-            self.updateStatusbar(err_msg)
+            self.updateStatusbar(errMsg)
             self.disableSaveMappingAndMapButtons()
         else:
             self.inputDataset = pd.read_csv(self.inputDatasetPath[0])
@@ -650,23 +601,23 @@ class MIPDatasetMapperWindow(object):
                     f"{WINDOW_NAME}", "<Please load a CDEs file in .xlxs>", None
                 )
             )
-            err_msg = (
+            errMsg = (
                 f"The CDEs file {self.targetCDEsPath[0]} does not exist. "
                 "Please select a valid file!"
             )
             QMessageBox.warning(
                 None,
                 "Error",
-                err_msg,
+                errMsg,
             )
-            self.updateStatusbar(err_msg)
+            self.updateStatusbar(errMsg)
             self.disableSaveMappingAndMapButtons()
         else:
             self.targetCDEs = pd.read_excel(self.targetCDEsPath[0])
             self.targetCDEsPandasModel = PandasTableModel(self.targetCDEs)
             self.targetCDEsTableView.setModel(self.targetCDEsPandasModel)
-            success_msg = f"Loaded CDEs file {self.targetCDEsPath[0]}"
-            self.updateStatusbar(success_msg)
+            successMsg = f"Loaded CDEs file {self.targetCDEsPath[0]}"
+            self.updateStatusbar(successMsg)
             if hasattr(self, "inputDatasetPath") and os.path.exists(
                 self.inputDatasetPath[0]
             ):
@@ -687,23 +638,23 @@ class MIPDatasetMapperWindow(object):
                     None,
                 )
             )
-            err_msg = (
+            errMsg = (
                 f"The mapping file {self.mappingFilePath[0]} does not exist. "
                 "Please select a valid file!"
             )
             QMessageBox.warning(
                 None,
                 "Error",
-                err_msg,
+                errMsg,
             )
-            self.updateStatusbar(err_msg)
+            self.updateStatusbar(errMsg)
             self.disableSaveMappingAndMapButtons()
         else:
-            success_msg = (
+            successMsg = (
                 f"Loaded mapping file {self.mappingFilePath[0]}. "
                 "Please check the mapping and click on the Map button to map the input dataset."
             )
-            self.updateStatusbar(success_msg)
+            self.updateStatusbar(successMsg)
             self.disableSaveMappingAndMapButtons()
 
     def saveMapping(self):
@@ -713,14 +664,14 @@ class MIPDatasetMapperWindow(object):
         )
         path = Path(self.mappingFilePath[0])
         if path.suffix != ".json":
-            err_msg = (
+            errMsg = (
                 f"The mapping file {self.mappingFilePath[0]} does not have a .json extension. "
                 "Please select a valid file!"
             )
             QMessageBox.warning(
                 None,
                 "Error",
-                err_msg,
+                errMsg,
             )
             return
         # Create the directories if they do not exist
@@ -731,8 +682,8 @@ class MIPDatasetMapperWindow(object):
         )
         print(f"Mapping saved to {self.mappingFilePath[0]}")
         self.mappingFilePathLabel.setText(self.mappingFilePath[0])
-        success_msg = f"Mapping saved to {self.mappingFilePath[0]}!"
-        self.updateStatusbar(success_msg)
+        successMsg = f"Mapping saved to {self.mappingFilePath[0]}!"
+        self.updateStatusbar(successMsg)
         self.mapButton.setEnabled(True)
 
     def disableSaveMappingAndMapButtons(self):
@@ -750,7 +701,7 @@ class MIPDatasetMapperWindow(object):
             len(self.columnsCDEsMappingData["dataset_column"].unique())
             != len(self.columnsCDEsMappingData["dataset_column"])
         ):
-            err_msg = (
+            errMsg = (
                 "The mapping is not valid. "
                 "Please check it and remove any mapping row "
                 "that might re-map a CDE code or a column of "
@@ -759,29 +710,29 @@ class MIPDatasetMapperWindow(object):
             QMessageBox.warning(
                 None,
                 "Error: Duplicate Column / CDEs Pairs",
-                err_msg,
+                errMsg,
             )
-            self.updateStatusbar(err_msg)
+            self.updateStatusbar(errMsg)
             self.disableSaveMappingAndMapButtons()
             return
         # Check if the mapping contains only valid CDE codes
         if self.columnsCDEsMappingData[
             self.columnsCDEsMappingData["cde_code"].isin(self.targetCDEs["code"])
         ].empty:
-            err_msg = (
+            errMsg = (
                 "The mapping is not valid. "
                 "Please check it and remove any invalid CDE code!"
             )
             QMessageBox.warning(
                 None,
                 "Error: Invalid CDE Codes",
-                err_msg,
+                errMsg,
             )
-            self.updateStatusbar(err_msg)
+            self.updateStatusbar(errMsg)
             self.disableSaveMappingAndMapButtons()
             return
         # Check if the mapping transform is correctly formatted
-        transform_list = self.columnsCDEsMappingData["transform"].tolist()
+        transformList = self.columnsCDEsMappingData["transform"].tolist()
 
         def is_invalid_map_transform(transform):
             """Check if the transform is an invalid map transform.
@@ -800,23 +751,23 @@ class MIPDatasetMapperWindow(object):
             except ValueError:
                 return True
 
-        is_invalid_transform = list(map(is_invalid_map_transform, transform_list))
-        if any(is_invalid_transform):
+        isInvalidTransformList = list(map(is_invalid_map_transform, transformList))
+        if any(isInvalidTransformList):
             df_invalidtransform_with_index = pd.DataFrame(
                 {
                     "transform": [
-                        transform_list[i]
-                        for i in range(len(transform_list))
-                        if is_invalid_transform[i]
+                        transformList[i]
+                        for i in range(len(transformList))
+                        if isInvalidTransformList[i]
                     ],
                     "mapping_row": [
                         i + 1
-                        for i in range(len(transform_list))
-                        if is_invalid_transform[i]
+                        for i in range(len(transformList))
+                        if isInvalidTransformList[i]
                     ],
                 }
             )
-            err_msg = (
+            errMsg = (
                 "The mapping is not valid. "
                 "Please check it and correct "
                 "any invalid transform!"
@@ -825,32 +776,32 @@ class MIPDatasetMapperWindow(object):
             QMessageBox.warning(
                 None,
                 "Error: Invalid Transform",
-                err_msg,
+                errMsg,
             )
-            self.updateStatusbar(err_msg)
+            self.updateStatusbar(errMsg)
             self.disableSaveMappingAndMapButtons()
             return
         # If the mapping is valid, display a success message
-        success_msg = (
+        successMsg = (
             "The mapping is valid! "
             "You can now save it and use it to map the source dataset."
         )
         QMessageBox.information(
             None,
             "Success",
-            success_msg,
+            successMsg,
         )
-        self.updateStatusbar(success_msg)
+        self.updateStatusbar(successMsg)
         self.mappingSaveButton.setEnabled(True)
         self.mapButton.setEnabled(False)
 
     def updateColumnCDEsMapping(self):
         """Update the column/CDEs mapping."""
-        info_msg = (
+        infoMsg = (
             "The mapping is being created / updated. "
             "Please wait until the process is finished."
         )
-        self.updateStatusbar(info_msg)
+        self.updateStatusbar(infoMsg)
         # Create a first mapping table based on fuzzy matching
         (
             self.columnsCDEsMappingData,
@@ -862,35 +813,6 @@ class MIPDatasetMapperWindow(object):
         )
         # Set the model of the table view to the pandas model
         self.mappingTableView.setModel(self.columnsCDEsMappingPandasModel)
-        # Set a custom delegates for the columns of the mapping table
-        # self.mappingSourceDatasetColumnDelegate = NoEditorDelegate(
-        #     self.mappingTableView
-        # )
-        # self.mappingTableView.setItemDelegateForColumn(
-        #     0, self.mappingSourceDatasetColumnDelegate
-        # )
-        for index, row in self.columnsCDEsMappingData.iterrows():
-            c = QComboBox()
-            c.addItems(
-                fuzzy_matched_cde_codes[row["cde_code"]][0]
-            )  # first tuple element is the list of CDE codes
-            i = self.mappingTableView.model().index(index, 1)
-            self.mappingTableView.setIndexWidget(i, c)
-
-        # self.mappingTargetCDECodeColumnDelegate = QComboBoxDelegate(
-        #     self.mappingTableView
-        # )
-        # self.mappingTargetCDECodeColumnDelegate.setItems(
-        #     self.targetCDEs["code"].tolist()
-        # )
-        # self.mappingTableView.setItemDelegateForColumn(
-        #     1, self.mappingTargetCDECodeColumnDelegate
-        # )
-        # "mappingTargetCDECodeColumnDelegate"
-        # "mappingTargetCDETypeColumnDelegate"
-        # "mappingTransformTypeColumnDelegate"
-        # "mappingTransformColumnDelegate"
-        info_msg = (
         self.mappingTableView.setSelectionBehavior(self.mappingTableView.SelectRows)
         self.mappingTableView.setSelectionMode(self.mappingTableView.SingleSelection)
         self.mappingTableView.setEditTriggers(
@@ -905,9 +827,11 @@ class MIPDatasetMapperWindow(object):
         self.mappingTableView.selectRow(indexRow)
         # Handle the combox box current index changed signal for the CDE code column
         self.cdeCode.currentIndexChanged.connect(self.updateMappingEditForm)
+        # Show status message
+        infoMsg = (
             "The mapping has been created. You can now edit, validate, and save it!"
         )
-        self.updateStatusbar(info_msg)
+        self.updateStatusbar(infoMsg)
 
     def selectOutputFilename(self):
         """Select the output filename."""
@@ -915,24 +839,24 @@ class MIPDatasetMapperWindow(object):
             None, "Select the output filename", "", "CSV files (*.csv)"
         )
         if self.outputFilename[0] == "":
-            err_msg = "Please select a valid output filename."
+            errMsg = "Please select a valid output filename."
             QMessageBox.warning(
                 None,
                 "Error",
-                err_msg,
+                errMsg,
             )
-            self.updateStatusbar(err_msg)
+            self.updateStatusbar(errMsg)
             return False
         if not self.outputFilename[0].endswith(".csv"):
             self.outputFilename = self.outputFilename[0] + ".csv"
-            success_msg = (
+            successMsg = (
                 "The output filename has been updated to: " + self.outputFilename + "."
             )
             QMessageBox.information(
                 None,
-                success_msg,
+                successMsg,
             )
-            self.updateStatusbar(success_msg)
+            self.updateStatusbar(successMsg)
         return True
 
     def updateStatusbar(self, message):
@@ -984,15 +908,15 @@ class MIPDatasetMapperWindow(object):
         )
         # Show a message box to inform the user that the mapping has
         # been done successfully
-        success_msg = (
+        successMsg = (
             "The mapping has been done successfully and "
             "the output dataset has been saved to: " + self.outputFilename[0] + "."
         )
         QMessageBox.information(
             None,
             "Success",
-            success_msg,
+            successMsg,
             QMessageBox.Ok,
         )
-        self.updateStatusbar(success_msg)
+        self.updateStatusbar(successMsg)
         self.mapButton.setEnabled(True)

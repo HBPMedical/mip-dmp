@@ -62,7 +62,6 @@ class PandasTableModel(QtCore.QAbstractTableModel):
             self._data.iloc[index.row(), index.column()] = value
             self.dataChanged.emit(index, index, [role])
             return True
-
         return False
 
 
