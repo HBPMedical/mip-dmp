@@ -26,6 +26,9 @@ from PySide2.QtWidgets import (
     QSizePolicy,
     QLineEdit,
     QHeaderView,
+    QHBoxLayout,
+    QVBoxLayout,
+    QInputDialog,
 )
 import pkg_resources
 
@@ -95,6 +98,12 @@ class MIPDatasetMapperWindow(object):
         "mappingTableRowUpdateGroupBox",
         "mappingTableRowUpdateGroupBoxLayout",
         "mappingRowIndex",
+        "mappingTableViewWidget",
+        "mappingTableViewLayout",
+        "mappingTableViewAddDeleteRowWidget",
+        "mappingTableViewAddDeleteRowLayout",
+        "mappingTableViewAddRowButton",
+        "mappingTableViewDeleteRowButton",
         "datasetColumn",
         "cdeCode",
         "cdeType",
@@ -347,6 +356,8 @@ class MIPDatasetMapperWindow(object):
         self.mappingFilePathLabel = QLabel(self.mappingFormLayoutWidget)
         # Set the splitter for the mapping table and the new entry form
         self.columnsCDEsMappingSplitter = QSplitter(Qt.Vertical)
+        self.mappingTableViewWidget = QWidget(self.columnsCDEsMappingGroupBox)
+        self.mappingTableViewLayout = QVBoxLayout()
         # Set the mapping table
         self.mappingTableView = QTableView(self.columnsCDEsMappingGroupBox)
         self.mappingTableView.setGeometry(QRect(10, 70, 371, 231))
@@ -354,6 +365,26 @@ class MIPDatasetMapperWindow(object):
             QHeaderView.Stretch
         )
         self.mappingTableView.horizontalHeader().setVisible(True)
+        self.mappingTableViewAddDeleteRowWidget = QWidget(
+            self.columnsCDEsMappingGroupBox
+        )
+        self.mappingTableViewAddDeleteRowLayout = QHBoxLayout()
+        self.mappingTableViewAddRowButton = QPushButton(self.columnsCDEsMappingGroupBox)
+        self.mappingTableViewAddRowButton.setToolTip(
+            "Add a new row to the mapping table"
+        )
+        self.mappingTableViewAddRowButton.setText(
+            QCoreApplication.translate(f"{WINDOW_NAME}", "Add", None)
+        )
+        self.mappingTableViewDeleteRowButton = QPushButton(
+            self.columnsCDEsMappingGroupBox
+        )
+        self.mappingTableViewDeleteRowButton.setToolTip(
+            "Delete the selected row from the mapping table"
+        )
+        self.mappingTableViewDeleteRowButton.setText(
+            QCoreApplication.translate(f"{WINDOW_NAME}", "Delete", None)
+        )
         # Create group box for entering a new entry to the mapping table
         self.mappingTableRowUpdateGroupBox = QGroupBox()
         # Create a form widget to edit row of mapping table
@@ -469,11 +500,22 @@ class MIPDatasetMapperWindow(object):
         self.columnsCDEsMappingGroupBoxLayout.addWidget(
             self.columnsCDEsMappingSplitter, 0, 0, 1, 1
         )
-        self.columnsCDEsMappingSplitter.addWidget(self.mappingTableView)
+        self.mappingTableViewWidget.setLayout(self.mappingTableViewLayout)
+        self.mappingTableViewLayout.addWidget(self.mappingTableView)
+        self.mappingTableViewAddDeleteRowWidget.setLayout(
+            self.mappingTableViewAddDeleteRowLayout
+        )
+        self.mappingTableViewAddDeleteRowLayout.addWidget(
+            self.mappingTableViewAddRowButton
+        )
+        self.mappingTableViewAddDeleteRowLayout.addWidget(
+            self.mappingTableViewDeleteRowButton
+        )
+        self.mappingTableViewLayout.addWidget(self.mappingTableViewAddDeleteRowWidget)
+        self.columnsCDEsMappingSplitter.addWidget(self.mappingTableViewWidget)
         self.columnsCDEsMappingGroupBoxLayout.addWidget(
             self.mappingFormLayoutWidget, 1, 0, 1, 1
         )
-
         self.rightCentralWidgetSplitter.addWidget(self.columnsCDEsMappingGroupBox)
         self.mappingTableRowUpdateGroupBox.setLayout(
             self.mappingTableRowUpdateGroupBoxLayout
@@ -489,6 +531,75 @@ class MIPDatasetMapperWindow(object):
         self.mappingSaveButton.triggered.connect(self.saveMapping)
         self.mapButton.triggered.connect(self.map)
         self.updateMappingRowButton.clicked.connect(self.updateMappingTableRow)
+        self.mappingTableViewAddRowButton.clicked.connect(self.addMappingTableRow)
+        self.mappingTableViewDeleteRowButton.clicked.connect(self.deleteMappingTableRow)
+
+    def addMappingTableRow(self):
+        """Add a row to the mapping table."""
+        # Show a dialog to enter the dataset column name
+        # it is given the choice to select from the list of dataset columns.
+        # If the user selects a column name from the list, the CDE code is
+        # automatically filled in with the best match.
+        datasetColumn, ok = QInputDialog().getItem(
+            None,
+            "Select dataset column to add to the mapping table",
+            "Dataset column:",
+            self.inputDatasetColumns,
+            0,
+            False,
+        )
+        if ok and datasetColumn is not None and datasetColumn != "":
+            # Get the fuzzy matches list for the dataset column
+            # and set the CDE code and type to the first match
+            columnFuzzyMatches = self.fuzzyMatchedCdeCodes[datasetColumn][0]
+            cdeCode = columnFuzzyMatches[0]
+            cdeType = self.targetCDEs[self.targetCDEs["code"] == cdeCode][
+                "type"
+            ].unique()[0]
+            if cdeType == "real" or cdeType == "integer":
+                transformType = "scale"
+                transform = "1.0"
+            else:
+                transformType = "map"
+                transform = '{ "X": "Y", "Y": "X" }'
+            newRow = {
+                "dataset_column": datasetColumn,
+                "cde_code": cdeCode,
+                "cde_type": cdeType,
+                "transform_type": transformType,
+                "transform": transform,
+            }
+            # Use the loc method to add the new row to the DataFrame
+            self.columnsCDEsMappingData.loc[len(self.columnsCDEsMappingData)] = newRow
+            # Update the table
+            self.mappingTableView.model().layoutChanged.emit()
+            successMsg = (
+                "New row for dataset column '{}' added to the mapping table!".format(
+                    datasetColumn
+                )
+            )
+            QMessageBox.information(None, "Success", successMsg)
+            self.statusbar.showMessage(successMsg)
+            self.statusbar.repaint()
+        else:
+            warnMsg = "No dataset column selected!"
+            QMessageBox.warning(None, "Warning", warnMsg)
+            self.statusbar.showMessage(warnMsg)
+            self.statusbar.repaint()
+
+    def deleteMappingTableRow(self):
+        """Delete the selected row from the mapping table."""
+        # Get the selected row index
+        index = self.mappingTableView.selectedIndexes()[0]
+        # Delete the row from the DataFrame
+        self.columnsCDEsMappingData.drop(index=index.row(), inplace=True)
+        self.columnsCDEsMappingData.reset_index(drop=True, inplace=True)
+        # Update the table
+        self.mappingTableView.model().layoutChanged.emit()
+        successMsg = "Row {} deleted from the mapping table!".format(index.row())
+        QMessageBox.information(None, "Success", successMsg)
+        self.statusbar.showMessage(successMsg)
+        self.statusbar.repaint()
 
     def initializeMappingEditForm(self, index):
         # Get the data for the current row and update the widgets in the form
