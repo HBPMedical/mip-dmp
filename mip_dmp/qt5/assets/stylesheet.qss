@@ -556,3 +556,45 @@ QTableView::item:selected, QTableView::item:selected:active {
     background-color: #4fa08b;
     color: #d3dae3;
 }
+
+QComboBox {
+    border-style: solid;
+    border-color: #4fa08b;
+    border-width: 1px;
+    border-radius: 5px;
+    color: #d3dae3;
+    padding: 2px;
+    background-color: #222b2e;
+    selection-background-color: #4fa08b;
+    selection-color: #d3dae3;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+    border-left-width: 1px;
+    border-left-color: #4fa08b;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #222b2e;
+	color: #222222;
+}
+
+QComboBox::item {
+    color: #d3dae3;
+}
+
+QComboBox::item:selected {
+    background-color: #4fa08b;
+    color: #222222;
+}
+
+QComboBox::item:!selected {
+    color: #222222;
+}
+
+QComboBox::item:!selected:hover {
+    background-color: #4fa08b;
+    color: #222222;
+}
