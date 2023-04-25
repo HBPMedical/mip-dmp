@@ -569,16 +569,23 @@ QComboBox {
     selection-color: #d3dae3;
 }
 
+QComboBox:disabled {
+    /* set the background and text color for the combobox when disabled */
+    background-color: #d3dae3;
+    color: #a8a8a8;
+}
+
 QComboBox::drop-down {
     subcontrol-origin: padding;
     subcontrol-position: top right;
     width: 15px;
+	height: 15px;
     border-left-width: 1px;
     border-left-color: #4fa08b;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
     background-color: #222b2e;
-	color: #222222;
+	color: #587E72;
 }
 
 QComboBox::item {

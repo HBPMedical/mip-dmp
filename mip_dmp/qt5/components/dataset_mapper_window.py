@@ -32,7 +32,12 @@ from PySide2.QtWidgets import (
 )
 import pkg_resources
 
-from mip_dmp.dataset.mapping import initialize_mapping_table, map_dataset
+from mip_dmp.io import load_mapping_json
+from mip_dmp.dataset.mapping import (
+    initialize_mapping_table,
+    map_dataset,
+    MAPPING_TABLE_COLUMNS,
+)
 from mip_dmp.qt5.model.table_model import (
     # NoEditorDelegate,
     PandasTableModel,
@@ -109,12 +114,15 @@ class MIPDatasetMapperWindow(object):
         "cdeType",
         "transformType",
         "transform",
-        "fuzzyMatchedCdeCodes",
+        "matchedCdeCodes",
         "updateMappingRowButton",
         "outputDirectoryPath",
         "outputFilename",
         "statusbar",
         "toolBar",
+        "mappingInitLabel",
+        "initMatchingMethod",
+        "mappingInitButton",
     ]
 
     def __init__(self, mainWindow):
@@ -145,7 +153,8 @@ class MIPDatasetMapperWindow(object):
         QMetaObject.connectSlotsByName(mainWindow)
         # Set the initial state of the UI where the save mapping and
         # map buttons are disabled
-        self.disableSaveMappingAndMapButtons()
+        self.disableMappingInitItems()
+        self.disableMappingMapButtons()
 
     def adjustWindow(self, mainWindow):
         """Adjust the window size, Qt Style Sheet, and title.
@@ -157,7 +166,7 @@ class MIPDatasetMapperWindow(object):
         """
         if not mainWindow.objectName():
             mainWindow.setObjectName(f"{WINDOW_NAME}")
-        mainWindow.resize(1024, 768)
+        mainWindow.resize(1280, 720)
         # Set the window Qt Style Sheet
         styleSheetFile = pkg_resources.resource_filename(
             "mip_dmp", os.path.join("qt5", "assets", "stylesheet.qss")
@@ -215,7 +224,7 @@ class MIPDatasetMapperWindow(object):
         # Add a separator to the tool bar
         self.toolBar.addSeparator()
         # Add the load target CDEs file button to the tool bar
-        targetCDEsToolLabel = QLabel("2. Target CDEs Metadata Schema:")
+        targetCDEsToolLabel = QLabel("2. Target Schema:")
         targetCDEsToolLabel.setStyleSheet(
             "QLabel { font-weight: bold; color: #222222;}"
         )
@@ -227,21 +236,50 @@ class MIPDatasetMapperWindow(object):
         self.toolBar.addWidget(spacer2)
         # Add a separator to the tool bar
         self.toolBar.addSeparator()
-        # Add the load / save mapping file buttons to the tool bar
-        mappingToolLabel = QLabel("3. Mapping file:")
-        mappingToolLabel.setStyleSheet("QLabel { font-weight: bold; color: #222222;}")
-        self.toolBar.addWidget(mappingToolLabel)
-        self.toolBar.addAction(self.mappingCheckButton)
-        self.toolBar.addAction(self.mappingSaveButton)
-        self.toolBar.addAction(self.mappingLoadButton)
+        # Add the button related to mapping table initialization to the tool bar
+        mappingInitLabel = QLabel("(3). Mapping Initialization:")
+        mappingInitLabel.setStyleSheet("QLabel { font-weight: bold; color: #222222;}")
+        self.initMatchingMethod = QComboBox()
+        icon = pkg_resources.resource_filename(
+            "mip_dmp", os.path.join("qt5", "assets", "down_arrow.png")
+        )
+        self.initMatchingMethod.setStyleSheet(
+            f"QComboBox::down-arrow {{ image: url({icon}); height: 16px; width: 16px; }}"
+        )
+        self.initMatchingMethod.addItems(["fuzzy", "glove", "chars2vec"])
+        self.toolBar.addWidget(mappingInitLabel)
+        self.toolBar.addWidget(self.initMatchingMethod)
+        self.mappingInitButton = QAction(
+            QIcon(
+                pkg_resources.resource_filename(
+                    "mip_dmp", os.path.join("qt5", "assets", "init_mapping.png")
+                )
+            ),
+            "Initialize Mapping",
+            mainWindow,
+        )
+        self.toolBar.addAction(self.mappingInitButton)
         # Add a spacer to the tool bar
         spacer3 = QWidget()
         spacer3.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         self.toolBar.addWidget(spacer3)
         # Add a separator to the tool bar
         self.toolBar.addSeparator()
+        # Add the load / save mapping file buttons to the tool bar
+        mappingToolLabel = QLabel("4. Mapping Check / Save / Load:")
+        mappingToolLabel.setStyleSheet("QLabel { font-weight: bold; color: #222222;}")
+        self.toolBar.addWidget(mappingToolLabel)
+        self.toolBar.addAction(self.mappingCheckButton)
+        self.toolBar.addAction(self.mappingSaveButton)
+        self.toolBar.addAction(self.mappingLoadButton)
+        # Add a spacer to the tool bar
+        spacer4 = QWidget()
+        spacer4.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        self.toolBar.addWidget(spacer4)
+        # Add a separator to the tool bar
+        self.toolBar.addSeparator()
         # Add the map button to the tool bar
-        actionsLabel = QLabel("4. Map:")
+        actionsLabel = QLabel("5. Map:")
         actionsLabel.setStyleSheet("QLabel { font-weight: bold; color: #222222;}")
         self.toolBar.addWidget(actionsLabel)
         self.mapButton = QAction(
@@ -526,6 +564,7 @@ class MIPDatasetMapperWindow(object):
         """Connect the buttons to their corresponding functions."""
         self.inputDatasetLoadButton.triggered.connect(self.loadInputDataset)
         self.targetCDEsLoadButton.triggered.connect(self.loadCDEsFile)
+        self.mappingInitButton.triggered.connect(self.mappingMatch)
         self.mappingLoadButton.triggered.connect(self.loadMapping)
         self.mappingCheckButton.triggered.connect(self.checkMapping)
         self.mappingSaveButton.triggered.connect(self.saveMapping)
@@ -551,8 +590,8 @@ class MIPDatasetMapperWindow(object):
         if ok and datasetColumn is not None and datasetColumn != "":
             # Get the fuzzy matches list for the dataset column
             # and set the CDE code and type to the first match
-            columnFuzzyMatches = self.fuzzyMatchedCdeCodes[datasetColumn][0]
-            cdeCode = columnFuzzyMatches[0]
+            columnMatches = self.matchedCdeCodes[datasetColumn][0]
+            cdeCode = columnMatches[0]
             cdeType = self.targetCDEs[self.targetCDEs["code"] == cdeCode][
                 "type"
             ].unique()[0]
@@ -606,12 +645,12 @@ class MIPDatasetMapperWindow(object):
         rowData = self.columnsCDEsMappingData.iloc[index.row(), :]
         self.mappingRowIndex.setText(str(index.row()))
         self.datasetColumn.setText(str(rowData["dataset_column"]))
-        columnFuzzyMatches = self.fuzzyMatchedCdeCodes[rowData["dataset_column"]][0]
+        columnMatches = self.matchedCdeCodes[rowData["dataset_column"]][0]
         self.cdeCode.clear()
-        self.cdeCode.addItems(columnFuzzyMatches)
-        ind = columnFuzzyMatches.index(rowData["cde_code"])
+        self.cdeCode.addItems(columnMatches)
+        ind = columnMatches.index(rowData["cde_code"])
         self.cdeCode.setCurrentIndex(ind)
-        cdeType = self.targetCDEs[self.targetCDEs["code"] == columnFuzzyMatches[ind]][
+        cdeType = self.targetCDEs[self.targetCDEs["code"] == columnMatches[ind]][
             "type"
         ].unique()[0]
         self.cdeType.setText(cdeType)
@@ -626,8 +665,8 @@ class MIPDatasetMapperWindow(object):
         # Get the data for the current row and update the widgets in the form
         rowIndex = int(self.mappingRowIndex.text())
         rowData = self.columnsCDEsMappingData.iloc[rowIndex, :]
-        columnFuzzyMatches = self.fuzzyMatchedCdeCodes[rowData["dataset_column"]][0]
-        cdeType = self.targetCDEs[self.targetCDEs["code"] == columnFuzzyMatches[index]][
+        columnMatches = self.matchedCdeCodes[rowData["dataset_column"]][0]
+        cdeType = self.targetCDEs[self.targetCDEs["code"] == columnMatches[index]][
             "type"
         ].unique()[0]
         self.cdeType.setText(cdeType)
@@ -687,7 +726,7 @@ class MIPDatasetMapperWindow(object):
                 errMsg,
             )
             self.updateStatusbar(errMsg)
-            self.disableSaveMappingAndMapButtons()
+            self.disableMappingMapButtons()
         else:
             self.inputDataset = pd.read_csv(self.inputDatasetPath[0])
             self.inputDatasetColumns = self.inputDataset.columns.tolist()
@@ -697,8 +736,12 @@ class MIPDatasetMapperWindow(object):
             if hasattr(self, "targetCDEsPath") and os.path.exists(
                 self.targetCDEsPath[0]
             ):
-                self.updateColumnCDEsMapping()
-            self.disableSaveMappingAndMapButtons()
+                self.initMapping()
+                self.enableMappingButtons()
+                self.enableMappingInitItems()
+            else:
+                self.disableMappingMapButtons()
+                self.disableMappingInitItems()
 
     def loadCDEsFile(self):
         """Load the CDEs file."""
@@ -722,7 +765,7 @@ class MIPDatasetMapperWindow(object):
                 errMsg,
             )
             self.updateStatusbar(errMsg)
-            self.disableSaveMappingAndMapButtons()
+            self.disableMappingMapButtons()
         else:
             self.targetCDEs = pd.read_excel(self.targetCDEsPath[0])
             self.targetCDEsPandasModel = PandasTableModel(self.targetCDEs)
@@ -732,8 +775,12 @@ class MIPDatasetMapperWindow(object):
             if hasattr(self, "inputDatasetPath") and os.path.exists(
                 self.inputDatasetPath[0]
             ):
-                self.updateColumnCDEsMapping()
-            self.disableSaveMappingAndMapButtons()
+                self.initMapping()
+                self.enableMappingInitItems()
+                self.enableMappingButtons()
+            else:
+                self.disableMappingMapButtons()
+                self.disableMappingInitItems()
 
     def loadMapping(self):
         """Load the mapping file."""
@@ -759,14 +806,35 @@ class MIPDatasetMapperWindow(object):
                 errMsg,
             )
             self.updateStatusbar(errMsg)
-            self.disableSaveMappingAndMapButtons()
+            self.disableMappingMapButtons()
         else:
-            successMsg = (
-                f"Loaded mapping file {self.mappingFilePath[0]}. "
-                "Please check the mapping and click on the Map button to map the input dataset."
-            )
-            self.updateStatusbar(successMsg)
-            self.disableSaveMappingAndMapButtons()
+            try:
+                self.columnsCDEsMappingData = load_mapping_json(self.mappingFilePath[0])
+                print(f"Mapping loaded from {self.mappingFilePath[0]}")
+                successMsg = (
+                    f"Loaded mapping file {self.mappingFilePath[0]}. \n"
+                    "Please Check the mapping, Save it and Click on the "
+                    "Map button to map the input dataset."
+                )
+                QMessageBox.information(
+                    None,
+                    "Success",
+                    successMsg,
+                )
+                self.updateStatusbar(successMsg)
+            except ValueError as e:
+                errMsg = (
+                    f"The mapping file {self.mappingFilePath[0]} is not valid: {repr(e)} \n"
+                    "Please select a valid file! "
+                )
+                QMessageBox.warning(
+                    None,
+                    "Error",
+                    errMsg,
+                )
+                self.updateStatusbar(errMsg)
+            self.disableMappingMapButtons()
+            self.enableMappingButtons()
 
     def saveMapping(self):
         """Save the mapping file."""
@@ -794,13 +862,36 @@ class MIPDatasetMapperWindow(object):
         print(f"Mapping saved to {self.mappingFilePath[0]}")
         self.mappingFilePathLabel.setText(self.mappingFilePath[0])
         successMsg = f"Mapping saved to {self.mappingFilePath[0]}!"
+        QMessageBox.information(
+            None,
+            "Success",
+            successMsg,
+        )
         self.updateStatusbar(successMsg)
         self.mapButton.setEnabled(True)
 
-    def disableSaveMappingAndMapButtons(self):
-        """Disable the save mapping and map buttons."""
+    def disableMappingMapButtons(self):
+        """Disable the check / save / load mapping and map buttons."""
+        self.mappingCheckButton.setEnabled(False)
         self.mappingSaveButton.setEnabled(False)
+        self.mappingLoadButton.setEnabled(False)
         self.mapButton.setEnabled(False)
+
+    def disableMappingInitItems(self):
+        """Disable the mapping initialization items."""
+        self.mappingInitButton.setEnabled(False)
+        self.initMatchingMethod.setEnabled(False)
+
+    def enableMappingInitItems(self):
+        """Enable the mapping initialization items."""
+        self.mappingInitButton.setEnabled(True)
+        self.initMatchingMethod.setEnabled(True)
+
+    def enableMappingButtons(self):
+        """Enable the check / save / load mapping and map buttons."""
+        self.mappingCheckButton.setEnabled(True)
+        # self.mappingSaveButton.setEnabled(True)
+        self.mappingLoadButton.setEnabled(True)
 
     def checkMapping(self):
         """Check the mapping."""
@@ -824,7 +915,7 @@ class MIPDatasetMapperWindow(object):
                 errMsg,
             )
             self.updateStatusbar(errMsg)
-            self.disableSaveMappingAndMapButtons()
+            self.disableMappingMapButtons()
             return
         # Check if the mapping contains only valid CDE codes
         if self.columnsCDEsMappingData[
@@ -840,7 +931,7 @@ class MIPDatasetMapperWindow(object):
                 errMsg,
             )
             self.updateStatusbar(errMsg)
-            self.disableSaveMappingAndMapButtons()
+            self.disableMappingMapButtons()
             return
         # Check if the mapping transform is correctly formatted
         transformList = self.columnsCDEsMappingData["transform"].tolist()
@@ -890,7 +981,7 @@ class MIPDatasetMapperWindow(object):
                 errMsg,
             )
             self.updateStatusbar(errMsg)
-            self.disableSaveMappingAndMapButtons()
+            self.disableMappingMapButtons()
             return
         # If the mapping is valid, display a success message
         successMsg = (
@@ -906,18 +997,16 @@ class MIPDatasetMapperWindow(object):
         self.mappingSaveButton.setEnabled(True)
         self.mapButton.setEnabled(False)
 
-    def updateColumnCDEsMapping(self):
-        """Update the column/CDEs mapping."""
+    def initMapping(self):
+        """Initialize an empty column/CDEs mapping table."""
         infoMsg = (
-            "The mapping is being created / updated. "
+            "The empty mapping table is being created. "
             "Please wait until the process is finished."
         )
         self.updateStatusbar(infoMsg)
-        # Create a first mapping table based on fuzzy matching
-        (
-            self.columnsCDEsMappingData,
-            self.fuzzyMatchedCdeCodes,
-        ) = initialize_mapping_table(dataset=self.inputDataset, schema=self.targetCDEs)
+        # Create a first empty mapping table
+        self.matchedCdeCodes = None
+        self.columnsCDEsMappingData = pd.DataFrame(columns=MAPPING_TABLE_COLUMNS)
         # Create a pandas model for the mapping table
         self.columnsCDEsMappingPandasModel = PandasTableModel(
             self.columnsCDEsMappingData
@@ -943,6 +1032,48 @@ class MIPDatasetMapperWindow(object):
             "The mapping has been created. You can now edit, validate, and save it!"
         )
         self.updateStatusbar(infoMsg)
+
+    def mappingMatch(self):
+        """Initialize the column/CDEs mapping based on fuzzy word matching and character embedding methods."""
+        matchingMethod = self.initMatchingMethod.currentText()
+        infoMsg = (
+            f"The mapping is being initialize using the {matchingMethod} method."
+            "Please wait until the process is finished."
+        )
+        self.updateStatusbar(infoMsg)
+        # Create a first mapping table based on fuzzy matching
+        (
+            self.columnsCDEsMappingData,
+            self.matchedCdeCodes,
+        ) = initialize_mapping_table(
+            dataset=self.inputDataset,
+            schema=self.targetCDEs,
+            matching_method=matchingMethod,
+        )
+        # Create a pandas model for the mapping table
+        self.columnsCDEsMappingPandasModel = PandasTableModel(
+            self.columnsCDEsMappingData
+        )
+        # Set the model of the table view to the pandas model
+        self.mappingTableView.setModel(self.columnsCDEsMappingPandasModel)
+        self.mappingTableView.setSelectionBehavior(self.mappingTableView.SelectRows)
+        self.mappingTableView.setSelectionMode(self.mappingTableView.SingleSelection)
+        self.mappingTableView.setEditTriggers(
+            self.mappingTableView.NoEditTriggers
+        )  # disable editing
+        # Handle the mapping table view row selection changed signal
+        self.mappingTableView.selectionModel().currentRowChanged.connect(
+            self.initializeMappingEditForm
+        )
+        # Select the first row of the mapping table view at the beginning
+        indexRow = 0
+        self.mappingTableView.selectRow(indexRow)
+        # Handle the combox box current index changed signal for the CDE code column
+        self.cdeCode.currentIndexChanged.connect(self.updateMappingEditForm)
+        # Show status message
+        infoMsg = "The mapping has been created. You can now edit, check, and save it!"
+        self.updateStatusbar(infoMsg)
+        self.enableMappingButtons()
 
     def selectOutputFilename(self):
         """Select the output filename."""

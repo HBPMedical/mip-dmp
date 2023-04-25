@@ -1,8 +1,21 @@
 """Module for input/output operations."""
 
+import os
 import json
 from pathlib import Path
 import pandas as pd
+import gensim.downloader as api
+
+# Disable Tensorflow warnings, other options are:
+# - 0 (default): all messages are logged (default behavior)
+# - 1: INFO messages are not printed
+# - 2: INFO and WARNING messages are not printed
+# - 3: INFO, WARNING, and ERROR messages are not printed
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # noqa
+
+import chars2vec
+
+from mip_dmp.dataset.mapping import MAPPING_TABLE_COLUMNS
 
 
 def load_csv(csc_file: str):
@@ -57,6 +70,32 @@ def load_json(json_file: str):
         return data
 
 
+def load_mapping_json(json_file: str):
+    """Load content of a saved mapping JSON file.
+
+    Parameters
+    ----------
+    json_file : str
+        Path to JSON file.
+
+    Returns
+    -------
+    data : dict
+        Dictionary loaded from JSON file.
+    """
+    data = pd.read_json(json_file, orient="records")
+    # Check if the mapping file is in the correct format
+    # i.e. if it contains the required columns listed in
+    # MAPPING_TABLE_COLUMNS
+    if not all([col in data.columns for col in MAPPING_TABLE_COLUMNS]):
+        raise ValueError(
+            "The mapping file is not in the correct format. "
+            "The mapping file must contain the following columns: "
+            f"{MAPPING_TABLE_COLUMNS}."
+        )
+    return data
+
+
 def generate_output_path(input_cdes_file: str, output_dir: str, output_suffix: str):
     """Generate output path for CDEs file, but without any extension.
 
@@ -82,3 +121,19 @@ def generate_output_path(input_cdes_file: str, output_dir: str, output_suffix: s
         "_".join([in_cdes_fname.stem, output_suffix]) + in_cdes_fname.suffix
     )
     return out_cdes_fname.absolute()
+
+
+def load_glove_model(model_name="glove-wiki-gigaword-50"):
+    """Load a GloVe model from disk.
+
+    Parameters
+    ----------
+    model_name : str, optional
+        Name of the GloVe model to load, by default "glove-wiki-gigaword-50"
+
+    Returns
+    -------
+    glove_model : dict
+        Dictionary containing the GloVe model.
+    """
+    return api.load(model_name)
