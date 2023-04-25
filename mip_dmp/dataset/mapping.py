@@ -3,6 +3,21 @@
 from fuzzywuzzy import fuzz
 import pandas as pd
 import numpy as np
+from scipy import spatial
+import gensim.downloader as api
+import os
+
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # noqa
+import chars2vec
+
+
+MAPPING_TABLE_COLUMNS = {
+    "dataset_column": [],
+    "cde_code": [],
+    "cde_type": [],
+    "transform_type": [],
+    "transform": [],
+}
 
 
 def map_dataset(dataset, mappings):
@@ -199,85 +214,123 @@ def initialize_mapping_table(dataset, schema, nb_fuzzy_matches=10):
     schema : pandas.DataFrame
         Schema to which the dataset is mapped.
 
-    nb_fuzzy_matches : int
-        Number of fuzzy matches to store for each dataset column.
+    nb_kept_matches : int
+        Number of matches to keep for each dataset column.
+
+    matching_method : str
+        Method to be used for matching the dataset columns with the CDE codes.
+        Can be "fuzzy", "glove" or "chars2vec".
+
+    glove_model_name : str
+        Name of the Glove model to be used for matching the dataset columns
+        with the CDE codes.
 
     Returns
     -------
     pandas.DataFrame
         Mapping table represented as a Pandas DataFrame.
 
-    fuzzy_matched_cde_codes : dict
-        Dictionary with tuple of the first 10 fuzzy matched CDE codes with
-        corresponding fuzzy ratio (value) for each dataset column (key).
+    matched_cde_codes : dict
+        Dictionary with tuple of the first 10 matched CDE codes with
+        corresponding fuzzy ratio / cosine similarity (value) for each dataset column (key).
     """
     # Create the mapping table.
-    MAPPING_TABLE_COLUMNS = {
-        "dataset_column": [],
-        "cde_code": [],
-        "cde_type": [],
-        "transform_type": [],
-        "transform": [],
-    }
     mapping_table = pd.DataFrame(MAPPING_TABLE_COLUMNS)
 
     # Add the dataset columns.
     mapping_table["dataset_column"] = dataset.columns
 
     # Initialize a dictionary to store the results of the
-    # first 10 fuzzy matched CDE codes for each dataset column.
-    fuzzy_matched_cde_codes = {}
+    # first 10 matched CDE codes for each dataset column.
+    matched_cde_codes = {}
 
-    # Add the CDE codes with fuzzy matching.
-    # The CDE codes are sorted by the similarity to the dataset column name,
-    # and the nb_dataset_columns first CDE codes are selected.
-    # matches = pd.Series(dataset.columns).apply(
-    #     fuzzy_match, args=(schema["code"].tolist(),)
-    # )
-
-    # # Extract the matched values and match ratios into separate columns
-    # for i in range(nb_fuzzy_matches):
-    #     # Sort the matches by the match ratio.
-    #     matches_sorted = matches.apply(
-    #         lambda x, i=i: sorted(x, key=lambda y: y[2])[i] if len(x) > i else None
-    #     )
-    #     # Store the first matched CDE code in the DataFrame.
-    #     mapping_table[f"cde_code"] = [match[0] for match in matches_sorted if match]
-    #     # Store the first nb_fuzy_matches matched CDE codes in the dictionary.
-    #     for dataset_column in dataset.columns:
-    #         if matches_sorted[dataset_column]:
-    #             fuzzy_matched_cde_codes[dataset_column] = [
-    #                 match[:nb_fuzzy_matches]
-    #                 for match in matches_sorted[dataset_column]
-    #                 if match
-    #             ]
-    #     print("Fuzzy matching: ")
-    #     print(fuzzy_matched_cde_codes)
-
-    matches = mapping_table["dataset_column"].apply(
-        lambda dataset_column: str(
-            sorted(
-                schema["code"],
-                key=lambda cde_code: fuzz.ratio(dataset_column, cde_code),
-                reverse=True,
-            )[
-                0:nb_fuzzy_matches
-            ]  # Select the nb_fuzzy_matches first matched CDE codes.
+    if matching_method == "fuzzy":
+        print(f"> Perform fuzzy matching with {nb_kept_matches} matches per column.")
+        # Function to find the fuzzy matches for each dataset column.
+        matches = mapping_table["dataset_column"].apply(
+            lambda dataset_column: str(
+                sorted(
+                    schema["code"],
+                    key=lambda cde_code: fuzz.ratio(dataset_column, cde_code),
+                    reverse=True,
+                )[
+                    0:nb_kept_matches
+                ]  # Select the nb_kept_matches first matched CDE codes.
+            )
         )
-    )
+    elif matching_method == "glove":
+        print(
+            f"> Perform Glove embedding matching with {nb_kept_matches} matches per column."
+        )
+        # Function to find the matches based on Glove embeddings and cosine similarity.
+        glove_model = api.load(glove_model_name)
+        matches = mapping_table["dataset_column"].apply(
+            lambda dataset_column: str(
+                sorted(
+                    schema["code"],
+                    key=lambda cde_code: embedding_similarity(
+                        glove_embedding(dataset_column, glove_model),
+                        glove_embedding(cde_code, glove_model),
+                    ),
+                )[
+                    0:nb_kept_matches
+                ]  # Select the nb_kept_matches first matched CDE codes.
+            )
+        )
+    elif matching_method == "chars2vec":
+        print(
+            f"> Perform chars2vec embedding matching with {nb_kept_matches} matches per column."
+        )
+        # Function to find the matches based on chars2vec embeddings and cosine similarity.
+        c2v_model = chars2vec.load_model("eng_50")
+        matches = mapping_table["dataset_column"].apply(
+            lambda dataset_column: str(
+                sorted(
+                    schema["code"],
+                    key=lambda cde_code: embedding_similarity(
+                        chars2vec_embedding(dataset_column, c2v_model),
+                        chars2vec_embedding(cde_code, c2v_model),
+                    ),
+                )[
+                    0:nb_kept_matches
+                ]  # Select the nb_kept_matches first matched CDE codes.
+            )
+        )
     matches = matches.apply(lambda x: eval(x))
 
     # Store the first nb_fuzy_matches matched CDE codes in the dictionary.
     for i, dataset_column in enumerate(dataset.columns):
-        fuzzy_matched_cde_codes[dataset_column] = (
-            matches[i][:nb_fuzzy_matches],
-            [
-                fuzz.ratio(dataset_column, match)
-                for match in matches[i][:nb_fuzzy_matches]
-            ],
-        )
-
-    # Add the first fuzzy matched CDE code for each dataset_column.
+        if matching_method == "fuzzy":
+            matched_cde_codes[dataset_column] = (
+                matches[i][:nb_kept_matches],
+                [
+                    fuzz.ratio(dataset_column, match)
+                    for match in matches[i][:nb_kept_matches]
+                ],
+            )
+        elif matching_method == "glove":
+            matched_cde_codes[dataset_column] = (
+                matches[i][:nb_kept_matches],
+                [
+                    embedding_similarity(
+                        glove_embedding(dataset_column, glove_model),
+                        glove_embedding(match, glove_model),
+                    )
+                    for match in matches[i][:nb_kept_matches]
+                ],
+            )
+        elif matching_method == "chars2vec":
+            matched_cde_codes[dataset_column] = (
+                matches[i][:nb_kept_matches],
+                [
+                    embedding_similarity(
+                        chars2vec_embedding(dataset_column, c2v_model),
+                        chars2vec_embedding(match, c2v_model),
+                    )
+                    for match in matches[i][:nb_kept_matches]
+                ],
+            )
+    # Add the first matched CDE code for each dataset_column.
     mapping_table["cde_code"] = [match[0] for match in matches]
 
     # Add the CDE type corresponding to the CDE code proposed by fuzzy matching.

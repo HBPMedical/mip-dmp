@@ -82,3 +82,19 @@ def generate_output_path(input_cdes_file: str, output_dir: str, output_suffix: s
         "_".join([in_cdes_fname.stem, output_suffix]) + in_cdes_fname.suffix
     )
     return out_cdes_fname.absolute()
+
+
+def load_glove_model(model_name="glove-wiki-gigaword-50"):
+    """Load a GloVe model from disk.
+
+    Parameters
+    ----------
+    model_name : str, optional
+        Name of the GloVe model to load, by default "glove-wiki-gigaword-50"
+
+    Returns
+    -------
+    glove_model : dict
+        Dictionary containing the GloVe model.
+    """
+    return api.load(model_name)
