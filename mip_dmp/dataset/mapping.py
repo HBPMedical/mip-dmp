@@ -203,7 +203,102 @@ def fuzzy_match(x, choices):
     return [(m, fuzz.ratio(x, m), -fuzz.ratio(x, m)) for m in choices]
 
 
-def initialize_mapping_table(dataset, schema, nb_fuzzy_matches=10):
+# Define the function to find the embedding vector representation for the text
+def glove_embedding(text, glove_model):
+    """Find the Glove embedding for the text.
+
+    Parameters
+    ----------
+    text : str
+        Text to be embedded.
+
+    glove_model : str
+        Glove model to be used, loaded by the gensim library.
+
+    Returns
+    -------
+    numpy.ndarray
+        Glove embedding for the text.
+    """
+
+    def preprocess_text(text):
+        """Preprocess the text.
+
+        Parameters
+        ----------
+        text : str
+            Text to be preprocessed.
+
+        Returns
+        -------
+        str
+            Preprocessed text.
+        """
+        # Lowercase the text.
+        text = text.lower()
+        # Tokenize the text.
+        text = [s for s in text if s != "" and s != "_"]  # Make a list of characters.
+        return text
+
+    # Preprocess the text.
+    text = preprocess_text(text)
+    # Find the Glove embedding for the text.
+    embedding = np.sum(np.array([glove_model[i] for i in text]), axis=0)
+    return embedding
+
+
+def chars2vec_embedding(text, chars2vec_model):
+    """Find the chars2vec embedding for the text.
+
+    Parameters
+    ----------
+    text : str
+        Text to be embedded.
+
+    chars2vec_model : str
+        chars2vec model to be used, loaded by the gensim library.
+
+    Returns
+    -------
+    numpy.ndarray
+        chars2vec embedding for the text.
+    """
+    # Find the chars2vec embedding for the text.
+    # The chars2vec model expects a list of strings as input.
+    # The output is a list of embeddings, so we take the first element.
+    embedding = chars2vec_model.vectorize_words([text])[0]
+    return embedding
+
+
+def embedding_similarity(x_embedding, y_embedding):
+    """Find the matches based on chars2vec embeddings and cosine similarity.
+
+    Parameters
+    ----------
+    x_embedding : str
+        String to compare against.
+
+    y_embedding : str
+        String to compare.
+
+    chars2vec_model : str
+        chars2vec model to be used, loaded by the gensim library.
+
+    Returns
+    -------
+    float
+        Cosine similarity between the two chars2vec embeddings of the strings.
+    """
+    return spatial.distance.cosine(x_embedding, y_embedding)
+
+
+def initialize_mapping_table(
+    dataset,
+    schema,
+    nb_kept_matches=10,
+    matching_method="fuzzy",
+    glove_model_name="glove-wiki-gigaword-50",
+):
     """Initialize the mapping table.
 
     Parameters
@@ -353,7 +448,7 @@ def initialize_mapping_table(dataset, schema, nb_fuzzy_matches=10):
         )
     ]
 
-    return (mapping_table, fuzzy_matched_cde_codes)
+    return (mapping_table, matched_cde_codes)
 
 
 def make_initial_transform(dataset, schema, dataset_column, cde_code):
