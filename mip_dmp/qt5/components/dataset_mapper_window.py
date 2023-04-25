@@ -42,6 +42,7 @@ from mip_dmp.qt5.model.table_model import (
     # NoEditorDelegate,
     PandasTableModel,
 )
+from mip_dmp.plot.word_embedding import embedding_vizualization_figure
 
 
 WINDOW_NAME = "MIPDatasetMapperUI"
@@ -123,6 +124,8 @@ class MIPDatasetMapperWindow(object):
         "mappingInitLabel",
         "initMatchingMethod",
         "mappingInitButton",
+        "embeddingVizButton",
+        "embeddingFigure",
     ]
 
     def __init__(self, mainWindow):
@@ -259,6 +262,16 @@ class MIPDatasetMapperWindow(object):
             mainWindow,
         )
         self.toolBar.addAction(self.mappingInitButton)
+        self.embeddingVizButton = QAction(
+            QIcon(
+                pkg_resources.resource_filename(
+                    "mip_dmp", os.path.join("qt5", "assets", "plot_embedding.png")
+                )
+            ),
+            "Plot Word Embedding in 3D with t-SNE",
+            mainWindow,
+        )
+        self.toolBar.addAction(self.embeddingVizButton)
         # Add a spacer to the tool bar
         spacer3 = QWidget()
         spacer3.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
@@ -572,6 +585,21 @@ class MIPDatasetMapperWindow(object):
         self.updateMappingRowButton.clicked.connect(self.updateMappingTableRow)
         self.mappingTableViewAddRowButton.clicked.connect(self.addMappingTableRow)
         self.mappingTableViewDeleteRowButton.clicked.connect(self.deleteMappingTableRow)
+        self.embeddingVizButton.triggered.connect(self.embeddingViz)
+
+    def embeddingViz(self):
+        """Open the embedding visualization window."""
+        self.embeddingFigure = embedding_vizualization_figure(
+            self.inputDataset, self.targetCDEs, self.initMatchingMethod.currentText()
+        )
+        if self.embeddingFigure is not None:
+            self.embeddingFigure.show()
+        else:
+            QMessageBox().warning(
+                None,
+                "Warning",
+                "Embedding visualization is not available for fuzzy matching.",
+            )
 
     def addMappingTableRow(self):
         """Add a row to the mapping table."""
@@ -881,6 +909,7 @@ class MIPDatasetMapperWindow(object):
         """Disable the mapping initialization items."""
         self.mappingInitButton.setEnabled(False)
         self.initMatchingMethod.setEnabled(False)
+        self.embeddingVizButton.setEnabled(False)
 
     def enableMappingInitItems(self):
         """Enable the mapping initialization items."""
@@ -1074,6 +1103,10 @@ class MIPDatasetMapperWindow(object):
         infoMsg = "The mapping has been created. You can now edit, check, and save it!"
         self.updateStatusbar(infoMsg)
         self.enableMappingButtons()
+        if matchingMethod != "fuzzy":
+            self.embeddingVizButton.setEnabled(True)
+        else:
+            self.embeddingVizButton.setEnabled(False)
 
     def selectOutputFilename(self):
         """Select the output filename."""
