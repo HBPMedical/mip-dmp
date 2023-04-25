@@ -166,7 +166,7 @@ class MIPDatasetMapperWindow(object):
         """
         if not mainWindow.objectName():
             mainWindow.setObjectName(f"{WINDOW_NAME}")
-        mainWindow.resize(1024, 768)
+        mainWindow.resize(1280, 720)
         # Set the window Qt Style Sheet
         styleSheetFile = pkg_resources.resource_filename(
             "mip_dmp", os.path.join("qt5", "assets", "stylesheet.qss")
