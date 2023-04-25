@@ -133,7 +133,23 @@ def load_glove_model(model_name="glove-wiki-gigaword-50"):
 
     Returns
     -------
-    glove_model : dict
+    dict
         Dictionary containing the GloVe model.
     """
     return api.load(model_name)
+
+
+def load_c2v_model(model_name="eng_50"):
+    """Load a chars2vec model from disk.
+
+    Parameters
+    ----------
+    model_name : str, optional
+        Name of the chars2vec model to load, by default "eng_50"
+
+    Returns
+    -------
+    dict
+        Dictionary containing the chars2vec model.
+    """
+    return chars2vec.load_model(model_name)
