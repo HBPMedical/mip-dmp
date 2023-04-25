@@ -806,14 +806,35 @@ class MIPDatasetMapperWindow(object):
                 errMsg,
             )
             self.updateStatusbar(errMsg)
-            self.disableSaveMappingAndMapButtons()
+            self.disableMappingMapButtons()
         else:
-            successMsg = (
-                f"Loaded mapping file {self.mappingFilePath[0]}. "
-                "Please check the mapping and click on the Map button to map the input dataset."
-            )
-            self.updateStatusbar(successMsg)
-            self.disableSaveMappingAndMapButtons()
+            try:
+                self.columnsCDEsMappingData = load_mapping_json(self.mappingFilePath[0])
+                print(f"Mapping loaded from {self.mappingFilePath[0]}")
+                successMsg = (
+                    f"Loaded mapping file {self.mappingFilePath[0]}. \n"
+                    "Please Check the mapping, Save it and Click on the "
+                    "Map button to map the input dataset."
+                )
+                QMessageBox.information(
+                    None,
+                    "Success",
+                    successMsg,
+                )
+                self.updateStatusbar(successMsg)
+            except ValueError as e:
+                errMsg = (
+                    f"The mapping file {self.mappingFilePath[0]} is not valid: {repr(e)} \n"
+                    "Please select a valid file! "
+                )
+                QMessageBox.warning(
+                    None,
+                    "Error",
+                    errMsg,
+                )
+                self.updateStatusbar(errMsg)
+            self.disableMappingMapButtons()
+            self.enableMappingButtons()
 
     def saveMapping(self):
         """Save the mapping file."""

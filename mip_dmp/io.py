@@ -3,6 +3,9 @@
 import json
 from pathlib import Path
 import pandas as pd
+import gensim.downloader as api
+
+from mip_dmp.dataset.mapping import MAPPING_TABLE_COLUMNS
 
 
 def load_csv(csc_file: str):
@@ -55,6 +58,32 @@ def load_json(json_file: str):
     with open(json_file) as f:
         data = json.load(f)
         return data
+
+
+def load_mapping_json(json_file: str):
+    """Load content of a saved mapping JSON file.
+
+    Parameters
+    ----------
+    json_file : str
+        Path to JSON file.
+
+    Returns
+    -------
+    data : dict
+        Dictionary loaded from JSON file.
+    """
+    data = pd.read_json(json_file, orient="records")
+    # Check if the mapping file is in the correct format
+    # i.e. if it contains the required columns listed in
+    # MAPPING_TABLE_COLUMNS
+    if not all([col in data.columns for col in MAPPING_TABLE_COLUMNS]):
+        raise ValueError(
+            "The mapping file is not in the correct format. "
+            "The mapping file must contain the following columns: "
+            f"{MAPPING_TABLE_COLUMNS}."
+        )
+    return data
 
 
 def generate_output_path(input_cdes_file: str, output_dir: str, output_suffix: str):
