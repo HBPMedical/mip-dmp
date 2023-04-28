@@ -28,6 +28,7 @@ def scatterplot_embeddings(
     inputDataset: pd.DataFrame,
     targetCDEs: pd.DataFrame,
     embedding_method: str = "chars2vec",
+    dim_reduction_method: str = "tsne",
 ):
     """Plot word embedding.
 
@@ -46,6 +47,9 @@ def scatterplot_embeddings(
         Embedding method. Can be "chars2vec" or "glove".
         Default: "chars2vec".
 
+    dim_reduction_method : str
+        Dimensionality reduction method. Can be "tsne" or "pca".
+
     Returns
     -------
     fig : plt.figure
@@ -63,8 +67,12 @@ def scatterplot_embeddings(
     column_embeddings = generate_embeddings(columns, embedding_method)
     cde_embeddings = generate_embeddings(cde_codes, embedding_method)
     # Reduce embeddings dimension to 3 components via t-SNE or PCA for visualization
-    x_column, y_column, z_column = reduce_embeddings_dimension(column_embeddings)
-    x_cde, y_cde, z_cde = reduce_embeddings_dimension(cde_embeddings)
+    x_column, y_column, z_column = reduce_embeddings_dimension(
+        column_embeddings, reduce_method=dim_reduction_method
+    )
+    x_cde, y_cde, z_cde = reduce_embeddings_dimension(
+        cde_embeddings, reduce_method=dim_reduction_method
+    )
     # Format data as pandas dataframe for plotting
     df = pd.DataFrame(
         {

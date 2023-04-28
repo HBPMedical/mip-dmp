@@ -155,9 +155,12 @@ def reduce_embeddings_dimension(
             random_state=42,
         )
         reduction_values = tsne_model.fit_transform(np.array(embeddings))
-    else:
+    elif reduce_method == "pca":
         pca_model = PCA(n_components=n_components, randomw_state=42)
         reduction_values = pca_model.fit_transform(np.array(embeddings))
+    else:
+        print(f"ERROR: Invalid reduction method ({reduce_method})!")
+        reduction_values = None
     # for value in tsne_values:
     #     x.append(value[0])
     #     y.append(value[1])
