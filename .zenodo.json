@@ -1,0 +1,29 @@
+{
+  "license": "Apache-2.0",
+  "keywords": [
+    "clinical",
+    "data",
+    "mapping",
+    "csv",
+    "schema",
+    "embedding",
+    "machine learning",
+    "federated learning"
+  ],
+  "creators": [
+    {
+      "name": "Tourbier, Sebastien",
+      "affiliation": "Centre Hospitalier Universitaire Vaudois and University of Lausanne (CHUV-UNIL), Switzerland"
+    },
+    {
+      "name": "Schaffhauser, Birgit",
+      "affiliation": "Centre Hospitalier Universitaire Vaudois and University of Lausanne (CHUV-UNIL), Switzerland"
+    },
+    {
+      "name": "Ryvlin, Philippe",
+      "affiliation": "Centre Hospitalier Universitaire Vaudois and University of Lausanne (CHUV-UNIL), Switzerland"
+    }
+  ],
+  "access_right": "open",
+  "upload_type": "software"
+}
