@@ -1,21 +1,12 @@
 """Module for input/output operations."""
 
-import os
 import json
 from pathlib import Path
 import pandas as pd
 import gensim.downloader as api
-
-# Disable Tensorflow warnings, other options are:
-# - 0 (default): all messages are logged (default behavior)
-# - 1: INFO messages are not printed
-# - 2: INFO and WARNING messages are not printed
-# - 3: INFO, WARNING, and ERROR messages are not printed
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # noqa
-
 import chars2vec
 
-from mip_dmp.dataset.mapping import MAPPING_TABLE_COLUMNS
+from mip_dmp.process.mapping import MAPPING_TABLE_COLUMNS
 
 
 def load_csv(csc_file: str):

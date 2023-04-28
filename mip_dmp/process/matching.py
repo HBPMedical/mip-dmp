@@ -1,305 +1,32 @@
-"""Module that provides functions to support the mapping of datasets to a specific CDEs metadata schema."""
+"""Module that provides functions to support the matching of dataset columns to CDEs."""
 
-from fuzzywuzzy import fuzz
+# External imports
 import pandas as pd
-import numpy as np
-from scipy import spatial
-import gensim.downloader as api
-import os
+from fuzzywuzzy import fuzz
 
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # noqa
-import chars2vec
-
-
-MAPPING_TABLE_COLUMNS = {
-    "dataset_column": [],
-    "cde_code": [],
-    "cde_type": [],
-    "transform_type": [],
-    "transform": [],
-}
+# Internal imports
+from mip_dmp.io import load_glove_model, load_c2v_model
+from mip_dmp.process.mapping import MAPPING_TABLE_COLUMNS
+from mip_dmp.process.embedding import (
+    glove_embedding,
+    chars2vec_embedding,
+    embedding_similarity,
+)
 
 
-def map_dataset(dataset, mappings):
-    """Map the dataset to the schema.
-
-    Parameters
-    ----------
-    dataset : pandas.DataFrame
-        Dataset to be mapped.
-
-    mappings : dict
-        Mappings of the dataset columns to the schema columns.
-
-    Returns
-    -------
-    pandas.DataFrame
-        Mapped dataset.
-    """
-    # create a list to hold the mapped columns
-    mapped_columns = []
-
-    # Map and apply transformation to each dataset column described in the
-    # mapping JSON file.
-    for mapping in mappings:
-        # Extract the mapping information of the column.
-        dataset_column = mapping["dataset_column"]
-        cde_code = mapping["cde_code"]
-        cde_type = mapping["cde_type"]
-        transform_type = mapping["transform_type"]
-        transform = mapping["transform"]
-        # Copy the dataset column to the mapped dataset for which the column name
-        # is the CDE code.
-        # map the input data to the CDE code and append to the list of mapped columns
-
-        # Apply the transformation to the mapped dataset column.
-        mapped_columns.append(
-            transform_dataset_column(
-                dataset[dataset_column].rename(cde_code),
-                cde_code,
-                cde_type,
-                transform_type,
-                transform,
-            )
-        )
-    mapped_dataset = pd.concat(mapped_columns, axis=1)
-    # Return the mapped dataset.
-    print(mapped_dataset)
-    return mapped_dataset
-
-
-def transform_dataset_column(
-    dataset_column, cde_code, cde_type, transform_type, transform
-):
-    """Transform the dataset column.
-
-    Parameters
-    ----------
-    dataset_column : pandas.DataFrame
-        Dataset column to be transformed.
-
-    cde_code : str
-        CDE code of the dataset column.
-
-    cde_type : str
-        CDE type of the dataset column. Can be "binomial", "multinomial", "integer" or "real".
-
-    transform_type : str
-        Type of transformation to be applied to the dataset column.
-        Can be "map" or "scale".
-
-    transform : str
-        Transformation to be applied to the dataset column.
-        Can be a JSON string for the "map" transformation type or a scaling factor.
-
-    Returns
-    -------
-    dataset_column: pandas.DataFrame
-        The transformed dataset column.
-    """
-    # Apply the transformation only if not NaN.
-    if transform_type == "map" and transform != "nan":
-        dataset_column = apply_transform_map(dataset_column, transform)
-    elif transform_type == "scale" and transform != "nan":
-        # Apply the scaling factor.
-        scaling_factor = float(transform)
-        dataset_column = apply_transform_scale(
-            dataset_column, cde_code, cde_type, scaling_factor
-        )
-    else:
-        print(f"WARNING: No transformation applied for output column {cde_code}.")
-    return dataset_column
-
-
-def apply_transform_map(dataset_column, transform):
-    """Apply the transform map for binomial and multinominal variables.
-
-    Parameters
-    ----------
-    dataset_column : pandas.DataFrame
-        Dataset column to be transformed.
-
-    transform : str
-        Transformation to be applied to the dataset column.
-        Can be a JSON string for the "map" transformation type or a scaling factor.
-
-    Returns
-    -------
-    dataset_column: pandas.DataFrame
-        The transformed dataset column."""
-    # Parse the mapping values from the JSON string
-    mapping_values = eval(transform)
-    # Map the values.
-    for mapping_value_item in mapping_values.items():
-        old_value = mapping_value_item[0]
-        new_value = mapping_value_item[1]
-        dataset_column.iloc[dataset_column == old_value] = new_value
-    return dataset_column
-
-
-def apply_transform_scale(dataset_column, cde_code, cde_type, scaling_factor):
-    """Apply the transform scale for real and integer variables.
-
-    Parameters
-    ----------
-    dataset_column : pandas.DataFrame
-        Dataset column to be transformed.
-
-    cde_code : str
-        CDE code of the dataset column.
-
-    cde_type : str
-        CDE type of the dataset column. Can be "binomial", "multinomial", "integer" or "real".
-
-    scaling_factor : float
-        Scaling factor to be applied to the dataset column.
-
-    Returns
-    -------
-    dataset_column: pandas.DataFrame
-        The transformed dataset column.
-    """
-    # Check if the column contains any NaN values. If so, the scaling is
-    # not applied. Otherwise, the scaling is applied.
-    if not dataset_column.isnull().values.any():
-        # Cast the column to the correct type and apply the scaling factor.
-        if cde_type == "integer":
-            dataset_column = dataset_column.astype(int) * int(scaling_factor)
-        elif cde_type == "real":
-            dataset_column = dataset_column.astype(float) * scaling_factor
-    else:
-        # Cast and scale only the non-NaN values.
-        if cde_type == "integer":
-            dataset_column_list = [
-                np.nan if pd.isnull(x) else int(float(x)) * int(scaling_factor)
-                for x in dataset_column
-            ]
-        elif cde_type == "real":
-            dataset_column_list = [
-                np.nan if pd.isnull(x) else float(x) * scaling_factor
-                for x in dataset_column
-            ]
-        dataset_column = pd.DataFrame(dataset_column_list, columns=[cde_code])
-    return dataset_column
-
-
-# Define the function to find fuzzy matches
-def fuzzy_match(x, choices):
-    """Find the fuzzy matches for the given string.
-
-    Parameters
-    ----------
-    x : str
-        String for which the fuzzy matches are found.
-
-    choices : list
-        List of strings to be matched.
-
-    Returns
-    -------
-    list
-        List of fuzzy matches.
-    """
-    return [(m, fuzz.ratio(x, m), -fuzz.ratio(x, m)) for m in choices]
-
-
-# Define the function to find the embedding vector representation for the text
-def glove_embedding(text, glove_model):
-    """Find the Glove embedding for the text.
-
-    Parameters
-    ----------
-    text : str
-        Text to be embedded.
-
-    glove_model : str
-        Glove model to be used, loaded by the gensim library.
-
-    Returns
-    -------
-    numpy.ndarray
-        Glove embedding for the text.
-    """
-
-    def preprocess_text(text):
-        """Preprocess the text.
-
-        Parameters
-        ----------
-        text : str
-            Text to be preprocessed.
-
-        Returns
-        -------
-        str
-            Preprocessed text.
-        """
-        # Lowercase the text.
-        text = text.lower()
-        # Tokenize the text.
-        text = [s for s in text if s != "" and s != "_"]  # Make a list of characters.
-        return text
-
-    # Preprocess the text.
-    text = preprocess_text(text)
-    # Find the Glove embedding for the text.
-    embedding = np.sum(np.array([glove_model[i] for i in text]), axis=0)
-    return embedding
-
-
-def chars2vec_embedding(text, chars2vec_model):
-    """Find the chars2vec embedding for the text.
-
-    Parameters
-    ----------
-    text : str
-        Text to be embedded.
-
-    chars2vec_model : str
-        chars2vec model to be used, loaded by the gensim library.
-
-    Returns
-    -------
-    numpy.ndarray
-        chars2vec embedding for the text.
-    """
-    # Find the chars2vec embedding for the text.
-    # The chars2vec model expects a list of strings as input.
-    # The output is a list of embeddings, so we take the first element.
-    embedding = chars2vec_model.vectorize_words([text])[0]
-    return embedding
-
-
-def embedding_similarity(x_embedding, y_embedding):
-    """Find the matches based on chars2vec embeddings and cosine similarity.
-
-    Parameters
-    ----------
-    x_embedding : str
-        String to compare against.
-
-    y_embedding : str
-        String to compare.
-
-    chars2vec_model : str
-        chars2vec model to be used, loaded by the gensim library.
-
-    Returns
-    -------
-    float
-        Cosine similarity between the two chars2vec embeddings of the strings.
-    """
-    return spatial.distance.cosine(x_embedding, y_embedding)
-
-
-def initialize_mapping_table(
+def match_columns_to_cdes(
     dataset,
     schema,
     nb_kept_matches=10,
     matching_method="fuzzy",
     glove_model_name="glove-wiki-gigaword-50",
 ):
-    """Initialize the mapping table.
+    """Initialize the mapping table by matching the dataset columns with the CDE codes.
+
+    Different matching methods can be used:
+    - "fuzzy": Fuzzy matching using the Levenshtein distance. (https://github.com/seatgeek/thefuzz)
+    - "glove": Embedding matching using Glove embeddings at the character level. (https://nlp.stanford.edu/projects/glove/)
+    - "chars2vec": Embedding matching using Chars2Vec embeddings. (https://github.com/IntuitionEngineeringTeam/chars2vec)
 
     Parameters
     ----------
@@ -358,7 +85,7 @@ def initialize_mapping_table(
             f"> Perform Glove embedding matching with {nb_kept_matches} matches per column."
         )
         # Function to find the matches based on Glove embeddings and cosine similarity.
-        glove_model = api.load(glove_model_name)
+        glove_model = load_glove_model(glove_model_name)
         matches = mapping_table["dataset_column"].apply(
             lambda dataset_column: str(
                 sorted(
@@ -377,7 +104,7 @@ def initialize_mapping_table(
             f"> Perform chars2vec embedding matching with {nb_kept_matches} matches per column."
         )
         # Function to find the matches based on chars2vec embeddings and cosine similarity.
-        c2v_model = chars2vec.load_model("eng_50")
+        c2v_model = load_c2v_model("eng_50")
         matches = mapping_table["dataset_column"].apply(
             lambda dataset_column: str(
                 sorted(

@@ -1,5 +1,6 @@
 """Class for the main window of the MIP Dataset Mapper UI application."""
 
+# External imports
 import ast
 import os
 import json
@@ -32,19 +33,22 @@ from PySide2.QtWidgets import (
 )
 import pkg_resources
 
+# Internal imports
 from mip_dmp.io import load_mapping_json
-from mip_dmp.dataset.mapping import (
-    initialize_mapping_table,
+from mip_dmp.process.mapping import (
     map_dataset,
     MAPPING_TABLE_COLUMNS,
 )
+from mip_dmp.process.matching import match_columns_to_cdes
 from mip_dmp.qt5.model.table_model import (
     # NoEditorDelegate,
     PandasTableModel,
 )
-from mip_dmp.plot.word_embedding import embedding_vizualization_figure
+from mip_dmp.qt5.components.matching_visualization_widget import (
+    MappingMatchVisualizationWidget,
+)
 
-
+# Constants
 WINDOW_NAME = "MIPDatasetMapperUI"
 
 
@@ -126,6 +130,9 @@ class MIPDatasetMapperWindow(object):
         "mappingInitButton",
         "embeddingVizButton",
         "embeddingFigure",
+        "embeddingWidget",
+        "embeddingWidgetLayout",
+        "embeddingCanvas",
     ]
 
     def __init__(self, mainWindow):
@@ -589,11 +596,18 @@ class MIPDatasetMapperWindow(object):
 
     def embeddingViz(self):
         """Open the embedding visualization window."""
-        self.embeddingFigure = embedding_vizualization_figure(
-            self.inputDataset, self.targetCDEs, self.initMatchingMethod.currentText()
+        self.embeddingWidget = MappingMatchVisualizationWidget()
+        print(
+            "Launch visualization widget with matching method: "
+            f"{self.initMatchingMethod.currentText()}"
         )
-        if self.embeddingFigure is not None:
-            self.embeddingFigure.show()
+        if self.initMatchingMethod.currentText() != "fuzzy":
+            self.embeddingWidget.generate_embedding_figure(
+                self.inputDataset,
+                self.targetCDEs,
+                self.initMatchingMethod.currentText(),
+            )
+            self.embeddingWidget.show()
         else:
             QMessageBox().warning(
                 None,
@@ -1074,9 +1088,10 @@ class MIPDatasetMapperWindow(object):
         (
             self.columnsCDEsMappingData,
             self.matchedCdeCodes,
-        ) = initialize_mapping_table(
+        ) = match_columns_to_cdes(
             dataset=self.inputDataset,
             schema=self.targetCDEs,
+            nb_kept_matches=10,
             matching_method=matchingMethod,
         )
         # Create a pandas model for the mapping table

@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 # import logging
-from mip_dmp.dataset.mapping import map_dataset
+from mip_dmp.process.mapping import map_dataset
 
 from mip_dmp.io import (
     load_csv,
