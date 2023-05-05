@@ -564,9 +564,11 @@ QComboBox {
     border-radius: 5px;
     color: #d3dae3;
     padding: 2px;
+	padding-left: 5px;
     background-color: #222b2e;
     selection-background-color: #4fa08b;
     selection-color: #d3dae3;
+	min-width: 100px;
 }
 
 QComboBox:disabled {
@@ -604,4 +606,13 @@ QComboBox::item:!selected {
 QComboBox::item:!selected:hover {
     background-color: #4fa08b;
     color: #222222;
+}
+
+QComboBox::item:checked {
+	height: 12px;
+	border: 1px solid #32414B;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 4px;
+	padding-left: 0px;
 }

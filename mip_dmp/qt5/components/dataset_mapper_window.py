@@ -1,5 +1,6 @@
 """Class for the main window of the MIP Dataset Mapper UI application."""
 
+# External imports
 import ast
 import os
 import json
@@ -32,19 +33,22 @@ from PySide2.QtWidgets import (
 )
 import pkg_resources
 
+# Internal imports
 from mip_dmp.io import load_mapping_json
-from mip_dmp.dataset.mapping import (
-    initialize_mapping_table,
+from mip_dmp.process.mapping import (
     map_dataset,
     MAPPING_TABLE_COLUMNS,
 )
+from mip_dmp.process.matching import match_columns_to_cdes
 from mip_dmp.qt5.model.table_model import (
     # NoEditorDelegate,
     PandasTableModel,
 )
-from mip_dmp.plot.word_embedding import embedding_vizualization_figure
+from mip_dmp.qt5.components.matching_visualization_widget import (
+    MappingMatchVisualizationWidget,
+)
 
-
+# Constants
 WINDOW_NAME = "MIPDatasetMapperUI"
 
 
@@ -126,6 +130,11 @@ class MIPDatasetMapperWindow(object):
         "mappingInitButton",
         "embeddingVizButton",
         "embeddingFigure",
+        "embeddingWidget",
+        "embeddingWidgetLayout",
+        "embeddingCanvas",
+        "inputDatasetColumnEmbeddings",
+        "targetCDEsEmbeddings",
     ]
 
     def __init__(self, mainWindow):
@@ -250,6 +259,7 @@ class MIPDatasetMapperWindow(object):
             f"QComboBox::down-arrow {{ image: url({icon}); height: 16px; width: 16px; }}"
         )
         self.initMatchingMethod.addItems(["fuzzy", "glove", "chars2vec"])
+        self.initMatchingMethod.setGeometry(QRect(0, 0, 100, 30))
         self.toolBar.addWidget(mappingInitLabel)
         self.toolBar.addWidget(self.initMatchingMethod)
         self.mappingInitButton = QAction(
@@ -589,11 +599,23 @@ class MIPDatasetMapperWindow(object):
 
     def embeddingViz(self):
         """Open the embedding visualization window."""
-        self.embeddingFigure = embedding_vizualization_figure(
-            self.inputDataset, self.targetCDEs, self.initMatchingMethod.currentText()
+        self.embeddingWidget = MappingMatchVisualizationWidget()
+        print(
+            "Launch visualization widget with matching method: "
+            f"{self.initMatchingMethod.currentText()}"
         )
-        if self.embeddingFigure is not None:
-            self.embeddingFigure.show()
+        if self.initMatchingMethod.currentText() != "fuzzy":
+            self.embeddingWidget.set_wordcombobox_items(self.inputDatasetColumns)
+            self.embeddingWidget.set_embeddings(
+                self.inputDatasetColumnEmbeddings,
+                self.inputDatasetColumns,
+                self.targetCDEsEmbeddings,
+                list(self.targetCDEs["code"].unique()),
+                self.matchedCdeCodes,
+                self.initMatchingMethod.currentText(),
+            )
+            self.embeddingWidget.generate_embedding_figure()
+            self.embeddingWidget.show()
         else:
             QMessageBox().warning(
                 None,
@@ -618,7 +640,7 @@ class MIPDatasetMapperWindow(object):
         if ok and datasetColumn is not None and datasetColumn != "":
             # Get the fuzzy matches list for the dataset column
             # and set the CDE code and type to the first match
-            columnMatches = self.matchedCdeCodes[datasetColumn][0]
+            columnMatches = self.matchedCdeCodes[datasetColumn]["words"]
             cdeCode = columnMatches[0]
             cdeType = self.targetCDEs[self.targetCDEs["code"] == cdeCode][
                 "type"
@@ -673,7 +695,7 @@ class MIPDatasetMapperWindow(object):
         rowData = self.columnsCDEsMappingData.iloc[index.row(), :]
         self.mappingRowIndex.setText(str(index.row()))
         self.datasetColumn.setText(str(rowData["dataset_column"]))
-        columnMatches = self.matchedCdeCodes[rowData["dataset_column"]][0]
+        columnMatches = self.matchedCdeCodes[rowData["dataset_column"]]["words"]
         self.cdeCode.clear()
         self.cdeCode.addItems(columnMatches)
         ind = columnMatches.index(rowData["cde_code"])
@@ -693,7 +715,7 @@ class MIPDatasetMapperWindow(object):
         # Get the data for the current row and update the widgets in the form
         rowIndex = int(self.mappingRowIndex.text())
         rowData = self.columnsCDEsMappingData.iloc[rowIndex, :]
-        columnMatches = self.matchedCdeCodes[rowData["dataset_column"]][0]
+        columnMatches = self.matchedCdeCodes[rowData["dataset_column"]]["words"]
         cdeType = self.targetCDEs[self.targetCDEs["code"] == columnMatches[index]][
             "type"
         ].unique()[0]
@@ -1074,9 +1096,12 @@ class MIPDatasetMapperWindow(object):
         (
             self.columnsCDEsMappingData,
             self.matchedCdeCodes,
-        ) = initialize_mapping_table(
+            self.inputDatasetColumnEmbeddings,
+            self.targetCDEsEmbeddings,
+        ) = match_columns_to_cdes(
             dataset=self.inputDataset,
             schema=self.targetCDEs,
+            nb_kept_matches=10,
             matching_method=matchingMethod,
         )
         # Create a pandas model for the mapping table
