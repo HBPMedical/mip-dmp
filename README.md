@@ -1,6 +1,6 @@
 # MIP Dataset Mapper (`mip_dmp`)
 
-Python tool with Graphical User Interface to map datasets to specific Common Data Elements (CDEs)metadata schema of a federation of the Medical Informatics Platform (MIP). It is developed to support members of a MIP Federation in the task of mapping their dataset to the CDEs schema of this federation. 
+Python tool with Graphical User Interface to map datasets to a specific Common Data Elements (CDEs) metadata schema of a federation of the Medical Informatics Platform (MIP). It is developed to support members of a MIP Federation in the task of mapping their dataset to the CDEs schema of this federation. 
 
 ## How to install?
 
