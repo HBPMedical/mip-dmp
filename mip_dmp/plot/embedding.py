@@ -5,20 +5,24 @@ import seaborn as sns
 from mip_dmp.process.embedding import generate_embeddings, reduce_embeddings_dimension
 
 # Define colors used to plot the column and CDE code embeddings
-COLORS = ["#0072B2", "#4fa08b"]  # '#009E73'
-
+# '#4fa08b' green / '#009E73' green / '#0072B2' blue / '#FFA500' orange
+COLORS = ["#0072B2", "#FFA500"]
 # Set seaborn style
 sns.set_style("darkgrid")
 sns.set(
     rc={
-        "axes.facecolor": "#222222",
-        "figure.facecolor": "#222222",
+        "axes.facecolor": "#081512",
+        "figure.facecolor": "#081512",
         "text.color": "white",
         "axes.edgecolor": "white",
-        "patch.edgecolor": "#222222",
+        "patch.edgecolor": "#081512",
         "xtick.color": "white",
         "ytick.color": "white",
         "axes.labelcolor": "white",
+        "grid.color": "#4fa08b",
+        "axes3d.xaxis.panecolor": "#081512",
+        "axes3d.yaxis.panecolor": "#081512",
+        "axes3d.zaxis.panecolor": "#081512",
     }
 )
 
