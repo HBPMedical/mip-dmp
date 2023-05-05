@@ -5,12 +5,10 @@ import pandas as pd
 from fuzzywuzzy import fuzz
 
 # Internal imports
-from mip_dmp.io import load_glove_model, load_c2v_model
 from mip_dmp.process.mapping import MAPPING_TABLE_COLUMNS
 from mip_dmp.process.embedding import (
-    glove_embedding,
-    chars2vec_embedding,
-    embedding_similarity,
+    generate_embeddings,
+    find_n_closest_embeddings,
 )
 
 
@@ -19,7 +17,6 @@ def match_columns_to_cdes(
     schema,
     nb_kept_matches=10,
     matching_method="fuzzy",
-    glove_model_name="glove-wiki-gigaword-50",
 ):
     """Initialize the mapping table by matching the dataset columns with the CDE codes.
 
@@ -43,31 +40,49 @@ def match_columns_to_cdes(
         Method to be used for matching the dataset columns with the CDE codes.
         Can be "fuzzy", "glove" or "chars2vec".
 
-    glove_model_name : str
-        Name of the Glove model to be used for matching the dataset columns
-        with the CDE codes.
-
     Returns
     -------
     pandas.DataFrame
         Mapping table represented as a Pandas DataFrame.
 
     matched_cde_codes : dict
-        Dictionary with tuple of the first 10 matched CDE codes with
-        corresponding fuzzy ratio / cosine similarity (value) for each dataset column (key).
+        Dictionary of dictionaries storing the first 10 matched CDE codes with
+        corresponding fuzzy ratio / cosine similarity (value) / and embedding vector
+        for each dataset column (key). It has the form::
+
+            {
+                "dataset_column_1": {
+                    "words": ["cde_code_1", "cde_code_2", ...],
+                    "distances": [0.9, 0.8, ...],
+                    "embeddings": [None, None, ...]
+                },
+                "dataset_column_2": {
+                    "words": ["cde_code_1", "cde_code_2", ...],
+                    "distances": [0.9, 0.8, ...],
+                    "embeddings": [None, None, ...]
+                },
+                ...
+            }
+
+    dataset_column_embeddings : list
+        List of embedding vectors for the dataset columns.
+
+    schema_code_embeddings : list
+        List of embedding vectors for the CDE codes.
     """
     # Create the mapping table.
     mapping_table = pd.DataFrame(MAPPING_TABLE_COLUMNS)
-
     # Add the dataset columns.
     mapping_table["dataset_column"] = dataset.columns
-
     # Initialize a dictionary to store the results of the
     # first 10 matched CDE codes for each dataset column.
     matched_cde_codes = {}
-
     if matching_method == "fuzzy":
         print(f"> Perform fuzzy matching with {nb_kept_matches} matches per column.")
+        dataset_column_embeddings, schema_code_embeddings = (
+            None,
+            None,
+        )  # Not used for fuzzy matching.
         # Function to find the fuzzy matches for each dataset column.
         matches = mapping_table["dataset_column"].apply(
             lambda dataset_column: str(
@@ -80,93 +95,56 @@ def match_columns_to_cdes(
                 ]  # Select the nb_kept_matches first matched CDE codes.
             )
         )
-    elif matching_method == "glove":
-        print(
-            f"> Perform Glove embedding matching with {nb_kept_matches} matches per column."
-        )
-        # Function to find the matches based on Glove embeddings and cosine similarity.
-        glove_model = load_glove_model(glove_model_name)
-        matches = mapping_table["dataset_column"].apply(
-            lambda dataset_column: str(
-                sorted(
-                    schema["code"],
-                    key=lambda cde_code: embedding_similarity(
-                        glove_embedding(dataset_column, glove_model),
-                        glove_embedding(cde_code, glove_model),
-                    ),
-                )[
-                    0:nb_kept_matches
-                ]  # Select the nb_kept_matches first matched CDE codes.
-            )
-        )
-    elif matching_method == "chars2vec":
-        print(
-            f"> Perform chars2vec embedding matching with {nb_kept_matches} matches per column."
-        )
-        # Function to find the matches based on chars2vec embeddings and cosine similarity.
-        c2v_model = load_c2v_model("eng_50")
-        matches = mapping_table["dataset_column"].apply(
-            lambda dataset_column: str(
-                sorted(
-                    schema["code"],
-                    key=lambda cde_code: embedding_similarity(
-                        chars2vec_embedding(dataset_column, c2v_model),
-                        chars2vec_embedding(cde_code, c2v_model),
-                    ),
-                )[
-                    0:nb_kept_matches
-                ]  # Select the nb_kept_matches first matched CDE codes.
-            )
-        )
-    matches = matches.apply(lambda x: eval(x))
-
-    # Store the first nb_fuzy_matches matched CDE codes in the dictionary.
-    for i, dataset_column in enumerate(dataset.columns):
-        if matching_method == "fuzzy":
-            matched_cde_codes[dataset_column] = (
-                matches[i][:nb_kept_matches],
-                [
+        # Store the first nb_fuzy_matches matched CDE codes in the dictionary.
+        for i, dataset_column in enumerate(dataset.columns):
+            matched_cde_codes[dataset_column] = {
+                "words": matches[i][:nb_kept_matches],
+                "distances": [
                     fuzz.ratio(dataset_column, match)
                     for match in matches[i][:nb_kept_matches]
                 ],
+                "embeddings": [None] * nb_kept_matches,
+            }
+    elif matching_method == "chars2vec" or matching_method == "glove":
+        print(
+            f"> Perform  {matching_method} embedding matching with {nb_kept_matches} matches per column."
+        )
+        dataset_column_embeddings, schema_code_embeddings = (
+            generate_embeddings(mapping_table["dataset_column"], matching_method),
+            generate_embeddings(schema["code"], matching_method),
+        )
+        print(f"> Find {nb_kept_matches} closest embeddings for each dataset column...")
+        n_closest_matches = [
+            find_n_closest_embeddings(
+                dataset_column_embedding,
+                schema_code_embeddings,
+                schema["code"],
+                nb_kept_matches,
             )
-        elif matching_method == "glove":
-            matched_cde_codes[dataset_column] = (
-                matches[i][:nb_kept_matches],
-                [
-                    embedding_similarity(
-                        glove_embedding(dataset_column, glove_model),
-                        glove_embedding(match, glove_model),
-                    )
-                    for match in matches[i][:nb_kept_matches]
-                ],
-            )
-        elif matching_method == "chars2vec":
-            matched_cde_codes[dataset_column] = (
-                matches[i][:nb_kept_matches],
-                [
-                    embedding_similarity(
-                        chars2vec_embedding(dataset_column, c2v_model),
-                        chars2vec_embedding(match, c2v_model),
-                    )
-                    for match in matches[i][:nb_kept_matches]
-                ],
-            )
+            for dataset_column_embedding in dataset_column_embeddings
+        ]
+        matched_cde_codes = {
+            dataset_column: {
+                "words": n_closest_matches[i]["embedding_words"],
+                "distances": n_closest_matches[i]["distances"],
+                "embeddings": n_closest_matches[i]["embeddings"],
+            }
+            for i, dataset_column in enumerate(mapping_table["dataset_column"])
+        }
     # Add the first matched CDE code for each dataset_column.
-    mapping_table["cde_code"] = [match[0] for match in matches]
-
+    mapping_table["cde_code"] = [
+        matched_cde_codes[k]["words"][0] for k in matched_cde_codes.keys()
+    ]
     # Add the CDE type corresponding to the CDE code proposed by fuzzy matching.
     mapping_table["cde_type"] = [
         schema[schema["code"] == cde_code]["type"].iloc[0]
         for cde_code in mapping_table["cde_code"]
     ]
-
     # Add the transform type based on the CDE type (integer, real, binominal, multinominal).
     mapping_table["transform_type"] = [
         "scale" if cde_type in ["integer", "real"] else "map"
         for cde_type in mapping_table["cde_type"]
     ]
-
     # Add the transform.
     mapping_table["transform"] = [
         make_initial_transform(dataset, schema, dataset_column, cde_code)
@@ -174,8 +152,12 @@ def match_columns_to_cdes(
             mapping_table["dataset_column"], mapping_table["cde_code"]
         )
     ]
-
-    return (mapping_table, matched_cde_codes)
+    return (
+        mapping_table,
+        matched_cde_codes,
+        dataset_column_embeddings,
+        schema_code_embeddings,
+    )
 
 
 def make_initial_transform(dataset, schema, dataset_column, cde_code):
@@ -202,7 +184,6 @@ def make_initial_transform(dataset, schema, dataset_column, cde_code):
     """
     # Get the CDE type.
     cde_type = schema[schema["code"] == cde_code]["type"].iloc[0]
-
     # Make the initial transform.
     if cde_type in ["integer", "real"]:
         return "1.0"
@@ -265,16 +246,12 @@ def generate_initial_transform(dataset_column_values, cde_code_values, dataset_c
         and dataset_column_values[0] == "nan"
         and ("nan" not in cde_code_values)
     ):
-        print(
-            f"WARNING: The dataset column {dataset_column} present only one NaN value."
-        )
+        print(f"WARNING: The dataset column {dataset_column} has only one NaN value.")
         return "nan"
     elif "nan" in dataset_column_values:
         nb_nan_values = dataset_column_values.count("nan")
         if nb_nan_values == len(dataset_column_values):
-            print(
-                f"WARNING: The dataset column {dataset_column} present only NaN values."
-            )
+            print(f"WARNING: The dataset column {dataset_column} has only NaN values.")
             return "nan"
     # Handle the case where we have the same number of dataset column values
     # and CDE code values.

@@ -114,6 +114,7 @@ def generate_embeddings(words: list, embedding_method: str = "chars2vec"):
     list
         List of embeddings for the words.
     """
+    print(f"> Generating embeddings for {len(words)} words...")
     if embedding_method == "chars2vec":
         c2v_model = load_c2v_model()
         embeddings = [chars2vec_embedding(word, c2v_model) for word in words]
@@ -123,6 +124,50 @@ def generate_embeddings(words: list, embedding_method: str = "chars2vec"):
     else:
         embeddings = None
     return embeddings
+
+
+def find_n_closest_embeddings(
+    word_embedding: np.array, embeddings: list, embedding_words: list, n: int = 5
+):
+    """Find the n closest embeddings to the given embedding.
+
+    Parameters
+    ----------
+    word_embedding : numpy.ndarray
+        Embedding to find the n closest embeddings to.
+
+    embeddings : list
+        List of embeddings to find the closest embeddings to the given embedding in.
+
+    embedding_words : list
+        List of words corresponding to the embeddings that will be resorted and reduced accordingly.
+
+    n : int
+        Number of closest embeddings to find.
+
+    Returns
+    -------
+    dict
+        Dictionary containing the n closest embeddings, their distances to the given embedding,
+        and the words corresponding to the embeddings in the form::
+
+            {
+                "distances": [float],
+                "embeddings": [numpy.ndarray],
+                "embedding_words": [str]
+            }
+    """
+    distances = np.array(
+        [spatial.distance.cosine(word_embedding, embedding) for embedding in embeddings]
+    ).astype(np.float32)
+    sorted_indices = np.argsort(distances)
+    return dict(
+        {
+            "distances": [distances[i] for i in sorted_indices[0:n]],
+            "embeddings": [embeddings[i] for i in sorted_indices[0:n]],
+            "embedding_words": [embedding_words[i] for i in sorted_indices[0:n]],
+        }
+    )
 
 
 def reduce_embeddings_dimension(
@@ -146,6 +191,9 @@ def reduce_embeddings_dimension(
     list
         List of reduced embeddings.
     """
+    print(
+        f"> Reducing embeddings dimensionality to {n_components} using {reduce_method}..."
+    )
     if reduce_method == "tsne":
         tsne_model = TSNE(
             perplexity=40,
@@ -156,17 +204,11 @@ def reduce_embeddings_dimension(
         )
         reduction_values = tsne_model.fit_transform(np.array(embeddings))
     elif reduce_method == "pca":
-        pca_model = PCA(n_components=n_components, randomw_state=42)
+        pca_model = PCA(n_components=n_components, random_state=42)
         reduction_values = pca_model.fit_transform(np.array(embeddings))
     else:
         print(f"ERROR: Invalid reduction method ({reduce_method})!")
         reduction_values = None
-    # for value in tsne_values:
-    #     x.append(value[0])
-    #     y.append(value[1])
-    #     z.append(value[2])
-    # return x, y, z
-    # Return x, y, z components
     return (
         reduction_values[:, 0],
         reduction_values[:, 1],
