@@ -39,7 +39,10 @@ class MIPDatasetMapperUI(QMainWindow):
 
     def closeEvent(self, event):
         """Close all windows."""
-        self.ui.embeddingWidget.close()
+        if hasattr(self.ui, "embeddingWidget"):
+            self.ui.embeddingWidget.close()
+        if hasattr(self.ui, "matchingWidget"):
+            self.ui.matchingWidget.close()
         self.close()
 
 

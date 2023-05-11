@@ -1,6 +1,8 @@
 """Module that provides functions to support the matching of dataset columns to CDEs."""
 
 # External imports
+import ast
+import numpy as np
 import pandas as pd
 from fuzzywuzzy import fuzz
 
@@ -95,13 +97,13 @@ def match_columns_to_cdes(
                 ]  # Select the nb_kept_matches first matched CDE codes.
             )
         )
-        # Store the first nb_fuzy_matches matched CDE codes in the dictionary.
+        # Store the first nb_fuzzy_matches matched CDE codes in the dictionary.
         for i, dataset_column in enumerate(dataset.columns):
+            words = ast.literal_eval(matches.to_list()[i])
             matched_cde_codes[dataset_column] = {
-                "words": matches[i][:nb_kept_matches],
+                "words": words,
                 "distances": [
-                    fuzz.ratio(dataset_column, match)
-                    for match in matches[i][:nb_kept_matches]
+                    (1 - 0.01 * fuzz.ratio(dataset_column, match)) for match in words
                 ],
                 "embeddings": [None] * nb_kept_matches,
             }
@@ -296,3 +298,43 @@ def generate_initial_transform(dataset_column_values, cde_code_values, dataset_c
                 for dataset_column_value in dataset_column_values
             }
         )
+
+
+def make_distance_vector(matchedCdeCodes, inputDatasetColumn):
+    """Make the n closest match distance vector.
+
+    Parameters
+    ----------
+    matchedCdeCodes : dict
+        Dictionary of the matching results in the form::
+
+            {
+                "inputDatasetColumn1": {
+                    "words": ["word1", "word2", ...],
+                    "distances": [distance1, distance2, ...],
+                    "embeddings": [embedding1, embedding2, ...]
+                },
+                "inputDatasetColumn2": {
+                    "words": ["word1", "word2", ...],
+                    "distances": [distance1, distance2, ...],
+                    "embeddings": [embedding1, embedding2, ...]
+                },
+                ...
+            }
+
+    inputDatasetColumn : lstr
+        Input dataset column name.
+
+    Returns
+    -------
+    distanceVector : numpy.ndarray
+        Similarity/distance vector.
+    """
+    # Get the matched CDE codes for the current input dataset column
+    matches = matchedCdeCodes[inputDatasetColumn]
+    # Initialize the similarity matrix
+    similarityVector = np.zeros((1, len(matches["words"])))
+    # Update the similarity matrix
+    similarityVector[0, :] = matches["distances"]
+    # Return the similarity matrix
+    return similarityVector
