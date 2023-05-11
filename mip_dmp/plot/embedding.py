@@ -1,3 +1,5 @@
+"""Module to plot the embeddings of the column names and CDE codes."""
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -136,9 +138,14 @@ def scatterplot_embeddings(
         def handle_annotations(artist, indices):
             """Add text annotations to closest point of the cursor when the mouse button was pressed."""
             # Get the type of the artist that can be "cde" or "column"
+            artist_type = None
             for k in artists.keys():
                 if artist == artists[k]:
                     artist_type = k
+            # If the artist type is not defined yet, return
+            if artist_type is None:
+                return
+            # Get the dataframe of the artist type ("cde" or "column")
             artist_df = df[df["type"] == artist_type]
             # For each index of the artist
             for ind in indices:

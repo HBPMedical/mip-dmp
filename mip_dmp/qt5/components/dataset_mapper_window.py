@@ -44,12 +44,15 @@ from mip_dmp.qt5.model.table_model import (
     # NoEditorDelegate,
     PandasTableModel,
 )
+from mip_dmp.qt5.components.embedding_visualization_widget import (
+    WordEmbeddingVisualizationWidget,
+)
 from mip_dmp.qt5.components.matching_visualization_widget import (
-    MappingMatchVisualizationWidget,
+    MatchingVisualizationWidget,
 )
 
 # Constants
-WINDOW_NAME = "MIPDatasetMapperUI"
+WINDOW_NAME = "MIP Dataset Mapper"
 
 
 class MIPDatasetMapperWindow(object):
@@ -135,6 +138,8 @@ class MIPDatasetMapperWindow(object):
         "embeddingCanvas",
         "inputDatasetColumnEmbeddings",
         "targetCDEsEmbeddings",
+        "matchingVizButton",
+        "matchingWidget",
     ]
 
     def __init__(self, mainWindow):
@@ -272,13 +277,23 @@ class MIPDatasetMapperWindow(object):
             mainWindow,
         )
         self.toolBar.addAction(self.mappingInitButton)
+        self.matchingVizButton = QAction(
+            QIcon(
+                pkg_resources.resource_filename(
+                    "mip_dmp", os.path.join("qt5", "assets", "heatmap_matching.png")
+                )
+            ),
+            "Visualize Column /CDE Match Distances",
+            mainWindow,
+        )
+        self.toolBar.addAction(self.matchingVizButton)
         self.embeddingVizButton = QAction(
             QIcon(
                 pkg_resources.resource_filename(
                     "mip_dmp", os.path.join("qt5", "assets", "plot_embedding.png")
                 )
             ),
-            "Plot Word Embedding in 3D with t-SNE",
+            "Visualize Word Embedding Matches in 3D (Enabled only for GloVe and Chars2Vec methods)",
             mainWindow,
         )
         self.toolBar.addAction(self.embeddingVizButton)
@@ -596,10 +611,11 @@ class MIPDatasetMapperWindow(object):
         self.mappingTableViewAddRowButton.clicked.connect(self.addMappingTableRow)
         self.mappingTableViewDeleteRowButton.clicked.connect(self.deleteMappingTableRow)
         self.embeddingVizButton.triggered.connect(self.embeddingViz)
+        self.matchingVizButton.triggered.connect(self.matchingViz)
 
     def embeddingViz(self):
         """Open the embedding visualization window."""
-        self.embeddingWidget = MappingMatchVisualizationWidget()
+        self.embeddingWidget = WordEmbeddingVisualizationWidget()
         print(
             "Launch visualization widget with matching method: "
             f"{self.initMatchingMethod.currentText()}"
@@ -622,6 +638,23 @@ class MIPDatasetMapperWindow(object):
                 "Warning",
                 "Embedding visualization is not available for fuzzy matching.",
             )
+
+    def matchingViz(self):
+        """Open the matching visualization window."""
+        self.matchingWidget = MatchingVisualizationWidget(
+            self.inputDatasetColumns,
+            self.targetCDEs["code"].unique().tolist(),
+            self.matchedCdeCodes,
+            self.initMatchingMethod.currentText(),
+            None,
+        )
+        self.matchingWidget.set_wordcombobox_items(self.inputDatasetColumns)
+        print(
+            "Launch matching visualization widget "
+            f"(matching method: {self.initMatchingMethod.currentText()})"
+        )
+        self.matchingWidget.generate_heatmap_figure()
+        self.matchingWidget.show()
 
     def addMappingTableRow(self):
         """Add a row to the mapping table."""
@@ -932,6 +965,7 @@ class MIPDatasetMapperWindow(object):
         self.mappingInitButton.setEnabled(False)
         self.initMatchingMethod.setEnabled(False)
         self.embeddingVizButton.setEnabled(False)
+        self.matchingVizButton.setEnabled(False)
 
     def enableMappingInitItems(self):
         """Enable the mapping initialization items."""
@@ -1132,6 +1166,7 @@ class MIPDatasetMapperWindow(object):
             self.embeddingVizButton.setEnabled(True)
         else:
             self.embeddingVizButton.setEnabled(False)
+        self.matchingVizButton.setEnabled(True)
 
     def selectOutputFilename(self):
         """Select the output filename."""
