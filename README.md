@@ -46,3 +46,7 @@ The task of mapping the dataset would consist of the following tasks:
 - Load a CDEs schema in `.xlxs` format (bottom left)
 - Edit the columns / CDEs mapping table (top right)
 - Configure output directory / filename and create the output CSV dataset mapped to the CDEs schema (bottom right)
+
+## Funding
+
+This project received funding from the European Union's H2020 Framework Programme for Research and Innovation under the Specific Grant Agreement No. 945539 (Human Brain Project SGA3, as part the Medical Informatics Platform (MIP)).
