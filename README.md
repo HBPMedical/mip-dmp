@@ -1,5 +1,7 @@
 # MIP Dataset Mapper (`mip_dmp`)
 
+![Latest GitHub Release](https://img.shields.io/github/v/release/HBPMedical/mip-dmp) ![Latest GitHub Release Date](https://img.shields.io/github/release-date/HBPMedical/mip-dmp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8056372.svg)](https://doi.org/10.5281/zenodo.8056372)
+
 Python tool with Graphical User Interface to map datasets to a specific Common Data Elements (CDEs) metadata schema of a federation of the Medical Informatics Platform (MIP). It is developed to support members of a MIP Federation in the task of mapping their dataset to the CDEs schema of this federation. 
 
 ## How to install?
