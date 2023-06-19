@@ -8,6 +8,7 @@ from mip_dmp.process.mapping import map_dataset
 
 from mip_dmp.io import (
     load_csv,
+    load_excel,
     # load_excel,
     load_json,
 )
@@ -31,6 +32,8 @@ def main():
     args.source_dataset = Path(args.source_dataset).absolute()
     # Set mapping file path
     args.mapping_file = Path(args.mapping_file).absolute()
+    # Set cdes file path
+    args.cdes_file = Path(args.cdes_file).absolute()
     # Set target dataset file path
     args.target_dataset = Path(args.target_dataset).absolute()
     # Set path of log file
@@ -48,8 +51,9 @@ def main():
     print("Loading the files...")
     source_dataset = load_csv(args.source_dataset)
     mappings = load_json(args.mapping_file)
+    cde_codes = load_excel(args.cdes_file)["code"].unique().tolist()
     # Map the input dataset to the target CDEs
-    output_dataset = map_dataset(source_dataset, mappings)
+    output_dataset = map_dataset(source_dataset, mappings, cde_codes)
     # Save the output dataset
     output_dataset.to_csv(
         args.target_dataset,

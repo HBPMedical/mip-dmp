@@ -24,7 +24,7 @@ MAPPING_TABLE_COLUMNS = {
 }
 
 
-def map_dataset(dataset, mappings):
+def map_dataset(dataset, mappings, cde_codes):
     """Map the dataset to the schema.
 
     Parameters
@@ -35,6 +35,9 @@ def map_dataset(dataset, mappings):
     mappings : dict
         Mappings of the dataset columns to the schema columns.
 
+    cde_codes : list
+        List of codes of the CDE metadata schema.
+
     Returns
     -------
     pandas.DataFrame
@@ -43,29 +46,41 @@ def map_dataset(dataset, mappings):
     # create a list to hold the mapped columns
     mapped_columns = []
 
+    # Convert the list of mappings to a dictionary using cde_code as the key
+    mapping_dict = {mapping["cde_code"]: mapping for mapping in mappings}
+    print(f"len(mapping_dict) = {len(mapping_dict)}")
+
     # Map and apply transformation to each dataset column described in the
     # mapping JSON file.
-    for mapping in mappings:
-        # Extract the mapping information of the column.
-        dataset_column = mapping["dataset_column"]
-        cde_code = mapping["cde_code"]
-        cde_type = mapping["cde_type"]
-        transform_type = mapping["transform_type"]
-        transform = mapping["transform"]
-        # Copy the dataset column to the mapped dataset for which the column name
-        # is the CDE code.
-        # map the input data to the CDE code and append to the list of mapped columns
-
-        # Apply the transformation to the mapped dataset column.
-        mapped_columns.append(
-            transform_dataset_column(
-                dataset[dataset_column].rename(cde_code),
-                cde_code,
-                cde_type,
-                transform_type,
-                transform,
+    for cde_code in cde_codes:
+        if cde_code in mapping_dict:
+            mapping = mapping_dict[cde_code]
+            # Extract the mapping information of the column.
+            dataset_column = mapping["dataset_column"]
+            cde_code = mapping["cde_code"]
+            cde_type = mapping["cde_type"]
+            transform_type = mapping["transform_type"]
+            transform = mapping["transform"]
+            print(
+                f"  > Process column {dataset_column} with CDE code {cde_code}, CDE type {cde_type}, transform type {transform_type}, and transform {transform}"
             )
-        )
+            # If the column is present in the dataset, copy the dataset column to
+            # the mapped dataset for which the column name is the CDE code, map
+            # the input data to the CDE code, apply the transformation, and append
+            # to the list of mapped columns.
+            if dataset_column in dataset.columns:
+                mapped_columns.append(
+                    transform_dataset_column(
+                        dataset[dataset_column].rename(cde_code),
+                        cde_code,
+                        cde_type,
+                        transform_type,
+                        transform,
+                    )
+                )
+        else:
+            print(f"WARNING: No mapping found for CDE code {cde_code}. Fill with NaN.")
+            mapped_columns.append(pd.DataFrame(columns=[cde_code]))
     mapped_dataset = pd.concat(mapped_columns, axis=1)
     # Return the mapped dataset.
     print(mapped_dataset)
@@ -133,9 +148,13 @@ def apply_transform_map(dataset_column, transform):
         The transformed dataset column."""
     # Parse the mapping values from the JSON string
     mapping_values = eval(transform)
+    dataset_column = dataset_column.map(
+        lambda x: x.lower() if isinstance(x, str) else x
+    )
+
     # Map the values.
     for mapping_value_item in mapping_values.items():
-        old_value = mapping_value_item[0]
+        old_value = mapping_value_item[0].lower()
         new_value = mapping_value_item[1]
         dataset_column.iloc[dataset_column == old_value] = new_value
     return dataset_column
@@ -167,10 +186,13 @@ def apply_transform_scale(dataset_column, cde_code, cde_type, scaling_factor):
     # not applied. Otherwise, the scaling is applied.
     if not dataset_column.isnull().values.any():
         # Cast the column to the correct type and apply the scaling factor.
-        if cde_type == "integer":
-            dataset_column = dataset_column.astype(int) * int(scaling_factor)
-        elif cde_type == "real":
-            dataset_column = dataset_column.astype(float) * scaling_factor
+        try:
+            if cde_type == "integer":
+                dataset_column = dataset_column.astype(int) * int(scaling_factor)
+            elif cde_type == "real":
+                dataset_column = dataset_column.astype(float) * scaling_factor
+        except ValueError:
+            print(f"WARNING: The column {cde_code} could not be cast to {cde_type}.")
     else:
         # Cast and scale only the non-NaN values.
         if cde_type == "integer":
