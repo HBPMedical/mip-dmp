@@ -1181,7 +1181,7 @@ class MIPDatasetMapperWindow(object):
         ) = match_columns_to_cdes(
             dataset=self.inputDataset,
             schema=self.targetCDEs,
-            nb_kept_matches=10,
+            nb_kept_matches=819,
             matching_method=matchingMethod,
         )
         # Create a pandas model for the mapping table
