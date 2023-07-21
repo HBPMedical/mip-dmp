@@ -728,7 +728,10 @@ class MIPDatasetMapperWindow(object):
         rowData = self.columnsCDEsMappingData.iloc[index.row(), :]
         self.mappingRowIndex.setText(str(index.row()))
         self.datasetColumn.setText(str(rowData["dataset_column"]))
-        columnMatches = self.matchedCdeCodes[rowData["dataset_column"]]["words"]
+        if self.matchedCdeCodes:
+            columnMatches = self.matchedCdeCodes[rowData["dataset_column"]]["words"]
+        else:
+            columnMatches = self.targetCDEs["code"].unique().tolist()
         self.cdeCode.clear()
         self.cdeCode.addItems(columnMatches)
         ind = columnMatches.index(rowData["cde_code"])
@@ -748,11 +751,14 @@ class MIPDatasetMapperWindow(object):
         # Get the data for the current row and update the widgets in the form
         rowIndex = int(self.mappingRowIndex.text())
         rowData = self.columnsCDEsMappingData.iloc[rowIndex, :]
-        columnMatches = self.matchedCdeCodes[rowData["dataset_column"]]["words"]
+        if self.matchedCdeCodes:
+            columnMatches = self.matchedCdeCodes[rowData["dataset_column"]]["words"]
+        else:
+            columnMatches = self.targetCDEs["code"].unique().tolist()
         cdeType = self.targetCDEs[self.targetCDEs["code"] == columnMatches[index]][
             "type"
         ].unique()[0]
-        self.cdeType.setText(cdeType)
+        self.cdeType.setText(str(cdeType))
         if cdeType == "real" or cdeType == "integer":
             if self.cdeCode.currentText() == rowData["cde_code"]:
                 self.transformType.setText("scale")
@@ -892,8 +898,34 @@ class MIPDatasetMapperWindow(object):
             self.disableMappingMapButtons()
         else:
             try:
+                # Load the mapping table file in JSON format
                 self.columnsCDEsMappingData = load_mapping_json(self.mappingFilePath[0])
                 print(f"Mapping loaded from {self.mappingFilePath[0]}")
+                # Create a pandas model for the mapping table
+                self.columnsCDEsMappingPandasModel = PandasTableModel(
+                    self.columnsCDEsMappingData
+                )
+                # Set the model of the table view to the pandas model
+                self.mappingTableView.setModel(self.columnsCDEsMappingPandasModel)
+                self.mappingTableView.setSelectionBehavior(
+                    self.mappingTableView.SelectRows
+                )
+                self.mappingTableView.setSelectionMode(
+                    self.mappingTableView.SingleSelection
+                )
+                self.mappingTableView.setEditTriggers(
+                    self.mappingTableView.NoEditTriggers
+                )  # disable editing
+                # Handle the mapping table view row selection changed signal
+                self.mappingTableView.selectionModel().currentRowChanged.connect(
+                    self.initializeMappingEditForm
+                )
+                # Select the first row of the mapping table view at the beginning
+                indexRow = 0
+                self.mappingTableView.selectRow(indexRow)
+                # Handle the combox box current index changed signal for the CDE code column
+                self.cdeCode.currentIndexChanged.connect(self.updateMappingEditForm)
+                # Display a success message
                 successMsg = (
                     f"Loaded mapping file {self.mappingFilePath[0]}. \n"
                     "Please Check the mapping, Save it and Click on the "
@@ -906,6 +938,7 @@ class MIPDatasetMapperWindow(object):
                 )
                 self.updateStatusbar(successMsg)
             except ValueError as e:
+                # Display an error message
                 errMsg = (
                     f"The mapping file {self.mappingFilePath[0]} is not valid: {repr(e)} \n"
                     "Please select a valid file! "
@@ -981,27 +1014,40 @@ class MIPDatasetMapperWindow(object):
     def checkMapping(self):
         """Check the mapping."""
         # Check if the mapping contains unique column / CDE pairs
-        if (
-            len(self.columnsCDEsMappingData["cde_code"].unique())
-            != len(self.columnsCDEsMappingData["cde_code"])
-        ) or (
-            len(self.columnsCDEsMappingData["dataset_column"].unique())
-            != len(self.columnsCDEsMappingData["dataset_column"])
+        if len(self.columnsCDEsMappingData["cde_code"].unique()) != len(
+            self.columnsCDEsMappingData["cde_code"]
         ):
             errMsg = (
                 "The mapping is not valid. "
                 "Please check it and remove any mapping row "
-                "that might re-map a CDE code or a column of "
-                "the source dataset!"
+                "that might map multiple columns of the input dataset "
+                "to the same CDE code!"
             )
             QMessageBox.warning(
                 None,
-                "Error: Duplicate Column / CDEs Pairs",
+                "Error: Duplicated mapped CDE code",
                 errMsg,
             )
             self.updateStatusbar(errMsg)
             self.disableMappingMapButtons()
             return
+        # if len(self.columnsCDEsMappingData["dataset_column"].unique()) != len(
+        #     self.columnsCDEsMappingData["dataset_column"]
+        # ):
+        #     errMsg = (
+        #         "The mapping is not valid. "
+        #         "Please check it and remove any mapping row(s) "
+        #         "that might map the same column(s) of "
+        #         "the source dataset to multiple CDE codes!"
+        #     )
+        #     QMessageBox.warning(
+        #         None,
+        #         "Error: Duplicate Column / CDEs Pairs",
+        #         errMsg,
+        #     )
+        #     self.updateStatusbar(errMsg)
+        #     self.disableMappingMapButtons()
+        #     return
         # Check if the mapping contains only valid CDE codes
         if self.columnsCDEsMappingData[
             self.columnsCDEsMappingData["cde_code"].isin(self.targetCDEs["code"])
@@ -1033,7 +1079,7 @@ class MIPDatasetMapperWindow(object):
                 The transform to check.
             """
             try:
-                ast.literal_eval(f'"{transform}"')
+                ast.literal_eval(f"{transform}")
                 return False
             except ValueError:
                 return True
@@ -1135,7 +1181,7 @@ class MIPDatasetMapperWindow(object):
         ) = match_columns_to_cdes(
             dataset=self.inputDataset,
             schema=self.targetCDEs,
-            nb_kept_matches=10,
+            nb_kept_matches=819,
             matching_method=matchingMethod,
         )
         # Create a pandas model for the mapping table
@@ -1235,7 +1281,9 @@ class MIPDatasetMapperWindow(object):
         with open(self.mappingFilePathLabel.text(), "r") as f:
             mapping = json.load(f)
         # Map the input dataset to the target CDEs
-        output_dataset = map_dataset(input_dataset, mapping)
+        output_dataset = map_dataset(
+            input_dataset, mapping, self.targetCDEs["code"].tolist()
+        )
         # Save the output dataset
         output_dataset.to_csv(
             self.outputFilename[0],

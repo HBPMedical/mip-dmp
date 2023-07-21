@@ -189,7 +189,7 @@ def make_initial_transform(dataset, schema, dataset_column, cde_code):
     # Make the initial transform.
     if cde_type in ["integer", "real"]:
         return "1.0"
-    elif cde_type in ["binominal", "multinominal"]:
+    elif cde_type in ["binominal", "multinominal", "nominal"]:
         # Extract the CDE code values from the corresponding cell of
         # the "values" column of the schema.
         cde_code_values_str = (
