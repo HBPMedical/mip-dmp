@@ -31,8 +31,9 @@ from mip_dmp.plot.embedding import scatterplot_embeddings
 from mip_dmp.process.embedding import generate_embeddings, reduce_embeddings_dimension
 
 
+# Constants
 WINDOW_NAME = "Word Embedding Matches Visualization"
-
+NB_KEPT_MATCHES = 15
 
 class WordEmbeddingVisualizationWidget(QWidget):
     """Class for the widget that supports the visualization of the automated column / CDE code matches via embedding."""
@@ -231,6 +232,16 @@ class WordEmbeddingVisualizationWidget(QWidget):
             len(self.inputDatasetColumnEmbeddings) > 0
             and len(self.targetCDECodeEmbeddings) > 0
         ):
+            matchedCdeCodes = self.matchedCdeCodes.copy()
+            # Keep only the NB_KEPT_MATCHES most similar CDE codes for a variable
+            for key in ["words", "distances"]:
+                matchedCdeCodes[self.wordComboBox.currentText()][
+                    key
+                ] = matchedCdeCodes[self.wordComboBox.currentText()][
+                    key
+                ][:NB_KEPT_MATCHES]
+            embeddings = self.embeddings.copy()
+            embeddings = [embedding_vector[:NB_KEPT_MATCHES] for embedding_vector in embeddings]
             # Generate 3D scatter plot
             scatterplot_embeddings(
                 self.figure,

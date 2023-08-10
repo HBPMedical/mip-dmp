@@ -31,7 +31,9 @@ from mip_dmp.plot.matching import heatmap_matching
 from mip_dmp.process.matching import make_distance_vector
 
 
+# Constants
 WINDOW_NAME = "Column /CDE Match Distance Visualization"
+NB_KEPT_MATCHES = 15
 
 
 class MatchingVisualizationWidget(QWidget):
@@ -137,9 +139,17 @@ class MatchingVisualizationWidget(QWidget):
 
     def generate_heatmap_figure(self):
         """Generate a heatmap figure with seaborn that shows the similarity / distance matrix of the input dataset columns and the target CDE codes."""
+        matchedCdeCodes = self.matchedCdeCodes.copy()
+        # Keep only the NB_KEPT_MATCHES most similar CDE codes for a variable
+        for key in ["words", "distances"]:
+            matchedCdeCodes[self.wordComboBox.currentText()][
+                key
+            ] = matchedCdeCodes[self.wordComboBox.currentText()][
+                key
+            ][:NB_KEPT_MATCHES]
         # Generate the distance vector
         distanceVector = make_distance_vector(
-            self.matchedCdeCodes, self.wordComboBox.currentText()
+            matchedCdeCodes, self.wordComboBox.currentText()
         )
         # Generate the heatmap
         self.figure.clear()
@@ -149,9 +159,9 @@ class MatchingVisualizationWidget(QWidget):
             [
                 self.wordComboBox.currentText()
             ],  # give the input dataset column only for y labels
-            self.matchedCdeCodes[self.wordComboBox.currentText()][
+            matchedCdeCodes[self.wordComboBox.currentText()][
                 "words"
-            ],  # give the n most similar CDE codes for x labels
+            ][:],
             self.matchingMethod,
         )
         # Draw the figure

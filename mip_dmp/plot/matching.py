@@ -88,7 +88,7 @@ def heatmap_matching(
         else "Cosine distance"
     )
     title = (
-        f"Distances for the most 10 similar CDE codes\n"
+        f"Distances for the most {matrix.shape[1]} similar CDE codes\n"
         f"(method: {matchingMethod}, distance: {distance_type})"
     )
     ax.set_title(title)

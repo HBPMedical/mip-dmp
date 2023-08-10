@@ -69,6 +69,7 @@ from mip_dmp.qt5.components.matching_visualization_widget import (
 
 # Constants
 WINDOW_NAME = "MIP Dataset Mapper"
+NB_KEPT_MATCHES = 819  # for all FERES variables
 
 
 class MIPDatasetMapperWindow(object):
@@ -1230,7 +1231,7 @@ class MIPDatasetMapperWindow(object):
         ) = match_columns_to_cdes(
             dataset=self.inputDataset,
             schema=self.targetCDEs,
-            nb_kept_matches=819,
+            nb_kept_matches=NB_KEPT_MATCHES,
             matching_method=matchingMethod,
         )
         # Create a pandas model for the mapping table

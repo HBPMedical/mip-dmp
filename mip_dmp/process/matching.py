@@ -331,7 +331,7 @@ def generate_initial_transform(dataset_column_values, cde_code_values, dataset_c
 
 
 def make_distance_vector(matchedCdeCodes, inputDatasetColumn):
-    """Make the n closest match distance vector.
+    """Make the n closest match distance vector for a given input dataset column.
 
     Parameters
     ----------
