@@ -14,4 +14,4 @@
 
 """MIP Dataset Mapper main module that stores the package version."""
 
-VERSION = "0.0.5"
+VERSION = "0.0.6"
