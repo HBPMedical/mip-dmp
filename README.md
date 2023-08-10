@@ -99,7 +99,7 @@ optional arguments:
 
 If you are using the MIP Dataset Mapper (`mip_dmp`) in your work, please acknowledge this software with the following entry:
 
-  > Tourbier, Sebastien, Schaffhauser, Birgit, & Ryvlin, Philippe. (2023). HBPMedical/mip-dmp: v0.0.3 (0.0.3). Zenodo. https://doi.org/10.5281/zenodo.8056372 
+  > Tourbier, Sebastien, Schaffhauser, Birgit, & Ryvlin, Philippe. (2023). HBPMedical/mip-dmp: v0.0.3 (0.0.3). Zenodo. https://doi.org/10.5281/zenodo.8056371
 
 ## Funding
 
