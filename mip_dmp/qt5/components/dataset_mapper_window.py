@@ -186,6 +186,9 @@ class MIPDatasetMapperWindow(object):
         # map buttons are disabled
         self.disableMappingInitItems()
         self.disableMappingMapButtons()
+        # Set the initial state of the UI where the mapping table and
+        # the mapping row editor are disabled
+        self.disableMappingComponents()
 
     def adjustWindow(self, mainWindow):
         """Adjust the window size, Qt Style Sheet, and title.
@@ -830,6 +833,7 @@ class MIPDatasetMapperWindow(object):
             )
             self.updateStatusbar(errMsg)
             self.disableMappingMapButtons()
+            self.disableMappingComponents()
         else:
             self.inputDataset = pd.read_csv(self.inputDatasetPath[0])
             self.inputDatasetColumns = self.inputDataset.columns.tolist()
@@ -842,9 +846,11 @@ class MIPDatasetMapperWindow(object):
                 self.initMapping()
                 self.enableMappingButtons()
                 self.enableMappingInitItems()
+                self.enableMappingComponents()
             else:
                 self.disableMappingMapButtons()
                 self.disableMappingInitItems()
+                self.disableMappingComponents()
 
     def loadCDEsFile(self):
         """Load the CDEs file."""
@@ -869,6 +875,7 @@ class MIPDatasetMapperWindow(object):
             )
             self.updateStatusbar(errMsg)
             self.disableMappingMapButtons()
+            self.disableMappingComponents()
         else:
             self.targetCDEs = pd.read_excel(self.targetCDEsPath[0])
             self.targetCDEsPandasModel = PandasTableModel(self.targetCDEs)
@@ -881,9 +888,11 @@ class MIPDatasetMapperWindow(object):
                 self.initMapping()
                 self.enableMappingInitItems()
                 self.enableMappingButtons()
+                self.enableMappingComponents()
             else:
                 self.disableMappingMapButtons()
                 self.disableMappingInitItems()
+                self.disableMappingComponents()
 
     def loadMapping(self):
         """Load the mapping file."""
@@ -1024,6 +1033,18 @@ class MIPDatasetMapperWindow(object):
         self.mappingCheckButton.setEnabled(True)
         # self.mappingSaveButton.setEnabled(True)
         self.mappingLoadButton.setEnabled(True)
+    
+    def disableMappingComponents(self):
+        """Disable the mapping components."""
+        self.columnsCDEsMappingGroupBox.setEnabled(False)
+        self.mappingTableRowUpdateGroupBox.setEnabled(False)
+        self.mappingFilePathLabel.setEnabled(False)
+    
+    def enableMappingComponents(self):
+        """Enable the mapping components."""
+        self.columnsCDEsMappingGroupBox.setEnabled(True)
+        self.mappingTableRowUpdateGroupBox.setEnabled(True)
+        self.mappingFilePathLabel.setEnabled(True)
 
     def checkMapping(self):
         """Check the mapping."""
