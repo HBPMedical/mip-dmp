@@ -528,6 +528,12 @@ class MIPDatasetMapperWindow(object):
         self.mappingRowIndex = QLabel(self.columnsCDEsMappingGroupBox)
         self.datasetColumn = QLabel(self.columnsCDEsMappingGroupBox)
         self.cdeCode = QComboBox(self.columnsCDEsMappingGroupBox)
+        icon = pkg_resources.resource_filename(
+            "mip_dmp", os.path.join("qt5", "assets", "down_arrow.png")
+        )
+        self.cdeCode.setStyleSheet(
+            f"QComboBox::down-arrow {{ image: url({icon}); height: 16px; width: 16px; }}"
+        )
         self.cdeType = QLabel(self.columnsCDEsMappingGroupBox)
         self.transformType = QLabel(self.columnsCDEsMappingGroupBox)
         self.transform = QLineEdit(self.columnsCDEsMappingGroupBox)
