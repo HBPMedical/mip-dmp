@@ -352,3 +352,31 @@ def make_distance_vector(matchedCdeCodes, inputDatasetColumn):
     similarityVector[0, :] = matches["distances"]
     # Return the similarity matrix
     return similarityVector
+
+
+def match_column_to_cdes(
+    dataset_column,
+    schema
+):
+    """Match a dataset column to CDEs using fuzzy matching.
+
+    Parameters
+    ----------
+    dataset_column : str
+        Dataset column.
+
+    schema : pandas.DataFrame
+        Schema to which the dataset is mapped.
+
+    Returns
+    -------
+    list
+        List of matched CDE codes ordered by decreasing fuzzy ratio.
+    """
+    # Function to find the fuzzy matches for each dataset column.
+    matches = sorted(
+        schema["code"],
+        key=lambda cde_code: fuzz.ratio(dataset_column, cde_code),
+        reverse=True,
+    )
+    return matches

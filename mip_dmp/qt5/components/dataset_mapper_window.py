@@ -53,7 +53,9 @@ from mip_dmp.process.mapping import (
     map_dataset,
     MAPPING_TABLE_COLUMNS,
 )
-from mip_dmp.process.matching import match_columns_to_cdes
+from mip_dmp.process.matching import (
+    match_columns_to_cdes, match_column_to_cdes
+)
 from mip_dmp.qt5.model.table_model import (
     # NoEditorDelegate,
     PandasTableModel,
@@ -694,9 +696,15 @@ class MIPDatasetMapperWindow(object):
             False,
         )
         if ok and datasetColumn is not None and datasetColumn != "":
-            # Get the fuzzy matches list for the dataset column
-            # and set the CDE code and type to the first match
-            columnMatches = self.matchedCdeCodes[datasetColumn]["words"]
+            if self.matchedCdeCodes:
+                # Get the fuzzy matches list for the dataset column
+                # and set the CDE code and type to the first match
+                columnMatches = self.matchedCdeCodes[datasetColumn]["words"]
+            else:
+                # If the matchedCdeCodes dictionary is empty, then the user
+                # has not yet initialized the mapping with fuzzy matching, and
+                # we propose the full list of CDEs ordered by fuzzy match
+                columnMatches = match_column_to_cdes(datasetColumn, self.targetCDEs)
             cdeCode = columnMatches[0]
             cdeType = self.targetCDEs[self.targetCDEs["code"] == cdeCode][
                 "type"
