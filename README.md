@@ -2,7 +2,7 @@
 
 ![Latest GitHub Release](https://img.shields.io/github/v/release/HBPMedical/mip-dmp) ![Latest GitHub Release Date](https://img.shields.io/github/release-date/HBPMedical/mip-dmp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8056372.svg)](https://doi.org/10.5281/zenodo.8056372)
 
-Python tool with Graphical User Interface to map datasets to a specific Common Data Elements (CDEs) metadata schema of a federation of the Medical Informatics Platform (MIP). It is developed to support members of a MIP Federation in the task of mapping their dataset to the CDEs schema of this federation. 
+Python tool with Graphical User Interface to map datasets to a specific Common Data Elements (CDEs) metadata schema of a federation of the Medical Informatics Platform (MIP). It is developed to support members of a MIP Federation in the task of mapping their dataset to the CDEs schema of this federation. This project is distributed under the Apache 2.0 open-source license (See [LICENSE](./LICENSE) for more details).
 
 ## How to install?
 
@@ -94,6 +94,12 @@ optional arguments:
                         Path to the target / output dataset file in CSV format.
 
 ```
+
+## How to cite?
+
+If you are using the MIP Dataset Mapper (`mip_dmp`) in your work, please acknowledge this software with the following entry:
+
+  > Tourbier, Sebastien, Schaffhauser, Birgit, & Ryvlin, Philippe. (2023). HBPMedical/mip-dmp: v0.0.3 (0.0.3). Zenodo. https://doi.org/10.5281/zenodo.8056372 
 
 ## Funding
 

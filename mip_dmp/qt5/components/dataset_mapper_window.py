@@ -1,4 +1,18 @@
-"""Class for the main window of the MIP Dataset Mapper UI application."""
+# Copyright 2023 The HIP team, University Hospital of Lausanne (CHUV), Switzerland & Contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""Module that defines the class dedicated to the main window of the MIP Dataset Mapper UI application."""
 
 # External imports
 import ast
@@ -39,7 +53,9 @@ from mip_dmp.process.mapping import (
     map_dataset,
     MAPPING_TABLE_COLUMNS,
 )
-from mip_dmp.process.matching import match_columns_to_cdes
+from mip_dmp.process.matching import (
+    match_columns_to_cdes, match_column_to_cdes
+)
 from mip_dmp.qt5.model.table_model import (
     # NoEditorDelegate,
     PandasTableModel,
@@ -53,6 +69,7 @@ from mip_dmp.qt5.components.matching_visualization_widget import (
 
 # Constants
 WINDOW_NAME = "MIP Dataset Mapper"
+NB_KEPT_MATCHES = 819  # for all FERES variables
 
 
 class MIPDatasetMapperWindow(object):
@@ -172,6 +189,9 @@ class MIPDatasetMapperWindow(object):
         # map buttons are disabled
         self.disableMappingInitItems()
         self.disableMappingMapButtons()
+        # Set the initial state of the UI where the mapping table and
+        # the mapping row editor are disabled
+        self.disableMappingComponents()
 
     def adjustWindow(self, mainWindow):
         """Adjust the window size, Qt Style Sheet, and title.
@@ -511,6 +531,12 @@ class MIPDatasetMapperWindow(object):
         self.mappingRowIndex = QLabel(self.columnsCDEsMappingGroupBox)
         self.datasetColumn = QLabel(self.columnsCDEsMappingGroupBox)
         self.cdeCode = QComboBox(self.columnsCDEsMappingGroupBox)
+        icon = pkg_resources.resource_filename(
+            "mip_dmp", os.path.join("qt5", "assets", "down_arrow.png")
+        )
+        self.cdeCode.setStyleSheet(
+            f"QComboBox::down-arrow {{ image: url({icon}); height: 16px; width: 16px; }}"
+        )
         self.cdeType = QLabel(self.columnsCDEsMappingGroupBox)
         self.transformType = QLabel(self.columnsCDEsMappingGroupBox)
         self.transform = QLineEdit(self.columnsCDEsMappingGroupBox)
@@ -671,9 +697,15 @@ class MIPDatasetMapperWindow(object):
             False,
         )
         if ok and datasetColumn is not None and datasetColumn != "":
-            # Get the fuzzy matches list for the dataset column
-            # and set the CDE code and type to the first match
-            columnMatches = self.matchedCdeCodes[datasetColumn]["words"]
+            if self.matchedCdeCodes:
+                # Get the fuzzy matches list for the dataset column
+                # and set the CDE code and type to the first match
+                columnMatches = self.matchedCdeCodes[datasetColumn]["words"]
+            else:
+                # If the matchedCdeCodes dictionary is empty, then the user
+                # has not yet initialized the mapping with fuzzy matching, and
+                # we propose the full list of CDEs ordered by fuzzy match
+                columnMatches = match_column_to_cdes(datasetColumn, self.targetCDEs)
             cdeCode = columnMatches[0]
             cdeType = self.targetCDEs[self.targetCDEs["code"] == cdeCode][
                 "type"
@@ -816,6 +848,7 @@ class MIPDatasetMapperWindow(object):
             )
             self.updateStatusbar(errMsg)
             self.disableMappingMapButtons()
+            self.disableMappingComponents()
         else:
             self.inputDataset = pd.read_csv(self.inputDatasetPath[0])
             self.inputDatasetColumns = self.inputDataset.columns.tolist()
@@ -828,9 +861,11 @@ class MIPDatasetMapperWindow(object):
                 self.initMapping()
                 self.enableMappingButtons()
                 self.enableMappingInitItems()
+                self.enableMappingComponents()
             else:
                 self.disableMappingMapButtons()
                 self.disableMappingInitItems()
+                self.disableMappingComponents()
 
     def loadCDEsFile(self):
         """Load the CDEs file."""
@@ -855,6 +890,7 @@ class MIPDatasetMapperWindow(object):
             )
             self.updateStatusbar(errMsg)
             self.disableMappingMapButtons()
+            self.disableMappingComponents()
         else:
             self.targetCDEs = pd.read_excel(self.targetCDEsPath[0])
             self.targetCDEsPandasModel = PandasTableModel(self.targetCDEs)
@@ -867,9 +903,11 @@ class MIPDatasetMapperWindow(object):
                 self.initMapping()
                 self.enableMappingInitItems()
                 self.enableMappingButtons()
+                self.enableMappingComponents()
             else:
                 self.disableMappingMapButtons()
                 self.disableMappingInitItems()
+                self.disableMappingComponents()
 
     def loadMapping(self):
         """Load the mapping file."""
@@ -1010,6 +1048,18 @@ class MIPDatasetMapperWindow(object):
         self.mappingCheckButton.setEnabled(True)
         # self.mappingSaveButton.setEnabled(True)
         self.mappingLoadButton.setEnabled(True)
+    
+    def disableMappingComponents(self):
+        """Disable the mapping components."""
+        self.columnsCDEsMappingGroupBox.setEnabled(False)
+        self.mappingTableRowUpdateGroupBox.setEnabled(False)
+        self.mappingFilePathLabel.setEnabled(False)
+    
+    def enableMappingComponents(self):
+        """Enable the mapping components."""
+        self.columnsCDEsMappingGroupBox.setEnabled(True)
+        self.mappingTableRowUpdateGroupBox.setEnabled(True)
+        self.mappingFilePathLabel.setEnabled(True)
 
     def checkMapping(self):
         """Check the mapping."""
@@ -1181,7 +1231,7 @@ class MIPDatasetMapperWindow(object):
         ) = match_columns_to_cdes(
             dataset=self.inputDataset,
             schema=self.targetCDEs,
-            nb_kept_matches=819,
+            nb_kept_matches=NB_KEPT_MATCHES,
             matching_method=matchingMethod,
         )
         # Create a pandas model for the mapping table

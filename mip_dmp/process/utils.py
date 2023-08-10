@@ -12,4 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Sub-package for PySide2 tabular data models of the MIP Dataset Mapper UI application."""
+"""Module that provides functions to support the modules of the `mip_dmp.process` sub-package."""
+
+def is_number(s):
+    """Check if a string is a number.
+
+    Parameters
+    ----------
+    s : str
+        String to check.
+
+    Returns
+    -------
+    bool
+        True if the string is a number, False otherwise.
+    """
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False

@@ -1,4 +1,18 @@
-"""Class for the widget that supports the visualization of the distances obtained by the automated mapping matches for the n most similar CDE codes."""
+# Copyright 2023 The HIP team, University Hospital of Lausanne (CHUV), Switzerland & Contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""Module that defines the class for the widget that supports the visualization of the distances obtained by the automated mapping matches for the n most similar CDE codes."""
 
 # External imports
 import os
@@ -17,7 +31,9 @@ from mip_dmp.plot.matching import heatmap_matching
 from mip_dmp.process.matching import make_distance_vector
 
 
+# Constants
 WINDOW_NAME = "Column /CDE Match Distance Visualization"
+NB_KEPT_MATCHES = 15
 
 
 class MatchingVisualizationWidget(QWidget):
@@ -123,9 +139,17 @@ class MatchingVisualizationWidget(QWidget):
 
     def generate_heatmap_figure(self):
         """Generate a heatmap figure with seaborn that shows the similarity / distance matrix of the input dataset columns and the target CDE codes."""
+        matchedCdeCodes = self.matchedCdeCodes.copy()
+        # Keep only the NB_KEPT_MATCHES most similar CDE codes for a variable
+        for key in ["words", "distances"]:
+            matchedCdeCodes[self.wordComboBox.currentText()][
+                key
+            ] = matchedCdeCodes[self.wordComboBox.currentText()][
+                key
+            ][:NB_KEPT_MATCHES]
         # Generate the distance vector
         distanceVector = make_distance_vector(
-            self.matchedCdeCodes, self.wordComboBox.currentText()
+            matchedCdeCodes, self.wordComboBox.currentText()
         )
         # Generate the heatmap
         self.figure.clear()
@@ -135,9 +159,9 @@ class MatchingVisualizationWidget(QWidget):
             [
                 self.wordComboBox.currentText()
             ],  # give the input dataset column only for y labels
-            self.matchedCdeCodes[self.wordComboBox.currentText()][
+            matchedCdeCodes[self.wordComboBox.currentText()][
                 "words"
-            ],  # give the n most similar CDE codes for x labels
+            ][:],
             self.matchingMethod,
         )
         # Draw the figure

@@ -25,6 +25,14 @@ QPlainTextEdit {
 	background-color: #222b2e;
 	color: #d3dae3;
 }
+QTextEdit:disabled,
+QPlainTextEdit:disabled {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #808086; /* Adjust the border color to your preference */
+    background-color: #2c2f2f; /* Adjust the background color to your preference */
+    color: #808086; /* Adjust the text color to your preference */
+}
 QToolButton {
 	border-style: solid;
 	border-top-color: qlineargradient(spread:pad, x1:0.5, y1:1, x2:0.5, y2:0, stop:0 rgb(215, 215, 215), stop:1 rgb(222, 222, 222));
@@ -98,7 +106,16 @@ QPushButton:pressed{
 	padding: 2px;
 	background-color: #2c2f2f;
 }
-QPushButton:disabled{
+QPushButton:disabled {
+    border-style: solid;
+    border-color: #808086; /* Adjust the border color to your preference */
+    border-width: 1px;
+    border-radius: 5px;
+    color: #808086; /* Adjust the text color to your preference */
+    padding: 2px;
+    background-color: #2c2f2f; /* Adjust the background color to your preference */
+}
+/* QPushButton:disabled{
 	border-style: solid;
 	border-top-color: qlineargradient(spread:pad, x1:0.5, y1:1, x2:0.5, y2:0, stop:0 rgb(215, 215, 215), stop:1 rgb(222, 222, 222));
 	border-right-color: qlineargradient(spread:pad, x1:0, y1:0.5, x2:1, y2:0.5, stop:0 rgb(217, 217, 217), stop:1 rgb(227, 227, 227));
@@ -109,7 +126,7 @@ QPushButton:disabled{
 	color: #808086;
 	padding: 2px;
 	background-color: rgb(142,142,142);
-}
+} */
 QLineEdit {
 	border-width: 1px;
 	border-style: solid;
@@ -117,8 +134,18 @@ QLineEdit {
 	background-color: #222b2e;
 	color: #d3dae3;
 }
+QLineEdit:disabled {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #808086; /* Adjust the border color for disabled state */
+    background-color: #2c2f2f; /* Adjust the background color for disabled state */
+    color: #808086; /* Adjust the text color for disabled state */
+}
 QLabel {
 	color: #d3dae3;
+}
+QLabel:disabled {
+    color: #808086; /* Adjust the text color for disabled state */
 }
 QLCDNumber {
 	color: #4d9b87;
@@ -535,12 +562,31 @@ QGroupBox {
    color: #d3dae3;
 }
 
+QGroupBox:disabled {
+    color: #808086; /* Adjust the color to your preference */
+    border: 1px solid #808086;
+    background-color: #2c2f2f; /* Adjust the background color to your preference */
+    border-radius: 5px;
+    margin-top: 6px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
 QTableView {
     background-color: #222b2e;
     border: 1px solid #4fa08b;
     gridline-color: #4fa08b;
     color: #d3dae3;
     selection-background-color: #4fa08b;
+    selection-color: #d3dae3;
+}
+
+QTableView:disabled {
+    background-color: #2c2f2f; /* Adjust the background color to your preference */
+    border: 1px solid #808086;
+    gridline-color: #808086;
+    color: #808086; /* Adjust the text color to your preference */
+    selection-background-color: #808086;
     selection-color: #d3dae3;
 }
 
@@ -572,9 +618,17 @@ QComboBox {
 }
 
 QComboBox:disabled {
-    /* set the background and text color for the combobox when disabled */
-    background-color: #d3dae3;
-    color: #a8a8a8;
+    border-style: solid;
+    border-color: #808086; /* Adjust the border color for disabled state */
+    border-width: 1px;
+    border-radius: 5px;
+    color: #808086; /* Adjust the text color for disabled state */
+    padding: 2px;
+    padding-left: 5px;
+    background-color: #2c2f2f; /* Adjust the background color for disabled state */
+    selection-background-color: #808086; /* Adjust the selection background color for disabled state */
+    selection-color: #d3dae3; /* Adjust the selection text color for disabled state */
+    min-width: 100px;
 }
 
 QComboBox::drop-down {

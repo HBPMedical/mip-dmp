@@ -1,4 +1,18 @@
-"""Class for the widget that supports the visualization of the initial automated mapping matches via embedding."""
+# Copyright 2023 The HIP team, University Hospital of Lausanne (CHUV), Switzerland & Contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""Module that defines the class dedicated to the widget that supports the visualization of the initial automated mapping matches via embedding."""
 
 # External imports
 import os
@@ -17,8 +31,9 @@ from mip_dmp.plot.embedding import scatterplot_embeddings
 from mip_dmp.process.embedding import generate_embeddings, reduce_embeddings_dimension
 
 
+# Constants
 WINDOW_NAME = "Word Embedding Matches Visualization"
-
+NB_KEPT_MATCHES = 15
 
 class WordEmbeddingVisualizationWidget(QWidget):
     """Class for the widget that supports the visualization of the automated column / CDE code matches via embedding."""
@@ -217,6 +232,16 @@ class WordEmbeddingVisualizationWidget(QWidget):
             len(self.inputDatasetColumnEmbeddings) > 0
             and len(self.targetCDECodeEmbeddings) > 0
         ):
+            matchedCdeCodes = self.matchedCdeCodes.copy()
+            # Keep only the NB_KEPT_MATCHES most similar CDE codes for a variable
+            for key in ["words", "distances"]:
+                matchedCdeCodes[self.wordComboBox.currentText()][
+                    key
+                ] = matchedCdeCodes[self.wordComboBox.currentText()][
+                    key
+                ][:NB_KEPT_MATCHES]
+            embeddings = self.embeddings.copy()
+            embeddings = [embedding_vector[:NB_KEPT_MATCHES] for embedding_vector in embeddings]
             # Generate 3D scatter plot
             scatterplot_embeddings(
                 self.figure,

@@ -1,3 +1,17 @@
+# Copyright 2023 The HIP team, University Hospital of Lausanne (CHUV), Switzerland & Contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 """Module that provides functions to support the matching of dataset columns to CDEs."""
 
 # External imports
@@ -12,6 +26,7 @@ from mip_dmp.process.embedding import (
     generate_embeddings,
     find_n_closest_embeddings,
 )
+from mip_dmp.process.utils import is_number
 
 
 def match_columns_to_cdes(
@@ -190,28 +205,43 @@ def make_initial_transform(dataset, schema, dataset_column, cde_code):
     if cde_type in ["integer", "real"]:
         return "1.0"
     elif cde_type in ["binominal", "multinominal", "nominal"]:
-        # Extract the CDE code values from the corresponding cell of
-        # the "values" column of the schema.
+        # Extract the string CDE code encoded / text values from the corresponding cell of
+        # the "values" column of the schema, and format it as a dictionary of the form:
+        # {encoded_value_1: text_value_1, encoded_value_2: text_value_2, ...}
         cde_code_values_str = (
             f'[{schema[schema["code"] == cde_code]["values"].iloc[0]}]'
         )
         # Replace problematic characters.
         cde_code_values_str = cde_code_values_str.replace("“", '"')
         cde_code_values_str = cde_code_values_str.replace("”", '"')
-        # Replace curly brackets to convert the string to a list of tuples.
-        cde_code_values_str = cde_code_values_str.replace("{", "(")
-        cde_code_values_str = cde_code_values_str.replace("}", ")")
-        # Convert the string to a list of tuples.
-        cde_code_values = eval(cde_code_values_str)
-        # Extract the values from the list of tuples as a list of strings.
-        cde_code_values = [
-            f"{str(cde_code_value[0])}" for cde_code_value in cde_code_values
-        ]
+        # Remove surrounding brackets
+        cde_code_values_str = cde_code_values_str.replace("[", "")
+        cde_code_values_str = cde_code_values_str.replace("]", "")
+        # Convert the string to a dictionary.
+        cde_code_values_dict = eval(cde_code_values_str)
         # Get the unique values of the dataset column and make sure they are strings.
         dataset_column_values = [
             f"{str(dataset_column_value)}"
             for dataset_column_value in dataset[dataset_column].unique()
         ]
+        # Extract the CDE code encoded / text values from the dictionary
+        # previously created.
+        if any(is_number(s) for s in dataset_column_values):
+            # If the dataset column values contain numbers,
+            # it means we relabel the encoded integer values
+            # with the new corresponding encoded values of the schema.
+            cde_code_values = [
+                f"{str(key)}"
+                for key in cde_code_values_dict
+            ]
+        else:
+            # If the dataset column values do not contain numbers,
+            # it means we relabel the text values with the new
+            # corresponding text values of the schema.
+            cde_code_values = [
+                f"{str(cde_code_values_dict[key])}"
+                for key in cde_code_values_dict
+            ]
         # Define the initial transform.
         initial_transform = generate_initial_transform(
             dataset_column_values,
@@ -301,7 +331,7 @@ def generate_initial_transform(dataset_column_values, cde_code_values, dataset_c
 
 
 def make_distance_vector(matchedCdeCodes, inputDatasetColumn):
-    """Make the n closest match distance vector.
+    """Make the n closest match distance vector for a given input dataset column.
 
     Parameters
     ----------
@@ -338,3 +368,31 @@ def make_distance_vector(matchedCdeCodes, inputDatasetColumn):
     similarityVector[0, :] = matches["distances"]
     # Return the similarity matrix
     return similarityVector
+
+
+def match_column_to_cdes(
+    dataset_column,
+    schema
+):
+    """Match a dataset column to CDEs using fuzzy matching.
+
+    Parameters
+    ----------
+    dataset_column : str
+        Dataset column.
+
+    schema : pandas.DataFrame
+        Schema to which the dataset is mapped.
+
+    Returns
+    -------
+    list
+        List of matched CDE codes ordered by decreasing fuzzy ratio.
+    """
+    # Function to find the fuzzy matches for each dataset column.
+    matches = sorted(
+        schema["code"],
+        key=lambda cde_code: fuzz.ratio(dataset_column, cde_code),
+        reverse=True,
+    )
+    return matches
