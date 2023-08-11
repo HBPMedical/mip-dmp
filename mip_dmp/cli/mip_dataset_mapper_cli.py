@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 """Standalone script which runs the MIP Dataset Mapper from the terminal."""
 
 import sys
@@ -21,15 +20,15 @@ from pathlib import Path
 # import logging
 from mip_dmp.process.mapping import map_dataset
 
-from mip_dmp.io import (
+from mip_dmp.utils.io import (
     load_csv,
     load_excel,
     # load_excel,
     load_json,
 )
-from mip_dmp.parser import create_parser
+from mip_dmp.utils.parser import create_parser
 
-# from mip_dmp.logger import setup_logging
+# from mip_dmp.utils.logger import setup_logging
 
 
 def main():
