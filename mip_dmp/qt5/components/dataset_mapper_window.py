@@ -324,12 +324,12 @@ class MIPDatasetMapperWindow(object):
         # Add a separator to the tool bar
         self.toolBar.addSeparator()
         # Add the load / save mapping file buttons to the tool bar
-        mappingToolLabel = QLabel("4. Mapping Check / Save / Load:")
+        mappingToolLabel = QLabel("4. Mapping (Load) / Check / Save:")
         mappingToolLabel.setStyleSheet("QLabel { font-weight: bold; color: #222222;}")
         self.toolBar.addWidget(mappingToolLabel)
+        self.toolBar.addAction(self.mappingLoadButton)
         self.toolBar.addAction(self.mappingCheckButton)
         self.toolBar.addAction(self.mappingSaveButton)
-        self.toolBar.addAction(self.mappingLoadButton)
         # Add a spacer to the tool bar
         spacer4 = QWidget()
         spacer4.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
