@@ -56,12 +56,14 @@ You can use the installed `mip_dataset_mapper_ui` script to start the MIP Datase
 
 In a terminal, you can launch it with the following command:
 ```
-$ mip_dataset_mapper_ui 
+$ mip_dataset_mapper_ui
 ```
 
-This will display a window that consists of four main component in grid layout fashion.
+This displays the main window of MIP Dataset Mapper UI application that consists of four main component in a grid layout fashion, as shown in the screeshot below.
 
-The task of mapping the dataset would consist of the following tasks:
+![](./docs/images/mip-dmp_ui_illustration.png)
+
+The task of mapping the dataset consists of the following tasks:
 
 - Load a input CSV dataset in `.csv` format (top left)
 - Load a CDEs schema in `.xlxs` format (bottom left)
