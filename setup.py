@@ -12,12 +12,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import setuptools
+"""`Setup.py` for mip_dmp."""
 
-# This extracts the required packages from the requirements.txt file
-with open("requirements.txt") as f:
-    required = f.read().splitlines()
+from os import path as op
+from setuptools import setup
+from mip_dmp import VERSION as __version__
 
-# This calls the setup function from setuptools
-# with the list of required packages
-setuptools.setup(install_requires=required)
+
+def main():
+    """Main function of the MIP Dataset Mapper ``setup.py``"""
+    # Handle version
+    root_dir = op.abspath(op.dirname(__file__))
+    version = None
+    cmdclass = {}
+    if op.isfile(op.join(root_dir, "mip_dmp", "VERSION")):
+        with open(op.join(root_dir, "mip_dmp", "VERSION")) as vfile:
+            version = vfile.readline().strip()
+    if version is None:
+        version = __version__
+    # Setup configuration
+    setup(
+        name="mip_dmp",
+        version=version,
+        cmdclass=cmdclass,
+    )
+
+
+if __name__ == "__main__":
+    main()
+

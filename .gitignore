@@ -15,3 +15,10 @@ build
 
 # Ignore QT Designer files
 *.ui
+
+# Ignore build documentation
+docs/api
+docs/build
+
+# Ignore Mac OS X system files
+.DS_Store
