@@ -1,6 +1,6 @@
 # MIP Dataset Mapper (`mip_dmp`)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![Latest GitHub Release](https://img.shields.io/github/v/release/HBPMedical/mip-dmp) ![Latest GitHub Release Date](https://img.shields.io/github/release-date/HBPMedical/mip-dmp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8056371.svg)](https://doi.org/10.5281/zenodo.8056371)
@@ -121,6 +121,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/sebastientourbier"><img src="https://avatars.githubusercontent.com/u/22279770?v=4?s=100" width="100px;" alt="Sébastien Tourbier"/><br /><sub><b>Sébastien Tourbier</b></sub></a><br /><a href="https://github.com/HBPMedical/mip-dmp/issues?q=author%3Asebastientourbier" title="Bug reports">🐛</a> <a href="https://github.com/HBPMedical/mip-dmp/commits?author=sebastientourbier" title="Code">💻</a> <a href="#design-sebastientourbier" title="Design">🎨</a> <a href="https://github.com/HBPMedical/mip-dmp/commits?author=sebastientourbier" title="Documentation">📖</a> <a href="#example-sebastientourbier" title="Examples">💡</a> <a href="#ideas-sebastientourbier" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-sebastientourbier" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-sebastientourbier" title="Maintenance">🚧</a> <a href="#mentoring-sebastientourbier" title="Mentoring">🧑‍🏫</a> <a href="https://github.com/HBPMedical/mip-dmp/pulls?q=is%3Apr+reviewed-by%3Asebastientourbier" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/HBPMedical/mip-dmp/commits?author=sebastientourbier" title="Tests">⚠️</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/BSchaffhauser"><img src="https://avatars.githubusercontent.com/u/91893580?v=4?s=100" width="100px;" alt="BSchaffhauser"/><br /><sub><b>BSchaffhauser</b></sub></a><br /><a href="#financial-BSchaffhauser" title="Financial">💵</a> <a href="#fundingFinding-BSchaffhauser" title="Funding Finding">🔍</a></td>
     </tr>
   </tbody>
 </table>
