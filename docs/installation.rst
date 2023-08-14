@@ -16,7 +16,7 @@ Installation Instructions for Users
 
     $ source ./venv/bin/activate
     (venv)$ pip install -r https://raw.githubusercontent.com/HBPMedical/mip-dmp/main/requirements.txt
-    (venv)$ pip install git+https://github.com/HBPMedical/mip-dmp.git@0.0.6
+    (venv)$ pip install git+https://github.com/HBPMedical/mip-dmp.git@0.0.7
 
 .. note::
     `mip_dmp` has not been made available on the Python Package Index (PyPI) yet, so we need to install it directly from GitHub.
