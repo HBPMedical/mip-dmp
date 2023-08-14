@@ -149,7 +149,7 @@ class WordEmbeddingVisualizationWidget(QWidget):
         inputDatasetColumnEmbeddings: list,
         inputDatasetColumns: list,
         targetCDECodeEmbeddings: list,
-        targetCDCCodes: list,
+        targetCDECodes: list,
         matchedCdeCodes: dict,
         matchingMethod: str,
     ):
@@ -164,7 +164,7 @@ class WordEmbeddingVisualizationWidget(QWidget):
         targetCDECodeEmbeddings: list
             List of the target CDE code embeddings.
 
-        targetCDCCodes: list
+        targetCDECodes: list
             List of the target CDE codes.
 
         matchedCdeCodes: dict
@@ -191,7 +191,7 @@ class WordEmbeddingVisualizationWidget(QWidget):
         self.inputDatasetColumnEmbeddings = inputDatasetColumnEmbeddings
         self.inputDatasetColumns = inputDatasetColumns
         self.targetCDECodeEmbeddings = targetCDECodeEmbeddings
-        self.targetCDECodes = targetCDCCodes
+        self.targetCDECodes = targetCDECodes
         self.matchedCdeCodes = matchedCdeCodes
         # Reduce embeddings dimension to 3 components via t-SNE or PCA for visualization
         dim_reduction_method = self.dimReductionMethodComboBox.currentText()

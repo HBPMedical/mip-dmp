@@ -117,7 +117,7 @@ def generate_output_path(input_cdes_file: str, output_dir: str, output_suffix: s
 
     Returns
     -------
-    out_cdes_fname_ : str
+    out_cdes_fname : str
         Generated absolute path for the output CDEs files where the updated CDEs are written, with
         extension automatically added (.json for JSON, .xlsx for EXCEL).
     """
