@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commandline Usage &mdash; mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/twemoji.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/mip_dmp_icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="_static/twemoji.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Grahical User Interface" href="ui_user_guide.html" />
+    <link rel="prev" title="Installation Instructions for Users" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/mip_dmp_icon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Instructions for Users</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Commandline Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#commandline-arguments">Commandline Arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#named-arguments">Named Arguments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ui_user_guide.html">Grahical User Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Instructions for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_cli_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.cli</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_plot_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_process_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.process</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_qt5_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_gui_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.ui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_utils_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About mip_dmp</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">How to cite?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Commandline Usage</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="commandline-usage">
+<span id="cmdusage"></span><h1>Commandline Usage<a class="headerlink" href="#commandline-usage" title="Permalink to this heading"></a></h1>
+<section id="commandline-arguments">
+<h2>Commandline Arguments<a class="headerlink" href="#commandline-arguments" title="Permalink to this heading"></a></h2>
+<p>The command to run the MIP Dataset Mapper commandline interface is as follows.</p>
+<p><p>Map a source dataset to a target dataset given a mapping file in JSON format generated by the MIP Dataset Mapper UI application (mip_dataset_mapper_ui).</p>
+</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">mip_dataset_mapper</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">--</span><span class="n">source_dataset</span> <span class="n">SOURCE_DATASET</span> <span class="o">--</span><span class="n">mapping_file</span>
+                          <span class="n">MAPPING_FILE</span> <span class="o">--</span><span class="n">cdes_file</span> <span class="n">CDES_FILE</span> <span class="o">--</span><span class="n">target_dataset</span>
+                          <span class="n">TARGET_DATASET</span>
+</pre></div>
+</div>
+<section id="named-arguments">
+<h3>Named Arguments<a class="headerlink" href="#named-arguments" title="Permalink to this heading"></a></h3>
+<dl class="option-list">
+<dt><kbd>--source_dataset</kbd></dt>
+<dd><p>Source dataset file in CSV format.</p>
+</dd>
+<dt><kbd>--mapping_file</kbd></dt>
+<dd><p>Source Dataset Columns / Common data elements (CDEs) mapping file in JSON format. The mapping file can be generated by the MIP Dataset Mapper UI application.</p>
+</dd>
+<dt><kbd>--cdes_file</kbd></dt>
+<dd><p>Common data elements (CDEs) metadata schema file in EXCEL format.</p>
+</dd>
+<dt><kbd>--target_dataset</kbd></dt>
+<dd><p>Path to the target / output dataset file in CSV format.</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation Instructions for Users" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ui_user_guide.html" class="btn btn-neutral float-right" title="Grahical User Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The MIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors.
+      <span class="lastupdated">Last updated on Aug 14, 2023.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

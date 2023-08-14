@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mip_dmp.utils.io &mdash; mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/twemoji.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/mip_dmp_icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="../../../_static/twemoji.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/mip_dmp_icon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation Instructions for Users</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../cmd_usage.html">Commandline Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ui_user_guide.html">Grahical User Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer.html">Instructions for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_cli_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.cli</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_plot_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_process_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.process</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_qt5_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_gui_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.ui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_utils_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About mip_dmp</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">How to cite?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">mip_dmp.utils.io</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for mip_dmp.utils.io</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2023 The HIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;Module for input/output operations with files involved in the MIP Dataset Mapper.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">gensim.downloader</span> <span class="k">as</span> <span class="nn">api</span>
+<span class="kn">import</span> <span class="nn">chars2vec</span>
+
+<span class="kn">from</span> <span class="nn">mip_dmp.process.mapping</span> <span class="kn">import</span> <span class="n">MAPPING_TABLE_COLUMNS</span>
+
+
+<div class="viewcode-block" id="load_csv"><a class="viewcode-back" href="../../../api_utils_subpackage.html#mip_dmp.utils.io.load_csv">[docs]</a><span class="k">def</span> <span class="nf">load_csv</span><span class="p">(</span><span class="n">csc_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load content of a CSV file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    csv_file : str</span>
+<span class="sd">        Path to CSV file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data : pd.DataFrame</span>
+<span class="sd">        Dataframe loaded from CSV file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csc_file</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="load_excel"><a class="viewcode-back" href="../../../api_utils_subpackage.html#mip_dmp.utils.io.load_excel">[docs]</a><span class="k">def</span> <span class="nf">load_excel</span><span class="p">(</span><span class="n">excel_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load content of an Excel file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    excel_file : str</span>
+<span class="sd">        Path to Excel file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data : pd.DataFrame</span>
+<span class="sd">        Dataframe loaded from Excel file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">excel_file</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="load_json"><a class="viewcode-back" href="../../../api_utils_subpackage.html#mip_dmp.utils.io.load_json">[docs]</a><span class="k">def</span> <span class="nf">load_json</span><span class="p">(</span><span class="n">json_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load content of a JSON file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    json_file : str</span>
+<span class="sd">        Path to JSON file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data : dict</span>
+<span class="sd">        Dictionary loaded from JSON file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="load_mapping_json"><a class="viewcode-back" href="../../../api_utils_subpackage.html#mip_dmp.utils.io.load_mapping_json">[docs]</a><span class="k">def</span> <span class="nf">load_mapping_json</span><span class="p">(</span><span class="n">json_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load content of a saved mapping JSON file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    json_file : str</span>
+<span class="sd">        Path to JSON file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data : dict</span>
+<span class="sd">        Dictionary loaded from JSON file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
+    <span class="c1"># Check if the mapping file is in the correct format</span>
+    <span class="c1"># i.e. if it contains the required columns listed in</span>
+    <span class="c1"># MAPPING_TABLE_COLUMNS</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">MAPPING_TABLE_COLUMNS</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;The mapping file is not in the correct format. &quot;</span>
+            <span class="s2">&quot;The mapping file must contain the following columns: &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">MAPPING_TABLE_COLUMNS</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="generate_output_path"><a class="viewcode-back" href="../../../api_utils_subpackage.html#mip_dmp.utils.io.generate_output_path">[docs]</a><span class="k">def</span> <span class="nf">generate_output_path</span><span class="p">(</span><span class="n">input_cdes_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_suffix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate output path for CDEs file, but without any extension.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    input_cdes_file : str</span>
+<span class="sd">        Path to input CDEs file in JSON or EXCEL format.</span>
+
+<span class="sd">    output_dir : str</span>
+<span class="sd">        Path to directory where the output CDEs file will be written.</span>
+
+<span class="sd">    output_suffix : str</span>
+<span class="sd">        Suffix to add to the input CDEs file name, to generate the output CDEs file name.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out_cdes_fname : str</span>
+<span class="sd">        Generated absolute path for the output CDEs files where the updated CDEs are written, with</span>
+<span class="sd">        extension automatically added (.json for JSON, .xlsx for EXCEL).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">in_cdes_fname</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">input_cdes_file</span><span class="p">)</span>
+    <span class="n">out_cdes_fname</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+        <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">in_cdes_fname</span><span class="o">.</span><span class="n">stem</span><span class="p">,</span> <span class="n">output_suffix</span><span class="p">])</span> <span class="o">+</span> <span class="n">in_cdes_fname</span><span class="o">.</span><span class="n">suffix</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">out_cdes_fname</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="load_glove_model"><a class="viewcode-back" href="../../../api_utils_subpackage.html#mip_dmp.utils.io.load_glove_model">[docs]</a><span class="k">def</span> <span class="nf">load_glove_model</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;glove-wiki-gigaword-50&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a GloVe model from disk.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    model_name : str, optional</span>
+<span class="sd">        Name of the GloVe model to load, by default &quot;glove-wiki-gigaword-50&quot;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        Dictionary containing the GloVe model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">api</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="load_c2v_model"><a class="viewcode-back" href="../../../api_utils_subpackage.html#mip_dmp.utils.io.load_c2v_model">[docs]</a><span class="k">def</span> <span class="nf">load_c2v_model</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;eng_50&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a chars2vec model from disk.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    model_name : str, optional</span>
+<span class="sd">        Name of the chars2vec model to load, by default &quot;eng_50&quot;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        Dictionary containing the chars2vec model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">chars2vec</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The MIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors.
+      <span class="lastupdated">Last updated on Aug 14, 2023.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

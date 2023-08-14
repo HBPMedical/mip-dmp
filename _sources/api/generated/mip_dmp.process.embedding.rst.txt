@@ -1,0 +1,7 @@
+mip\_dmp.process.embedding module
+=================================
+
+.. automodule:: mip_dmp.process.embedding
+   :members:
+   :undoc-members:
+   :show-inheritance:

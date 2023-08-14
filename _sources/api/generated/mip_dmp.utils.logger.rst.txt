@@ -1,0 +1,7 @@
+mip\_dmp.utils.logger module
+============================
+
+.. automodule:: mip_dmp.utils.logger
+   :members:
+   :undoc-members:
+   :show-inheritance:

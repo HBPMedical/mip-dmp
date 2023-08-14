@@ -1,0 +1,18 @@
+mip\_dmp.qt5.model package
+==========================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   mip_dmp.qt5.model.table_model
+
+Module contents
+---------------
+
+.. automodule:: mip_dmp.qt5.model
+   :members:
+   :undoc-members:
+   :show-inheritance:

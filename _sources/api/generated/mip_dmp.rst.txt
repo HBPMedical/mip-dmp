@@ -1,0 +1,23 @@
+mip\_dmp package
+================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   mip_dmp.cli
+   mip_dmp.plot
+   mip_dmp.process
+   mip_dmp.qt5
+   mip_dmp.ui
+   mip_dmp.utils
+
+Module contents
+---------------
+
+.. automodule:: mip_dmp
+   :members:
+   :undoc-members:
+   :show-inheritance:

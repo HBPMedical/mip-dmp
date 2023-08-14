@@ -1,0 +1,7 @@
+mip\_dmp.process.mapping module
+===============================
+
+.. automodule:: mip_dmp.process.mapping
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mip_dmp.qt5.components.dataset_mapper_window module &mdash; mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/twemoji.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/mip_dmp_icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="../../_static/twemoji.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/mip_dmp_icon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation Instructions for Users</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../cmd_usage.html">Commandline Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ui_user_guide.html">Grahical User Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer.html">Instructions for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api_cli_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.cli</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_plot_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_process_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.process</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_qt5_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_gui_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.ui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_utils_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About mip_dmp</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">How to cite?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">mip_dmp.qt5.components.dataset_mapper_window module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-mip_dmp.qt5.components.dataset_mapper_window">
+<span id="mip-dmp-qt5-components-dataset-mapper-window-module"></span><h1>mip_dmp.qt5.components.dataset_mapper_window module<a class="headerlink" href="#module-mip_dmp.qt5.components.dataset_mapper_window" title="Permalink to this heading"></a></h1>
+<p>Module that defines the class dedicated to the main window of the MIP Dataset Mapper UI application.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mip_dmp.qt5.components.dataset_mapper_window.</span></span><span class="sig-name descname"><span class="pre">MIPDatasetMapperWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for the main window of the MIP Dataset Mapper UI application.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.addMappingTableRow">
+<span class="sig-name descname"><span class="pre">addMappingTableRow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.addMappingTableRow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.addMappingTableRow" title="Permalink to this definition"></a></dt>
+<dd><p>Add a row to the mapping table.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.adjustWidgetsAndLayouts">
+<span class="sig-name descname"><span class="pre">adjustWidgetsAndLayouts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.adjustWidgetsAndLayouts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.adjustWidgetsAndLayouts" title="Permalink to this definition"></a></dt>
+<dd><p>Add widgets to the layouts of the UI elements.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.adjustWindow">
+<span class="sig-name descname"><span class="pre">adjustWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.adjustWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.adjustWindow" title="Permalink to this definition"></a></dt>
+<dd><p>Adjust the window size, Qt Style Sheet, and title.</p>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.cdeCode">
+<span class="sig-name descname"><span class="pre">cdeCode</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.cdeCode" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.cdeType">
+<span class="sig-name descname"><span class="pre">cdeType</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.cdeType" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.centralWidgetGridLayout">
+<span class="sig-name descname"><span class="pre">centralWidgetGridLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.centralWidgetGridLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.centralWidgetSplitter">
+<span class="sig-name descname"><span class="pre">centralWidgetSplitter</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.centralWidgetSplitter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.centralwidget">
+<span class="sig-name descname"><span class="pre">centralwidget</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.centralwidget" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.checkMapping">
+<span class="sig-name descname"><span class="pre">checkMapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.checkMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.checkMapping" title="Permalink to this definition"></a></dt>
+<dd><p>Check the content of the mapping table.</p>
+<p>This function checks if:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The mapping table contains unique mapping to a specific CDE code.</p></li>
+<li><p>The mapping contains only valid CDE codes.</p></li>
+<li><p>The mapping transform is correctly formatted.</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingData">
+<span class="sig-name descname"><span class="pre">columnsCDEsMappingData</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingData" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingGroupBox">
+<span class="sig-name descname"><span class="pre">columnsCDEsMappingGroupBox</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingGroupBox" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingGroupBoxLayout">
+<span class="sig-name descname"><span class="pre">columnsCDEsMappingGroupBoxLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingGroupBoxLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingPandasModel">
+<span class="sig-name descname"><span class="pre">columnsCDEsMappingPandasModel</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingPandasModel" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingSplitter">
+<span class="sig-name descname"><span class="pre">columnsCDEsMappingSplitter</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingSplitter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.connectButtons">
+<span class="sig-name descname"><span class="pre">connectButtons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.connectButtons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.connectButtons" title="Permalink to this definition"></a></dt>
+<dd><p>Connect the buttons to their corresponding functions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createComponents">
+<span class="sig-name descname"><span class="pre">createComponents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.createComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createComponents" title="Permalink to this definition"></a></dt>
+<dd><p>Create the UI components.</p>
+<section id="id1">
+<h2>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createInputDatasetComponents">
+<span class="sig-name descname"><span class="pre">createInputDatasetComponents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.createInputDatasetComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createInputDatasetComponents" title="Permalink to this definition"></a></dt>
+<dd><p>Create the components of the input dataset group box.</p>
+<section id="id2">
+<h2>Parameters<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createMappingComponents">
+<span class="sig-name descname"><span class="pre">createMappingComponents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.createMappingComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createMappingComponents" title="Permalink to this definition"></a></dt>
+<dd><p>Create the components of the mapping group box.</p>
+<section id="id3">
+<h2>Parameters<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createMappingTableRowViewComponents">
+<span class="sig-name descname"><span class="pre">createMappingTableRowViewComponents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.createMappingTableRowViewComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createMappingTableRowViewComponents" title="Permalink to this definition"></a></dt>
+<dd><p>Create the components of the mapping table row editor group box.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createTargetCDEsComponents">
+<span class="sig-name descname"><span class="pre">createTargetCDEsComponents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.createTargetCDEsComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createTargetCDEsComponents" title="Permalink to this definition"></a></dt>
+<dd><p>Create the components of the target CDEs group box.</p>
+<section id="id4">
+<h2>Parameters<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createToolBar">
+<span class="sig-name descname"><span class="pre">createToolBar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.createToolBar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createToolBar" title="Permalink to this definition"></a></dt>
+<dd><p>Create the tool bar.</p>
+<section id="id5">
+<h2>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.datasetColumn">
+<span class="sig-name descname"><span class="pre">datasetColumn</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.datasetColumn" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.deleteMappingTableRow">
+<span class="sig-name descname"><span class="pre">deleteMappingTableRow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.deleteMappingTableRow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.deleteMappingTableRow" title="Permalink to this definition"></a></dt>
+<dd><p>Delete the selected row from the mapping table.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.disableMappingComponents">
+<span class="sig-name descname"><span class="pre">disableMappingComponents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.disableMappingComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.disableMappingComponents" title="Permalink to this definition"></a></dt>
+<dd><p>Disable the mapping components.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.disableMappingInitItems">
+<span class="sig-name descname"><span class="pre">disableMappingInitItems</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.disableMappingInitItems"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.disableMappingInitItems" title="Permalink to this definition"></a></dt>
+<dd><p>Disable the mapping initialization items.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.disableMappingMapButtons">
+<span class="sig-name descname"><span class="pre">disableMappingMapButtons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.disableMappingMapButtons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.disableMappingMapButtons" title="Permalink to this definition"></a></dt>
+<dd><p>Disable the check / save / load mapping and map buttons.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingCanvas">
+<span class="sig-name descname"><span class="pre">embeddingCanvas</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingCanvas" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingFigure">
+<span class="sig-name descname"><span class="pre">embeddingFigure</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingFigure" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingViz">
+<span class="sig-name descname"><span class="pre">embeddingViz</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.embeddingViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingViz" title="Permalink to this definition"></a></dt>
+<dd><p>Open the embedding visualization window.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingVizButton">
+<span class="sig-name descname"><span class="pre">embeddingVizButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingVizButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingWidget">
+<span class="sig-name descname"><span class="pre">embeddingWidget</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingWidget" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingWidgetLayout">
+<span class="sig-name descname"><span class="pre">embeddingWidgetLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingWidgetLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.enableMappingButtons">
+<span class="sig-name descname"><span class="pre">enableMappingButtons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.enableMappingButtons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.enableMappingButtons" title="Permalink to this definition"></a></dt>
+<dd><p>Enable the check / save / load mapping and map buttons.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.enableMappingComponents">
+<span class="sig-name descname"><span class="pre">enableMappingComponents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.enableMappingComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.enableMappingComponents" title="Permalink to this definition"></a></dt>
+<dd><p>Enable the mapping components.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.enableMappingInitItems">
+<span class="sig-name descname"><span class="pre">enableMappingInitItems</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.enableMappingInitItems"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.enableMappingInitItems" title="Permalink to this definition"></a></dt>
+<dd><p>Enable the mapping initialization items.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.initMapping">
+<span class="sig-name descname"><span class="pre">initMapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.initMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.initMapping" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize an empty column/CDEs mapping table.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.initMatchingMethod">
+<span class="sig-name descname"><span class="pre">initMatchingMethod</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.initMatchingMethod" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.initializeMappingEditForm">
+<span class="sig-name descname"><span class="pre">initializeMappingEditForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.initializeMappingEditForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.initializeMappingEditForm" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize the mapping row editor form with the data of the selected row.</p>
+<section id="id6">
+<h2>Parameters<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>index<span class="classifier">QModelIndex</span></dt><dd><p>The index of the selected row in the mapping table.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDataset">
+<span class="sig-name descname"><span class="pre">inputDataset</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDataset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetColumnEmbeddings">
+<span class="sig-name descname"><span class="pre">inputDatasetColumnEmbeddings</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetColumnEmbeddings" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetColumns">
+<span class="sig-name descname"><span class="pre">inputDatasetColumns</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetColumns" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetFormLayout">
+<span class="sig-name descname"><span class="pre">inputDatasetFormLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetFormLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetFormLayoutWidget">
+<span class="sig-name descname"><span class="pre">inputDatasetFormLayoutWidget</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetFormLayoutWidget" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetGroupBox">
+<span class="sig-name descname"><span class="pre">inputDatasetGroupBox</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetGroupBox" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetGroupBoxLayout">
+<span class="sig-name descname"><span class="pre">inputDatasetGroupBoxLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetGroupBoxLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetLoadButton">
+<span class="sig-name descname"><span class="pre">inputDatasetLoadButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetLoadButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetPandasModel">
+<span class="sig-name descname"><span class="pre">inputDatasetPandasModel</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetPandasModel" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetPath">
+<span class="sig-name descname"><span class="pre">inputDatasetPath</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetPath" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetPathLabel">
+<span class="sig-name descname"><span class="pre">inputDatasetPathLabel</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetPathLabel" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetTableView">
+<span class="sig-name descname"><span class="pre">inputDatasetTableView</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetTableView" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.leftCentralWidgetSplitter">
+<span class="sig-name descname"><span class="pre">leftCentralWidgetSplitter</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.leftCentralWidgetSplitter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.loadCDEsFile">
+<span class="sig-name descname"><span class="pre">loadCDEsFile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.loadCDEsFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.loadCDEsFile" title="Permalink to this definition"></a></dt>
+<dd><p>Load the CDEs file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.loadInputDataset">
+<span class="sig-name descname"><span class="pre">loadInputDataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.loadInputDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.loadInputDataset" title="Permalink to this definition"></a></dt>
+<dd><p>Load the input dataset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.loadMapping">
+<span class="sig-name descname"><span class="pre">loadMapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.loadMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.loadMapping" title="Permalink to this definition"></a></dt>
+<dd><p>Load the mapping file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.map" title="Permalink to this definition"></a></dt>
+<dd><p>Map the input dataset to the target CDEs.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mapButton">
+<span class="sig-name descname"><span class="pre">mapButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mapButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingCheckButton">
+<span class="sig-name descname"><span class="pre">mappingCheckButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingCheckButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingFilePath">
+<span class="sig-name descname"><span class="pre">mappingFilePath</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingFilePath" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingFilePathLabel">
+<span class="sig-name descname"><span class="pre">mappingFilePathLabel</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingFilePathLabel" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingFormLayout">
+<span class="sig-name descname"><span class="pre">mappingFormLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingFormLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingFormLayoutWidget">
+<span class="sig-name descname"><span class="pre">mappingFormLayoutWidget</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingFormLayoutWidget" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingInitButton">
+<span class="sig-name descname"><span class="pre">mappingInitButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingInitButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingInitLabel">
+<span class="sig-name descname"><span class="pre">mappingInitLabel</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingInitLabel" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingLoadButton">
+<span class="sig-name descname"><span class="pre">mappingLoadButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingLoadButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingMatch">
+<span class="sig-name descname"><span class="pre">mappingMatch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.mappingMatch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingMatch" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize the column/CDEs mapping based on fuzzy word matching and character embedding methods.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingRowIndex">
+<span class="sig-name descname"><span class="pre">mappingRowIndex</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingRowIndex" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingSaveButton">
+<span class="sig-name descname"><span class="pre">mappingSaveButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingSaveButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableRowUpdateGroupBox">
+<span class="sig-name descname"><span class="pre">mappingTableRowUpdateGroupBox</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableRowUpdateGroupBox" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableRowUpdateGroupBoxLayout">
+<span class="sig-name descname"><span class="pre">mappingTableRowUpdateGroupBoxLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableRowUpdateGroupBoxLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableView">
+<span class="sig-name descname"><span class="pre">mappingTableView</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableView" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewAddDeleteRowLayout">
+<span class="sig-name descname"><span class="pre">mappingTableViewAddDeleteRowLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewAddDeleteRowLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewAddDeleteRowWidget">
+<span class="sig-name descname"><span class="pre">mappingTableViewAddDeleteRowWidget</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewAddDeleteRowWidget" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewAddRowButton">
+<span class="sig-name descname"><span class="pre">mappingTableViewAddRowButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewAddRowButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewDeleteRowButton">
+<span class="sig-name descname"><span class="pre">mappingTableViewDeleteRowButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewDeleteRowButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewLayout">
+<span class="sig-name descname"><span class="pre">mappingTableViewLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewWidget">
+<span class="sig-name descname"><span class="pre">mappingTableViewWidget</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewWidget" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.matchedCdeCodes">
+<span class="sig-name descname"><span class="pre">matchedCdeCodes</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.matchedCdeCodes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.matchingViz">
+<span class="sig-name descname"><span class="pre">matchingViz</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.matchingViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.matchingViz" title="Permalink to this definition"></a></dt>
+<dd><p>Open the matching visualization window.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.matchingVizButton">
+<span class="sig-name descname"><span class="pre">matchingVizButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.matchingVizButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.matchingWidget">
+<span class="sig-name descname"><span class="pre">matchingWidget</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.matchingWidget" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputDirectoryLabel">
+<span class="sig-name descname"><span class="pre">outputDirectoryLabel</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputDirectoryLabel" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputDirectoryPath">
+<span class="sig-name descname"><span class="pre">outputDirectoryPath</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputDirectoryPath" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputDirectorySelectButton">
+<span class="sig-name descname"><span class="pre">outputDirectorySelectButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputDirectorySelectButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFilename">
+<span class="sig-name descname"><span class="pre">outputFilename</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFilename" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFilenameLabel">
+<span class="sig-name descname"><span class="pre">outputFilenameLabel</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFilenameLabel" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFilenameSelectButton">
+<span class="sig-name descname"><span class="pre">outputFilenameSelectButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFilenameSelectButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFormLayout">
+<span class="sig-name descname"><span class="pre">outputFormLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFormLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFormLayoutWidget">
+<span class="sig-name descname"><span class="pre">outputFormLayoutWidget</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFormLayoutWidget" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputGroupBox">
+<span class="sig-name descname"><span class="pre">outputGroupBox</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputGroupBox" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputGroupBoxLayout">
+<span class="sig-name descname"><span class="pre">outputGroupBoxLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputGroupBoxLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.rightCentralWidgetSplitter">
+<span class="sig-name descname"><span class="pre">rightCentralWidgetSplitter</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.rightCentralWidgetSplitter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.saveMapping">
+<span class="sig-name descname"><span class="pre">saveMapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.saveMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.saveMapping" title="Permalink to this definition"></a></dt>
+<dd><p>Save the mapping file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.selectOutputFilename">
+<span class="sig-name descname"><span class="pre">selectOutputFilename</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.selectOutputFilename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.selectOutputFilename" title="Permalink to this definition"></a></dt>
+<dd><p>Select the output filename.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.statusbar">
+<span class="sig-name descname"><span class="pre">statusbar</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.statusbar" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEs">
+<span class="sig-name descname"><span class="pre">targetCDEs</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsEmbeddings">
+<span class="sig-name descname"><span class="pre">targetCDEsEmbeddings</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsEmbeddings" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsFormLayout">
+<span class="sig-name descname"><span class="pre">targetCDEsFormLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsFormLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsFormLayoutWidget">
+<span class="sig-name descname"><span class="pre">targetCDEsFormLayoutWidget</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsFormLayoutWidget" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsGroupBox">
+<span class="sig-name descname"><span class="pre">targetCDEsGroupBox</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsGroupBox" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsGroupBoxLayout">
+<span class="sig-name descname"><span class="pre">targetCDEsGroupBoxLayout</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsGroupBoxLayout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsLoadButton">
+<span class="sig-name descname"><span class="pre">targetCDEsLoadButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsLoadButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsPandasModel">
+<span class="sig-name descname"><span class="pre">targetCDEsPandasModel</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsPandasModel" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsPath">
+<span class="sig-name descname"><span class="pre">targetCDEsPath</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsPath" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsPathLabel">
+<span class="sig-name descname"><span class="pre">targetCDEsPathLabel</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsPathLabel" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsTableView">
+<span class="sig-name descname"><span class="pre">targetCDEsTableView</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsTableView" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.toolBar">
+<span class="sig-name descname"><span class="pre">toolBar</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.toolBar" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.transform" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.transformType">
+<span class="sig-name descname"><span class="pre">transformType</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.transformType" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.updateMappingEditForm">
+<span class="sig-name descname"><span class="pre">updateMappingEditForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.updateMappingEditForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.updateMappingEditForm" title="Permalink to this definition"></a></dt>
+<dd><p>Update the mapping table row form for a given index.</p>
+<section id="id7">
+<h2>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>index<span class="classifier">QModelIndex</span></dt><dd><p>The index of the selected row to be updated in the mapping table.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.updateMappingRowButton">
+<span class="sig-name descname"><span class="pre">updateMappingRowButton</span></span><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.updateMappingRowButton" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.updateMappingTableRow">
+<span class="sig-name descname"><span class="pre">updateMappingTableRow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.updateMappingTableRow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.updateMappingTableRow" title="Permalink to this definition"></a></dt>
+<dd><p>Update the selected row of the mapping table with the data of the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.updateStatusbar">
+<span class="sig-name descname"><span class="pre">updateStatusbar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.updateStatusbar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.updateStatusbar" title="Permalink to this definition"></a></dt>
+<dd><p>Update the statusbar with the given message.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The MIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors.
+      <span class="lastupdated">Last updated on Aug 14, 2023.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

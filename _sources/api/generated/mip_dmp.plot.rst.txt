@@ -1,0 +1,19 @@
+mip\_dmp.plot package
+=====================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   mip_dmp.plot.embedding
+   mip_dmp.plot.matching
+
+Module contents
+---------------
+
+.. automodule:: mip_dmp.plot
+   :members:
+   :undoc-members:
+   :show-inheritance:

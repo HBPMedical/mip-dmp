@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mip_dmp.qt5.components.embedding_visualization_widget module &mdash; mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/twemoji.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/mip_dmp_icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="../../_static/twemoji.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/mip_dmp_icon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation Instructions for Users</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../cmd_usage.html">Commandline Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ui_user_guide.html">Grahical User Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer.html">Instructions for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api_cli_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.cli</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_plot_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_process_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.process</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_qt5_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_gui_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.ui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_utils_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About mip_dmp</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">How to cite?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">mip_dmp.qt5.components.embedding_visualization_widget module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-mip_dmp.qt5.components.embedding_visualization_widget">
+<span id="mip-dmp-qt5-components-embedding-visualization-widget-module"></span><h1>mip_dmp.qt5.components.embedding_visualization_widget module<a class="headerlink" href="#module-mip_dmp.qt5.components.embedding_visualization_widget" title="Permalink to this heading"></a></h1>
+<p>Module that defines the class dedicated to the widget that supports the visualization of the initial automated mapping matches via embedding.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mip_dmp.qt5.components.embedding_visualization_widget.</span></span><span class="sig-name descname"><span class="pre">WordEmbeddingVisualizationWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>Class for the widget that supports the visualization of the automated column / CDE code matches via embedding.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.adjustWindow">
+<span class="sig-name descname"><span class="pre">adjustWindow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.adjustWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.adjustWindow" title="Permalink to this definition"></a></dt>
+<dd><p>Adjust the window size, Qt Style Sheet, and title.</p>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.generate_embedding_figure">
+<span class="sig-name descname"><span class="pre">generate_embedding_figure</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.generate_embedding_figure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.generate_embedding_figure" title="Permalink to this definition"></a></dt>
+<dd><p>Generate 3D scatter plot showing dimensionality-reduced embedding vectors of the words.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.generate_embeddings">
+<span class="sig-name descname"><span class="pre">generate_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputDatasetColumns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targetCDECodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matchingMethod</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.generate_embeddings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.generate_embeddings" title="Permalink to this definition"></a></dt>
+<dd><p>Generate the embeddings of the columns and CDE codes.</p>
+<p>Set the input dataset columns (<code class="xref py py-obj docutils literal notranslate"><span class="pre">self.inputDatasetColumns</span></code>), the target CDE codes (<code class="xref py py-obj docutils literal notranslate"><span class="pre">self.targetCDECodes</span></code>),
+the input dataset column embeddings (<code class="xref py py-obj docutils literal notranslate"><span class="pre">self.inputDatasetColumnEmbeddings</span></code>) and the target CDE code embeddings
+(<code class="xref py py-obj docutils literal notranslate"><span class="pre">self.targetCDECodeEmbeddings</span></code>).</p>
+<p>The embeddings are generated using the specified matching method (<code class="xref py py-obj docutils literal notranslate"><span class="pre">matchingMethod</span></code>).
+The matching method can be “glove” or “chars2vec”.</p>
+<dl class="simple">
+<dt>inputDatasetColumns: list</dt><dd><p>List of the input dataset columns.</p>
+</dd>
+<dt>targetCDECodes: list</dt><dd><p>List of the target CDE codes.</p>
+</dd>
+<dt>matchingMethod: str</dt><dd><p>Matching method. Can be “glove” or “chars2vec”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.set_embeddings">
+<span class="sig-name descname"><span class="pre">set_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputDatasetColumnEmbeddings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputDatasetColumns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targetCDECodeEmbeddings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targetCDECodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matchedCdeCodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matchingMethod</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.set_embeddings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.set_embeddings" title="Permalink to this definition"></a></dt>
+<dd><p>Set the input dataset column and target CDE code embeddings.</p>
+<dl>
+<dt>inputDatasetColumnEmbeddings: list</dt><dd><p>List of the input dataset column embeddings.</p>
+</dd>
+<dt>inputDatasetColumns: list</dt><dd><p>List of the input dataset columns.</p>
+</dd>
+<dt>targetCDECodeEmbeddings: list</dt><dd><p>List of the target CDE code embeddings.</p>
+</dd>
+<dt>targetCDECodes: list</dt><dd><p>List of the target CDE codes.</p>
+</dd>
+<dt>matchedCdeCodes: dict</dt><dd><p>Dictionary of the matched CDE codes in the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;input_dataset_column1&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;cde_code1&quot;</span><span class="p">,</span> <span class="s2">&quot;cde_code2&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;embeddings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">embedding_vector1</span><span class="p">,</span> <span class="n">embedding_vector2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="s2">&quot;distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">distance1</span><span class="p">,</span> <span class="n">distance2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;input_dataset_column2&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;cde_code1&quot;</span><span class="p">,</span> <span class="s2">&quot;cde_code2&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;embeddings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">embedding_vector1</span><span class="p">,</span> <span class="n">embedding_vector2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="s2">&quot;distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">distance1</span><span class="p">,</span> <span class="n">distance2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>matchingMethod: str</dt><dd><p>Matching method. Can be “glove” or “chars2vec”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.set_matching_method">
+<span class="sig-name descname"><span class="pre">set_matching_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matchingMethod</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.set_matching_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.set_matching_method" title="Permalink to this definition"></a></dt>
+<dd><p>Set the matching method.</p>
+<dl class="simple">
+<dt>matchingMethod: str</dt><dd><p>Matching method. Can be “glove” or “chars2vec”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.set_word_list">
+<span class="sig-name descname"><span class="pre">set_word_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wordList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.set_word_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.set_word_list" title="Permalink to this definition"></a></dt>
+<dd><p>Set the list of words that can be visualized in the 3D scatter plot.</p>
+<dl class="simple">
+<dt>wordList: list</dt><dd><p>List of words to visualize in the 3D scatter plot</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.set_wordcombobox_items">
+<span class="sig-name descname"><span class="pre">set_wordcombobox_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wordList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.set_wordcombobox_items"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.set_wordcombobox_items" title="Permalink to this definition"></a></dt>
+<dd><p>Set the items of the word combo box.</p>
+<dl class="simple">
+<dt>wordList: list</dt><dd><p>List of words to visualize in the combo box of the widget
+that controls the selection of the word to visualize in the
+3D scatter plot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.staticMetaObject">
+<span class="sig-name descname"><span class="pre">staticMetaObject</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;PySide2.QtCore.QMetaObject</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.staticMetaObject" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The MIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors.
+      <span class="lastupdated">Last updated on Aug 14, 2023.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

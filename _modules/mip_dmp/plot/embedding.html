@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mip_dmp.plot.embedding &mdash; mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/twemoji.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/mip_dmp_icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="../../../_static/twemoji.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/mip_dmp_icon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation Instructions for Users</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../cmd_usage.html">Commandline Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ui_user_guide.html">Grahical User Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer.html">Instructions for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_cli_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.cli</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_plot_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_process_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.process</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_qt5_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_gui_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.ui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_utils_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About mip_dmp</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">How to cite?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">mip_dmp.plot.embedding</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for mip_dmp.plot.embedding</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2023 The HIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;Module to plot the embeddings of the column names and CDE codes.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span> <span class="nn">mip_dmp.process.embedding</span> <span class="kn">import</span> <span class="n">generate_embeddings</span><span class="p">,</span> <span class="n">reduce_embeddings_dimension</span>
+
+<span class="c1"># Define colors used to plot the column and CDE code embeddings</span>
+<span class="c1"># &#39;#4fa08b&#39; green / &#39;#009E73&#39; green / &#39;#0072B2&#39; blue / &#39;#FFA500&#39; orange</span>
+<span class="n">COLORS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#0072B2&quot;</span><span class="p">,</span> <span class="s2">&quot;#FFA500&quot;</span><span class="p">]</span>
+<span class="c1"># Set seaborn style</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">rc</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;axes.facecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#081512&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;figure.facecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#081512&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;text.color&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;axes.edgecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;patch.edgecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#081512&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;xtick.color&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ytick.color&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;axes.labelcolor&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;grid.color&quot;</span><span class="p">:</span> <span class="s2">&quot;#4fa08b&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;axes3d.xaxis.panecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#081512&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;axes3d.yaxis.panecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#081512&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;axes3d.zaxis.panecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;#081512&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="scatterplot_embeddings"><a class="viewcode-back" href="../../../api_plot_subpackage.html#mip_dmp.plot.embedding.scatterplot_embeddings">[docs]</a><span class="k">def</span> <span class="nf">scatterplot_embeddings</span><span class="p">(</span>
+    <span class="n">fig</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">matchedCdeCodes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">selectedColumnName</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the embeddings of the selected column name and CDE codes in a 3D scatter plot.</span>
+
+<span class="sd">    fig: matplotlib.figure.Figure</span>
+<span class="sd">        Figure to render the 3D scatter plot of the embeddings.</span>
+
+<span class="sd">    embeddings: dict</span>
+<span class="sd">        Dictionary of embeddings in the form::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &quot;x&quot;: [5, ..., 2],</span>
+<span class="sd">                &quot;y&quot;: [0.5, ..., 0.2],</span>
+<span class="sd">                &quot;z&quot;: [0.5, ..., 0.2],</span>
+<span class="sd">                &quot;label&quot;: [&quot;word1&quot;, ..., &quot;wordN&quot;],</span>
+<span class="sd">                &quot;type&quot;: [&quot;cde&quot;, ..., &quot;column&quot;]</span>
+<span class="sd">            }</span>
+
+<span class="sd">        where `x`, `y` and `z` are the lists of the x, y and z coordinates of the embeddings,</span>
+<span class="sd">        `label` is the list of the labels of the embeddings and `type` is the list of the</span>
+<span class="sd">        types of the embeddings (can be &quot;column&quot; or &quot;cde&quot;).</span>
+
+<span class="sd">    matchedCdeCodes: dict</span>
+<span class="sd">        Dictionary of the matched CDE codes in the form::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &quot;input_dataset_column1&quot;: {</span>
+<span class="sd">                    &quot;words&quot;: [&quot;cde_code1&quot;, &quot;cde_code2&quot;, ...],</span>
+<span class="sd">                    &quot;embeddings&quot;: [embedding_vector1, embedding_vector2, ...]</span>
+<span class="sd">                    &quot;distances&quot;: [distance1, distance2, ...]</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;input_dataset_column2&quot;: {</span>
+<span class="sd">                    &quot;words&quot;: [&quot;cde_code1&quot;, &quot;cde_code2&quot;, ...],</span>
+<span class="sd">                    &quot;embeddings&quot;: [embedding_vector1, embedding_vector2, ...]</span>
+<span class="sd">                    &quot;distances&quot;: [distance1, distance2, ...]</span>
+<span class="sd">                },</span>
+<span class="sd">                ...</span>
+<span class="sd">            }</span>
+
+<span class="sd">    selectedColumnName: str</span>
+<span class="sd">        Name of the selected column.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt; Generate scatterplot...&quot;</span><span class="p">)</span>
+    <span class="c1"># Get the words for which their embeddings have been matched to column name</span>
+    <span class="n">selected_column_matches</span> <span class="o">=</span> <span class="n">matchedCdeCodes</span><span class="p">[</span><span class="n">selectedColumnName</span><span class="p">][</span><span class="s2">&quot;words&quot;</span><span class="p">]</span>
+    <span class="c1"># Generate filtered list of embeddings</span>
+    <span class="n">filtered_embeddings</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">embeddings</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">filtered_embeddings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">embeddings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;cde&quot;</span> <span class="ow">and</span> <span class="n">embeddings</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">selected_column_matches</span>
+        <span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
+            <span class="n">embeddings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;column&quot;</span> <span class="ow">and</span> <span class="n">embeddings</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">selectedColumnName</span>
+        <span class="p">]</span>
+
+    <span class="c1"># Determine a scaled dynamic jittering for the scatter plot based on</span>
+    <span class="c1"># the dynamic range of the data in the given dimension</span>
+    <span class="k">def</span> <span class="nf">rand_jitter</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.3</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return random noise for jittering.&quot;&quot;&quot;</span>
+        <span class="n">stdev</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">stdev</span>
+
+    <span class="n">stdev_x</span> <span class="o">=</span> <span class="n">rand_jitter</span><span class="p">(</span><span class="n">filtered_embeddings</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">])</span>
+    <span class="n">stdev_y</span> <span class="o">=</span> <span class="n">rand_jitter</span><span class="p">(</span><span class="n">filtered_embeddings</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">])</span>
+    <span class="n">stdev_z</span> <span class="o">=</span> <span class="n">rand_jitter</span><span class="p">(</span><span class="n">filtered_embeddings</span><span class="p">[</span><span class="s2">&quot;z&quot;</span><span class="p">])</span>
+    <span class="c1"># Format data as pandas dataframe for plotting</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">filtered_embeddings</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">filtered_embeddings</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="n">filtered_embeddings</span><span class="p">[</span><span class="s2">&quot;z&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">filtered_embeddings</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">filtered_embeddings</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="c1"># Create a scatter plot with different colors for each group</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+    <span class="n">artists</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">annotation_texts</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span> <span class="n">COLORS</span><span class="p">):</span>
+        <span class="n">artists</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">],</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">],</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
+            <span class="n">picker</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">annotation_texts</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Set labels and show legend</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="c1"># Define a function to handle PickEvent-type events on the scatterplot</span>
+    <span class="k">def</span> <span class="nf">pick_event_method</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define a function to pick event on the scatter plot (artist).&quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">handle_annotations</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">indices</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Add text annotations to closest point of the cursor when the mouse button was pressed.&quot;&quot;&quot;</span>
+            <span class="c1"># Get the type of the artist that can be &quot;cde&quot; or &quot;column&quot;</span>
+            <span class="n">artist_type</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">artists</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">artist</span> <span class="o">==</span> <span class="n">artists</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                    <span class="n">artist_type</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="c1"># If the artist type is not defined yet, return</span>
+            <span class="k">if</span> <span class="n">artist_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="c1"># Get the dataframe of the artist type (&quot;cde&quot; or &quot;column&quot;)</span>
+            <span class="n">artist_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">artist_type</span><span class="p">]</span>
+            <span class="c1"># For each index of the artist</span>
+            <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+                <span class="c1"># Get the coordinates of the mouse click</span>
+                <span class="n">points_x</span><span class="p">,</span> <span class="n">points_y</span><span class="p">,</span> <span class="n">points_z</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">_offsets3d</span>
+                <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">points_x</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span><span class="o">.</span><span class="fm">__float__</span><span class="p">(),</span>
+                    <span class="n">points_y</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span><span class="o">.</span><span class="fm">__float__</span><span class="p">(),</span>
+                    <span class="n">points_z</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span><span class="o">.</span><span class="fm">__float__</span><span class="p">(),</span>
+                <span class="p">)</span>
+                <span class="c1"># Find the closest point in the dataframe</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="p">(</span><span class="n">artist_df</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+                    <span class="o">+</span> <span class="p">(</span><span class="n">artist_df</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+                    <span class="o">+</span> <span class="p">(</span><span class="n">artist_df</span><span class="p">[</span><span class="s2">&quot;z&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span>
+                <span class="c1"># Get the corresponding label</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">artist_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="c1"># print(</span>
+                <span class="c1">#     f&quot;Mouse click at ({x}, {y}, {z}) for label {text} ({artist_type})&quot;</span>
+                <span class="c1"># )</span>
+                <span class="c1"># Handle the removal of the annotation if it already exists and is clicked again</span>
+                <span class="n">abord</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">for</span> <span class="n">annotation</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">texts</span><span class="p">:</span>
+                    <span class="n">annotation_text</span> <span class="o">=</span> <span class="n">annotation</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">annotation_text</span> <span class="o">==</span> <span class="n">text</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
+                        <span class="n">text</span> <span class="ow">in</span> <span class="n">annotation_texts</span><span class="p">[</span><span class="n">artist_type</span><span class="p">]</span>
+                    <span class="p">):</span>
+                        <span class="n">annotation</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+                        <span class="n">annotation_texts</span><span class="p">[</span><span class="n">artist_type</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+                        <span class="n">abord</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">if</span> <span class="n">abord</span><span class="p">:</span>
+                    <span class="k">return</span>
+                <span class="c1"># Add a random jittering to the coordinates of the annotation for the &quot;column&quot; type.</span>
+                <span class="c1"># Useful to avoid overlapping of the annotations when the points are overlapping.</span>
+                <span class="k">if</span> <span class="n">artist_type</span> <span class="o">==</span> <span class="s2">&quot;column&quot;</span><span class="p">:</span>
+                    <span class="n">stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">stdev_x</span><span class="p">,</span> <span class="n">stdev_y</span><span class="p">,</span> <span class="n">stdev_z</span><span class="p">])</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+                    <span class="n">x</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span> <span class="o">*</span> <span class="n">stdev</span>
+                    <span class="n">y</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span> <span class="o">*</span> <span class="n">stdev</span>
+                    <span class="n">z</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span> <span class="o">*</span> <span class="n">stdev</span>
+                <span class="c1"># print(f&quot;Text shown at ({x}, {y}, {z}) for label {text}&quot;)</span>
+                <span class="c1"># Add the annotation to the plot with the selected color based on type</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+                    <span class="n">x</span><span class="p">,</span>
+                    <span class="n">y</span><span class="p">,</span>
+                    <span class="n">z</span><span class="p">,</span>
+                    <span class="n">text</span><span class="p">,</span>
+                    <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="n">COLORS</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">artist_type</span> <span class="o">==</span> <span class="s2">&quot;column&quot;</span> <span class="k">else</span> <span class="n">COLORS</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">backgroundcolor</span><span class="o">=</span><span class="s2">&quot;#081512&quot;</span><span class="p">,</span>
+                    <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="c1"># Add the annotation to the list of annotations</span>
+                <span class="n">annotation_texts</span><span class="p">[</span><span class="n">artist_type</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="c1"># Get the coordinates of the point clicked</span>
+        <span class="n">handle_annotations</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">artist</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">ind</span><span class="p">)</span>
+        <span class="c1"># redraw the canvas</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+    <span class="c1"># Connect the pick_event_method function to the figure</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">mpl_connect</span><span class="p">(</span><span class="s2">&quot;pick_event&quot;</span><span class="p">,</span> <span class="n">pick_event_method</span><span class="p">)</span>
+    <span class="c1"># Return the figure</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The MIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors.
+      <span class="lastupdated">Last updated on Aug 14, 2023.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

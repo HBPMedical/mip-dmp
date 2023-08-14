@@ -1,0 +1,7 @@
+mip\_dmp.process.utils module
+=============================
+
+.. automodule:: mip_dmp.process.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+mip\_dmp.plot.matching module
+=============================
+
+.. automodule:: mip_dmp.plot.matching
+   :members:
+   :undoc-members:
+   :show-inheritance:

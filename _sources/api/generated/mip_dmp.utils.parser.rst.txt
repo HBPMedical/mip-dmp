@@ -1,0 +1,7 @@
+mip\_dmp.utils.parser module
+============================
+
+.. automodule:: mip_dmp.utils.parser
+   :members:
+   :undoc-members:
+   :show-inheritance:

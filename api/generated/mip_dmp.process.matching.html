@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mip_dmp.process.matching module &mdash; mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/twemoji.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/mip_dmp_icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="../../_static/twemoji.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/mip_dmp_icon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation Instructions for Users</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../cmd_usage.html">Commandline Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ui_user_guide.html">Grahical User Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer.html">Instructions for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api_cli_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.cli</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_plot_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_process_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.process</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_qt5_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_gui_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.ui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_utils_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About mip_dmp</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">How to cite?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">mip_dmp.process.matching module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-mip_dmp.process.matching">
+<span id="mip-dmp-process-matching-module"></span><h1>mip_dmp.process.matching module<a class="headerlink" href="#module-mip_dmp.process.matching" title="Permalink to this heading"></a></h1>
+<p>Module that provides functions to support the matching of dataset columns to CDEs.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="mip_dmp.process.matching.generate_initial_transform">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.process.matching.</span></span><span class="sig-name descname"><span class="pre">generate_initial_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_column_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cde_code_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/process/matching.html#generate_initial_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.process.matching.generate_initial_transform" title="Permalink to this definition"></a></dt>
+<dd><p>Generate the initial transform.</p>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>dataset_column_values<span class="classifier">list of str</span></dt><dd><p>Dataset column values.</p>
+</dd>
+<dt>cde_code_values<span class="classifier">list of str</span></dt><dd><p>CDE code values.</p>
+</dd>
+<dt>dataset_column<span class="classifier">str</span></dt><dd><p>Dataset column.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h2>Returns<a class="headerlink" href="#returns" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>initial_transform<span class="classifier">str</span></dt><dd><p>Initial transform.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mip_dmp.process.matching.make_distance_vector">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.process.matching.</span></span><span class="sig-name descname"><span class="pre">make_distance_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matchedCdeCodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputDatasetColumn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/process/matching.html#make_distance_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.process.matching.make_distance_vector" title="Permalink to this definition"></a></dt>
+<dd><p>Make the n closest match distance vector for a given input dataset column.</p>
+<section id="id1">
+<h2>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<dl>
+<dt>matchedCdeCodes<span class="classifier">dict</span></dt><dd><p>Dictionary of the matching results in the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;inputDatasetColumn1&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;word1&quot;</span><span class="p">,</span> <span class="s2">&quot;word2&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">distance1</span><span class="p">,</span> <span class="n">distance2</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;embeddings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">embedding1</span><span class="p">,</span> <span class="n">embedding2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;inputDatasetColumn2&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;word1&quot;</span><span class="p">,</span> <span class="s2">&quot;word2&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">distance1</span><span class="p">,</span> <span class="n">distance2</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;embeddings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">embedding1</span><span class="p">,</span> <span class="n">embedding2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>inputDatasetColumn<span class="classifier">lstr</span></dt><dd><p>Input dataset column name.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h2>Returns<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>distanceVector<span class="classifier">numpy.ndarray</span></dt><dd><p>Similarity/distance vector.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mip_dmp.process.matching.make_initial_transform">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.process.matching.</span></span><span class="sig-name descname"><span class="pre">make_initial_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cde_code</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/process/matching.html#make_initial_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.process.matching.make_initial_transform" title="Permalink to this definition"></a></dt>
+<dd><p>Make the initial transform.</p>
+<section id="id3">
+<h2>Parameters<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>dataset<span class="classifier">pandas.DataFrame</span></dt><dd><p>Dataset to be mapped.</p>
+</dd>
+<dt>schema<span class="classifier">pandas.DataFrame</span></dt><dd><p>Schema to which the dataset is mapped.</p>
+</dd>
+<dt>dataset_column<span class="classifier">str</span></dt><dd><p>Dataset column.</p>
+</dd>
+<dt>cde_code<span class="classifier">str</span></dt><dd><p>CDE code.</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h2>Returns<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>dict</dt><dd><p>Initial transform.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mip_dmp.process.matching.match_column_to_cdes">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.process.matching.</span></span><span class="sig-name descname"><span class="pre">match_column_to_cdes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/process/matching.html#match_column_to_cdes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.process.matching.match_column_to_cdes" title="Permalink to this definition"></a></dt>
+<dd><p>Match a dataset column to CDEs using fuzzy matching.</p>
+<section id="id5">
+<h2>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>dataset_column<span class="classifier">str</span></dt><dd><p>Dataset column.</p>
+</dd>
+<dt>schema<span class="classifier">pandas.DataFrame</span></dt><dd><p>Schema to which the dataset is mapped.</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h2>Returns<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>list</dt><dd><p>List of matched CDE codes ordered by decreasing fuzzy ratio.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mip_dmp.process.matching.match_columns_to_cdes">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.process.matching.</span></span><span class="sig-name descname"><span class="pre">match_columns_to_cdes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_kept_matches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matching_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fuzzy'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mip_dmp/process/matching.html#match_columns_to_cdes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mip_dmp.process.matching.match_columns_to_cdes" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize the mapping table by matching the dataset columns with the CDE codes.</p>
+<p>Different matching methods can be used:
+- “fuzzy”: Fuzzy matching using the Levenshtein distance. (<a class="reference external" href="https://github.com/seatgeek/thefuzz">https://github.com/seatgeek/thefuzz</a>)
+- “glove”: Embedding matching using Glove embeddings at the character level. (<a class="reference external" href="https://nlp.stanford.edu/projects/glove/">https://nlp.stanford.edu/projects/glove/</a>)
+- “chars2vec”: Embedding matching using Chars2Vec embeddings. (<a class="reference external" href="https://github.com/IntuitionEngineeringTeam/chars2vec">https://github.com/IntuitionEngineeringTeam/chars2vec</a>)</p>
+<section id="id7">
+<h2>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>dataset<span class="classifier">pandas.DataFrame</span></dt><dd><p>Dataset to be mapped.</p>
+</dd>
+<dt>schema<span class="classifier">pandas.DataFrame</span></dt><dd><p>Schema to which the dataset is mapped.</p>
+</dd>
+<dt>nb_kept_matches<span class="classifier">int</span></dt><dd><p>Number of matches to keep for each dataset column.</p>
+</dd>
+<dt>matching_method<span class="classifier">str</span></dt><dd><p>Method to be used for matching the dataset columns with the CDE codes.
+Can be “fuzzy”, “glove” or “chars2vec”.</p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h2>Returns<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<dl>
+<dt>pandas.DataFrame</dt><dd><p>Mapping table represented as a Pandas DataFrame.</p>
+</dd>
+<dt>matched_cde_codes<span class="classifier">dict</span></dt><dd><p>Dictionary of dictionaries storing the first 10 matched CDE codes with
+corresponding fuzzy ratio / cosine similarity (value) / and embedding vector
+for each dataset column (key). It has the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;dataset_column_1&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;cde_code_1&quot;</span><span class="p">,</span> <span class="s2">&quot;cde_code_2&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;embeddings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;dataset_column_2&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;cde_code_1&quot;</span><span class="p">,</span> <span class="s2">&quot;cde_code_2&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;embeddings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>dataset_column_embeddings<span class="classifier">list</span></dt><dd><p>List of embedding vectors for the dataset columns.</p>
+</dd>
+<dt>schema_code_embeddings<span class="classifier">list</span></dt><dd><p>List of embedding vectors for the CDE codes.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The MIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors.
+      <span class="lastupdated">Last updated on Aug 14, 2023.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

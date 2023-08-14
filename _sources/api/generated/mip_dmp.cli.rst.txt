@@ -1,0 +1,18 @@
+mip\_dmp.cli package
+====================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   mip_dmp.cli.mip_dataset_mapper_cli
+
+Module contents
+---------------
+
+.. automodule:: mip_dmp.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:

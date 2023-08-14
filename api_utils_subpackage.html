@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mip_dmp.utils &mdash; mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/twemoji.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/mip_dmp_icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="_static/twemoji.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="License" href="LICENSE.html" />
+    <link rel="prev" title="mip_dmp.ui" href="api_gui_subpackage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/mip_dmp_icon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Instructions for Users</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cmd_usage.html">Commandline Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui_user_guide.html">Grahical User Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Instructions for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api_cli_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.cli</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_plot_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_process_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.process</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_qt5_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_gui_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.ui</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mip-dmp-utils-io"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.utils.io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mip-dmp-utils-logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.utils.logger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mip-dmp-utils-parser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.utils.parser</span></code></a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About mip_dmp</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">How to cite?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mip-dmp-utils">
+<span id="apidoc-utils"></span><h1><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code><a class="headerlink" href="#mip-dmp-utils" title="Permalink to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code> package contains modules with utility functions for i/o, logging, and script argument parsing.</p>
+<section id="mip-dmp-utils-io">
+<h2><a class="reference internal" href="api/generated/mip_dmp.utils.io.html#module-mip_dmp.utils.io" title="mip_dmp.utils.io"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.utils.io</span></code></a><a class="headerlink" href="#mip-dmp-utils-io" title="Permalink to this heading"></a></h2>
+<p>Module for input/output operations with files involved in the MIP Dataset Mapper.</p>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.utils.io.</span></span><span class="sig-name descname"><span class="pre">generate_output_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_cdes_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/utils/io.html#generate_output_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Generate output path for CDEs file, but without any extension.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>input_cdes_file<span class="classifier">str</span></dt><dd><p>Path to input CDEs file in JSON or EXCEL format.</p>
+</dd>
+<dt>output_dir<span class="classifier">str</span></dt><dd><p>Path to directory where the output CDEs file will be written.</p>
+</dd>
+<dt>output_suffix<span class="classifier">str</span></dt><dd><p>Suffix to add to the input CDEs file name, to generate the output CDEs file name.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>out_cdes_fname<span class="classifier">str</span></dt><dd><p>Generated absolute path for the output CDEs files where the updated CDEs are written, with
+extension automatically added (.json for JSON, .xlsx for EXCEL).</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.utils.io.</span></span><span class="sig-name descname"><span class="pre">load_c2v_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eng_50'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/utils/io.html#load_c2v_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Load a chars2vec model from disk.</p>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>model_name<span class="classifier">str, optional</span></dt><dd><p>Name of the chars2vec model to load, by default “eng_50”</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Returns<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the chars2vec model.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.utils.io.</span></span><span class="sig-name descname"><span class="pre">load_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csc_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/utils/io.html#load_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Load content of a CSV file.</p>
+<section id="id3">
+<h3>Parameters<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>csv_file<span class="classifier">str</span></dt><dd><p>Path to CSV file.</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h3>Returns<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>data<span class="classifier">pd.DataFrame</span></dt><dd><p>Dataframe loaded from CSV file.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.utils.io.</span></span><span class="sig-name descname"><span class="pre">load_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">excel_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/utils/io.html#load_excel"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Load content of an Excel file.</p>
+<section id="id5">
+<h3>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>excel_file<span class="classifier">str</span></dt><dd><p>Path to Excel file.</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h3>Returns<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>data<span class="classifier">pd.DataFrame</span></dt><dd><p>Dataframe loaded from Excel file.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.utils.io.</span></span><span class="sig-name descname"><span class="pre">load_glove_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'glove-wiki-gigaword-50'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/utils/io.html#load_glove_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Load a GloVe model from disk.</p>
+<section id="id7">
+<h3>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>model_name<span class="classifier">str, optional</span></dt><dd><p>Name of the GloVe model to load, by default “glove-wiki-gigaword-50”</p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h3>Returns<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the GloVe model.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.utils.io.</span></span><span class="sig-name descname"><span class="pre">load_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/utils/io.html#load_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Load content of a JSON file.</p>
+<section id="id9">
+<h3>Parameters<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>json_file<span class="classifier">str</span></dt><dd><p>Path to JSON file.</p>
+</dd>
+</dl>
+</section>
+<section id="id10">
+<h3>Returns<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>data<span class="classifier">dict</span></dt><dd><p>Dictionary loaded from JSON file.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.utils.io.</span></span><span class="sig-name descname"><span class="pre">load_mapping_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/utils/io.html#load_mapping_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Load content of a saved mapping JSON file.</p>
+<section id="id11">
+<h3>Parameters<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>json_file<span class="classifier">str</span></dt><dd><p>Path to JSON file.</p>
+</dd>
+</dl>
+</section>
+<section id="id12">
+<h3>Returns<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>data<span class="classifier">dict</span></dt><dd><p>Dictionary loaded from JSON file.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="mip-dmp-utils-logger">
+<h2><a class="reference internal" href="api/generated/mip_dmp.utils.logger.html#module-mip_dmp.utils.logger" title="mip_dmp.utils.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.utils.logger</span></code></a><a class="headerlink" href="#mip-dmp-utils-logger" title="Permalink to this heading"></a></h2>
+<p>Module to setup logging for the MIP Dataset Mapper.</p>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.utils.logger.</span></span><span class="sig-name descname"><span class="pre">setup_logging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/utils/logger.html#setup_logging"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Set up logging and log file.</p>
+<section id="id13">
+<h3>Parameters<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>log_file<span class="classifier">str</span></dt><dd><p>Path to output log file.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="mip-dmp-utils-parser">
+<h2><a class="reference internal" href="api/generated/mip_dmp.utils.parser.html#module-mip_dmp.utils.parser" title="mip_dmp.utils.parser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.utils.parser</span></code></a><a class="headerlink" href="#mip-dmp-utils-parser" title="Permalink to this heading"></a></h2>
+<p>Module to create argument parser of the script, i.e. command line interface of the MIP Dataset Mapper.</p>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.utils.parser.</span></span><span class="sig-name descname"><span class="pre">create_parser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/utils/parser.html#create_parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create argument parser of the script.</p>
+<section id="id14">
+<h3>Returns<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>p<span class="classifier">argparse.ArgumentParser</span></dt><dd><p>Parser of the script.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api_gui_subpackage.html" class="btn btn-neutral float-left" title="mip_dmp.ui" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="LICENSE.html" class="btn btn-neutral float-right" title="License" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The MIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors.
+      <span class="lastupdated">Last updated on Aug 14, 2023.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

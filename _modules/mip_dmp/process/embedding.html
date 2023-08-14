@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mip_dmp.process.embedding &mdash; mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/twemoji.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/mip_dmp_icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="../../../_static/twemoji.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/mip_dmp_icon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation Instructions for Users</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../cmd_usage.html">Commandline Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ui_user_guide.html">Grahical User Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer.html">Instructions for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_cli_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.cli</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_plot_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_process_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.process</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_qt5_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_gui_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.ui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_utils_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About mip_dmp</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citing.html">How to cite?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">mip_dmp.process.embedding</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for mip_dmp.process.embedding</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2023 The HIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;Module that provides function to handle word embeddings and operations on them.&quot;&quot;&quot;</span>
+
+<span class="c1"># External imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">spatial</span>
+<span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="c1"># Internal imports</span>
+<span class="kn">from</span> <span class="nn">mip_dmp.utils.io</span> <span class="kn">import</span> <span class="n">load_glove_model</span><span class="p">,</span> <span class="n">load_c2v_model</span>
+
+
+<div class="viewcode-block" id="glove_embedding"><a class="viewcode-back" href="../../../api_process_subpackage.html#mip_dmp.process.embedding.glove_embedding">[docs]</a><span class="k">def</span> <span class="nf">glove_embedding</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">glove_model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the Glove embedding for the text.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    text : str</span>
+<span class="sd">        Text to be embedded.</span>
+
+<span class="sd">    glove_model : str</span>
+<span class="sd">        Glove model to be used, loaded by the gensim library.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numpy.ndarray</span>
+<span class="sd">        Glove embedding for the text.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">preprocess_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Preprocess the text.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        text : str</span>
+<span class="sd">            Text to be preprocessed.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Preprocessed text.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Lowercase the text.</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="c1"># Tokenize the text.</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">text</span> <span class="k">if</span> <span class="n">s</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">!=</span> <span class="s2">&quot;_&quot;</span><span class="p">]</span>  <span class="c1"># Make a list of characters.</span>
+        <span class="k">return</span> <span class="n">text</span>
+
+    <span class="c1"># Preprocess the text.</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">preprocess_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Find the Glove embedding for the text.</span>
+    <span class="n">embedding</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">glove_model</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">text</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">embedding</span></div>
+
+
+<div class="viewcode-block" id="chars2vec_embedding"><a class="viewcode-back" href="../../../api_process_subpackage.html#mip_dmp.process.embedding.chars2vec_embedding">[docs]</a><span class="k">def</span> <span class="nf">chars2vec_embedding</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">chars2vec_model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the chars2vec embedding for the text.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    text : str</span>
+<span class="sd">        Text to be embedded.</span>
+
+<span class="sd">    chars2vec_model : str</span>
+<span class="sd">        chars2vec model to be used, loaded by the gensim library.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numpy.ndarray</span>
+<span class="sd">        chars2vec embedding for the text.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the chars2vec embedding for the text.</span>
+    <span class="c1"># The chars2vec model expects a list of strings as input.</span>
+    <span class="c1"># The output is a list of embeddings, so we take the first element.</span>
+    <span class="n">embedding</span> <span class="o">=</span> <span class="n">chars2vec_model</span><span class="o">.</span><span class="n">vectorize_words</span><span class="p">([</span><span class="n">text</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">embedding</span></div>
+
+
+<div class="viewcode-block" id="embedding_similarity"><a class="viewcode-back" href="../../../api_process_subpackage.html#mip_dmp.process.embedding.embedding_similarity">[docs]</a><span class="k">def</span> <span class="nf">embedding_similarity</span><span class="p">(</span><span class="n">x_embedding</span><span class="p">,</span> <span class="n">y_embedding</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the matches based on chars2vec embeddings and cosine similarity.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x_embedding : str</span>
+<span class="sd">        String to compare against.</span>
+
+<span class="sd">    y_embedding : str</span>
+<span class="sd">        String to compare.</span>
+
+<span class="sd">    chars2vec_model : str</span>
+<span class="sd">        chars2vec model to be used, loaded by the gensim library.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Cosine similarity between the two chars2vec embeddings of the strings.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">cosine</span><span class="p">(</span><span class="n">x_embedding</span><span class="p">,</span> <span class="n">y_embedding</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="generate_embeddings"><a class="viewcode-back" href="../../../api_process_subpackage.html#mip_dmp.process.embedding.generate_embeddings">[docs]</a><span class="k">def</span> <span class="nf">generate_embeddings</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">embedding_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;chars2vec&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate embeddings for a list of words.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    words : list</span>
+<span class="sd">        List of words to generate embeddings for.</span>
+
+<span class="sd">    embedding_method : str</span>
+<span class="sd">        Embedding method to be used, either &quot;chars2vec&quot; or &quot;glove&quot;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        List of embeddings for the words.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt; Generating embeddings for </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span><span class="si">}</span><span class="s2"> words...&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">embedding_method</span> <span class="o">==</span> <span class="s2">&quot;chars2vec&quot;</span><span class="p">:</span>
+        <span class="n">c2v_model</span> <span class="o">=</span> <span class="n">load_c2v_model</span><span class="p">()</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="p">[</span><span class="n">chars2vec_embedding</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">c2v_model</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">embedding_method</span> <span class="o">==</span> <span class="s2">&quot;glove&quot;</span><span class="p">:</span>
+        <span class="n">glove_model</span> <span class="o">=</span> <span class="n">load_glove_model</span><span class="p">()</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="p">[</span><span class="n">glove_embedding</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">glove_model</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">embeddings</span></div>
+
+
+<div class="viewcode-block" id="find_n_closest_embeddings"><a class="viewcode-back" href="../../../api_process_subpackage.html#mip_dmp.process.embedding.find_n_closest_embeddings">[docs]</a><span class="k">def</span> <span class="nf">find_n_closest_embeddings</span><span class="p">(</span>
+    <span class="n">word_embedding</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">embedding_words</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the n closest embeddings to the given embedding.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    word_embedding : numpy.ndarray</span>
+<span class="sd">        Embedding to find the n closest embeddings to.</span>
+
+<span class="sd">    embeddings : list</span>
+<span class="sd">        List of embeddings to find the closest embeddings to the given embedding in.</span>
+
+<span class="sd">    embedding_words : list</span>
+<span class="sd">        List of words corresponding to the embeddings that will be resorted and reduced accordingly.</span>
+
+<span class="sd">    n : int</span>
+<span class="sd">        Number of closest embeddings to find.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        Dictionary containing the n closest embeddings, their distances to the given embedding,</span>
+<span class="sd">        and the words corresponding to the embeddings in the form::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &quot;distances&quot;: [float],</span>
+<span class="sd">                &quot;embeddings&quot;: [numpy.ndarray],</span>
+<span class="sd">                &quot;embedding_words&quot;: [str]</span>
+<span class="sd">            }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">cosine</span><span class="p">(</span><span class="n">word_embedding</span><span class="p">,</span> <span class="n">embedding</span><span class="p">)</span> <span class="k">for</span> <span class="n">embedding</span> <span class="ow">in</span> <span class="n">embeddings</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">distances</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sorted_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">]],</span>
+            <span class="s2">&quot;embeddings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">embeddings</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sorted_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">]],</span>
+            <span class="s2">&quot;embedding_words&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">embedding_words</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sorted_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">]],</span>
+        <span class="p">}</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="reduce_embeddings_dimension"><a class="viewcode-back" href="../../../api_process_subpackage.html#mip_dmp.process.embedding.reduce_embeddings_dimension">[docs]</a><span class="k">def</span> <span class="nf">reduce_embeddings_dimension</span><span class="p">(</span>
+    <span class="n">embeddings</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">reduce_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tsne&quot;</span><span class="p">,</span> <span class="n">n_components</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reduce the dimension of the embeddings, mainly for visualization purposes.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    embeddings : list</span>
+<span class="sd">        List of embeddings to reduce the dimension of.</span>
+
+<span class="sd">    reduce_method : str</span>
+<span class="sd">        Method to use to reduce the dimension, either &quot;tsne&quot; or &quot;pca&quot;.</span>
+
+<span class="sd">    n_components : int</span>
+<span class="sd">        Number of components to reduce the dimension to.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        List of reduced embeddings.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;&gt; Reducing embeddings dimensionality to </span><span class="si">{</span><span class="n">n_components</span><span class="si">}</span><span class="s2"> using </span><span class="si">{</span><span class="n">reduce_method</span><span class="si">}</span><span class="s2">...&quot;</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">reduce_method</span> <span class="o">==</span> <span class="s2">&quot;tsne&quot;</span><span class="p">:</span>
+        <span class="n">tsne_model</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span>
+            <span class="n">perplexity</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+            <span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">,</span>
+            <span class="n">init</span><span class="o">=</span><span class="s2">&quot;pca&quot;</span><span class="p">,</span>
+            <span class="n">n_iter</span><span class="o">=</span><span class="mi">2500</span><span class="p">,</span>
+            <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">reduction_values</span> <span class="o">=</span> <span class="n">tsne_model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">embeddings</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">reduce_method</span> <span class="o">==</span> <span class="s2">&quot;pca&quot;</span><span class="p">:</span>
+        <span class="n">pca_model</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+        <span class="n">reduction_values</span> <span class="o">=</span> <span class="n">pca_model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">embeddings</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR: Invalid reduction method (</span><span class="si">{</span><span class="n">reduce_method</span><span class="si">}</span><span class="s2">)!&quot;</span><span class="p">)</span>
+        <span class="n">reduction_values</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">reduction_values</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">reduction_values</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">reduction_values</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The MIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors.
+      <span class="lastupdated">Last updated on Aug 14, 2023.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+mip\_dmp.qt5.components.matching\_visualization\_widget module
+==============================================================
+
+.. automodule:: mip_dmp.qt5.components.matching_visualization_widget
+   :members:
+   :undoc-members:
+   :show-inheritance:

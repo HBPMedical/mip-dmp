@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mip_dmp.plot &mdash; mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/twemoji.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/mip_dmp_icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="_static/twemoji.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mip_dmp.process" href="api_process_subpackage.html" />
+    <link rel="prev" title="mip_dmp.cli" href="api_cli_subpackage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/mip_dmp_icon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Instructions for Users</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cmd_usage.html">Commandline Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui_user_guide.html">Grahical User Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Instructions for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api_cli_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.cli</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mip-dmp-plot-embedding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.plot.embedding</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mip-dmp-plot-matching"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.plot.matching</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_process_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.process</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_qt5_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_gui_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.ui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_utils_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About mip_dmp</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">How to cite?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mip-dmp-plot">
+<span id="apidoc-plot"></span><h1><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code><a class="headerlink" href="#mip-dmp-plot" title="Permalink to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code> subpackage contains modules that define classes and functions that handle the reading and writing of BIDS data. The classes are also designed to be used with the <code class="docutils literal notranslate"><span class="pre">datahipy</span></code> command line interface.</p>
+<section id="mip-dmp-plot-embedding">
+<h2><a class="reference internal" href="api/generated/mip_dmp.plot.embedding.html#module-mip_dmp.plot.embedding" title="mip_dmp.plot.embedding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.plot.embedding</span></code></a><a class="headerlink" href="#mip-dmp-plot-embedding" title="Permalink to this heading"></a></h2>
+<p>Module to plot the embeddings of the column names and CDE codes.</p>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.plot.embedding.</span></span><span class="sig-name descname"><span class="pre">scatterplot_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embeddings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matchedCdeCodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selectedColumnName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/plot/embedding.html#scatterplot_embeddings"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Plot the embeddings of the selected column name and CDE codes in a 3D scatter plot.</p>
+<dl>
+<dt>fig: matplotlib.figure.Figure</dt><dd><p>Figure to render the 3D scatter plot of the embeddings.</p>
+</dd>
+<dt>embeddings: dict</dt><dd><p>Dictionary of embeddings in the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
+    <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
+    <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;word1&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="s2">&quot;wordN&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;cde&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="s2">&quot;column&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>where <code class="xref py py-obj docutils literal notranslate"><span class="pre">x</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">y</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">z</span></code> are the lists of the x, y and z coordinates of the embeddings,
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">label</span></code> is the list of the labels of the embeddings and <code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code> is the list of the
+types of the embeddings (can be “column” or “cde”).</p>
+</dd>
+<dt>matchedCdeCodes: dict</dt><dd><p>Dictionary of the matched CDE codes in the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;input_dataset_column1&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;cde_code1&quot;</span><span class="p">,</span> <span class="s2">&quot;cde_code2&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;embeddings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">embedding_vector1</span><span class="p">,</span> <span class="n">embedding_vector2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="s2">&quot;distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">distance1</span><span class="p">,</span> <span class="n">distance2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;input_dataset_column2&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;cde_code1&quot;</span><span class="p">,</span> <span class="s2">&quot;cde_code2&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;embeddings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">embedding_vector1</span><span class="p">,</span> <span class="n">embedding_vector2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="s2">&quot;distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">distance1</span><span class="p">,</span> <span class="n">distance2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>selectedColumnName: str</dt><dd><p>Name of the selected column.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="mip-dmp-plot-matching">
+<h2><a class="reference internal" href="api/generated/mip_dmp.plot.matching.html#module-mip_dmp.plot.matching" title="mip_dmp.plot.matching"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.plot.matching</span></code></a><a class="headerlink" href="#mip-dmp-plot-matching" title="Permalink to this heading"></a></h2>
+<p>Module to plot the initial matching results between the input dataset columns and the target CDE codes.</p>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">mip_dmp.plot.matching.</span></span><span class="sig-name descname"><span class="pre">heatmap_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">figure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputDatasetColumns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targetCDECodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matchingMethod</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/plot/matching.html#heatmap_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Render a heatmap of the initial matching results between the input dataset columns and the target CDE codes.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>figure: matplotlib.figure.Figure</dt><dd><p>Figure to render the heatmap of the matching results.</p>
+</dd>
+<dt>matrix: numpy.ndarray</dt><dd><p>Similarity / distance matrix of the matching results.</p>
+</dd>
+<dt>inputDatasetColumns: list</dt><dd><p>List of the input dataset columns. Used as ytick labels.</p>
+</dd>
+<dt>targetCDECodes: list</dt><dd><p>List of the target CDE codes. Used as xtick labels.</p>
+</dd>
+<dt>matchingMethod: str</dt><dd><p>Matching method used to generate the similarity / distance matrix.
+Used to generate the title of the figure.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api_cli_subpackage.html" class="btn btn-neutral float-left" title="mip_dmp.cli" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api_process_subpackage.html" class="btn btn-neutral float-right" title="mip_dmp.process" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The MIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors.
+      <span class="lastupdated">Last updated on Aug 14, 2023.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

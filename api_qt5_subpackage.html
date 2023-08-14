@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mip_dmp.qt5 &mdash; mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/twemoji.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/mip_dmp_icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="_static/twemoji.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mip_dmp.ui" href="api_gui_subpackage.html" />
+    <link rel="prev" title="mip_dmp.process" href="api_process_subpackage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/mip_dmp_icon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Instructions for Users</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cmd_usage.html">Commandline Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui_user_guide.html">Grahical User Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Instructions for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api_cli_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.cli</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_plot_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_process_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.process</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mip-dmp-qt5-components-sub-package"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.qt5.components</span></code> sub-package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mip-dmp-qt5-components-dataset-mapper-window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.qt5.components.dataset_mapper_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mip-dmp-qt5-components-embedding-visualization-widget"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.qt5.components.embedding_visualization_widget</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mip-dmp-qt5-components-matching-visualization-widget"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.qt5.components.matching_visualization_widget</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mip-dmp-qt5-model-sub-package"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.qt5.model</span></code> sub-package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mip-dmp-qt5-model-table-model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.qt5.model.table_model</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_gui_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.ui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_utils_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About mip_dmp</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">How to cite?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mip-dmp-qt5">
+<span id="apidoc-qt5"></span><h1><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code><a class="headerlink" href="#mip-dmp-qt5" title="Permalink to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code> subpackage contains sub-packages and modules for PySide2 UI components of the MIP Dataset Mapper.</p>
+<section id="mip-dmp-qt5-components-sub-package">
+<h2><a class="reference internal" href="api/generated/mip_dmp.qt5.components.html#module-mip_dmp.qt5.components" title="mip_dmp.qt5.components"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.qt5.components</span></code></a> sub-package<a class="headerlink" href="#mip-dmp-qt5-components-sub-package" title="Permalink to this heading"></a></h2>
+<section id="mip-dmp-qt5-components-dataset-mapper-window">
+<h3><a class="reference internal" href="api/generated/mip_dmp.qt5.components.dataset_mapper_window.html#module-mip_dmp.qt5.components.dataset_mapper_window" title="mip_dmp.qt5.components.dataset_mapper_window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.qt5.components.dataset_mapper_window</span></code></a><a class="headerlink" href="#mip-dmp-qt5-components-dataset-mapper-window" title="Permalink to this heading"></a></h3>
+<p>Module that defines the class dedicated to the main window of the MIP Dataset Mapper UI application.</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mip_dmp.qt5.components.dataset_mapper_window.</span></span><span class="sig-name descname"><span class="pre">MIPDatasetMapperWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for the main window of the MIP Dataset Mapper UI application.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">adjustWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.adjustWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Adjust the window size, Qt Style Sheet, and title.</p>
+<section id="parameters">
+<h4>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">createComponents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.createComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create the UI components.</p>
+<section id="id1">
+<h4>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">createToolBar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.createToolBar"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create the tool bar.</p>
+<section id="id2">
+<h4>Parameters<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">createInputDatasetComponents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.createInputDatasetComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create the components of the input dataset group box.</p>
+<section id="id3">
+<h4>Parameters<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">createTargetCDEsComponents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.createTargetCDEsComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create the components of the target CDEs group box.</p>
+<section id="id4">
+<h4>Parameters<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">createMappingComponents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.createMappingComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create the components of the mapping group box.</p>
+<section id="id5">
+<h4>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">createMappingTableRowViewComponents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.createMappingTableRowViewComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create the components of the mapping table row editor group box.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">adjustWidgetsAndLayouts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.adjustWidgetsAndLayouts"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Add widgets to the layouts of the UI elements.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">connectButtons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.connectButtons"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Connect the buttons to their corresponding functions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">embeddingViz</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.embeddingViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Open the embedding visualization window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">matchingViz</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.matchingViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Open the matching visualization window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">addMappingTableRow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.addMappingTableRow"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Add a row to the mapping table.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">deleteMappingTableRow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.deleteMappingTableRow"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Delete the selected row from the mapping table.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">initializeMappingEditForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.initializeMappingEditForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Initialize the mapping row editor form with the data of the selected row.</p>
+<section id="id6">
+<h4>Parameters<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>index<span class="classifier">QModelIndex</span></dt><dd><p>The index of the selected row in the mapping table.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">updateMappingEditForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.updateMappingEditForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Update the mapping table row form for a given index.</p>
+<section id="id7">
+<h4>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>index<span class="classifier">QModelIndex</span></dt><dd><p>The index of the selected row to be updated in the mapping table.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">updateMappingTableRow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.updateMappingTableRow"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Update the selected row of the mapping table with the data of the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">loadInputDataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.loadInputDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Load the input dataset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">loadCDEsFile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.loadCDEsFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Load the CDEs file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">loadMapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.loadMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Load the mapping file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">saveMapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.saveMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Save the mapping file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">disableMappingMapButtons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.disableMappingMapButtons"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Disable the check / save / load mapping and map buttons.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">disableMappingInitItems</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.disableMappingInitItems"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Disable the mapping initialization items.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">enableMappingInitItems</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.enableMappingInitItems"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Enable the mapping initialization items.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">enableMappingButtons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.enableMappingButtons"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Enable the check / save / load mapping and map buttons.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">disableMappingComponents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.disableMappingComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Disable the mapping components.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">enableMappingComponents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.enableMappingComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Enable the mapping components.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">checkMapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.checkMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Check the content of the mapping table.</p>
+<p>This function checks if:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The mapping table contains unique mapping to a specific CDE code.</p></li>
+<li><p>The mapping contains only valid CDE codes.</p></li>
+<li><p>The mapping transform is correctly formatted.</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">initMapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.initMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Initialize an empty column/CDEs mapping table.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingMatch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.mappingMatch"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Initialize the column/CDEs mapping based on fuzzy word matching and character embedding methods.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">selectOutputFilename</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.selectOutputFilename"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Select the output filename.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">updateStatusbar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.updateStatusbar"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Update the statusbar with the given message.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/dataset_mapper_window.html#MIPDatasetMapperWindow.map"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Map the input dataset to the target CDEs.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">centralWidgetGridLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">centralWidgetSplitter</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">centralwidget</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">columnsCDEsMappingGroupBox</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">columnsCDEsMappingGroupBoxLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">columnsCDEsMappingSplitter</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inputDatasetFormLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inputDatasetFormLayoutWidget</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inputDatasetGroupBox</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inputDatasetGroupBoxLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inputDatasetLoadButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inputDatasetPathLabel</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inputDatasetTableView</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">leftCentralWidgetSplitter</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mapButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingFilePathLabel</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingFormLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingFormLayoutWidget</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingLoadButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingSaveButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingCheckButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingTableView</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">outputDirectoryLabel</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">outputDirectorySelectButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">outputFilenameLabel</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">outputFilenameSelectButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">outputFormLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">outputFormLayoutWidget</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">outputGroupBox</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">outputGroupBoxLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">rightCentralWidgetSplitter</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">targetCDEsFormLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">targetCDEsFormLayoutWidget</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">targetCDEsGroupBox</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">targetCDEsGroupBoxLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">targetCDEsLoadButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">targetCDEsPathLabel</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">targetCDEsTableView</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inputDatasetPath</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inputDataset</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inputDatasetColumns</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inputDatasetPandasModel</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">targetCDEsPath</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">targetCDEs</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">targetCDEsPandasModel</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingFilePath</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">columnsCDEsMappingData</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">columnsCDEsMappingPandasModel</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingTableRowUpdateGroupBox</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingTableRowUpdateGroupBoxLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingRowIndex</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingTableViewWidget</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingTableViewLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingTableViewAddDeleteRowWidget</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingTableViewAddDeleteRowLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingTableViewAddRowButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingTableViewDeleteRowButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">datasetColumn</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">cdeCode</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">cdeType</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">transformType</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">transform</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">matchedCdeCodes</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">updateMappingRowButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">outputDirectoryPath</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">outputFilename</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">statusbar</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">toolBar</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingInitLabel</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">initMatchingMethod</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">mappingInitButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">embeddingVizButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">embeddingFigure</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">embeddingWidget</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">embeddingWidgetLayout</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">embeddingCanvas</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inputDatasetColumnEmbeddings</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">targetCDEsEmbeddings</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">matchingVizButton</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">matchingWidget</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="mip-dmp-qt5-components-embedding-visualization-widget">
+<h3><a class="reference internal" href="api/generated/mip_dmp.qt5.components.embedding_visualization_widget.html#module-mip_dmp.qt5.components.embedding_visualization_widget" title="mip_dmp.qt5.components.embedding_visualization_widget"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.qt5.components.embedding_visualization_widget</span></code></a><a class="headerlink" href="#mip-dmp-qt5-components-embedding-visualization-widget" title="Permalink to this heading"></a></h3>
+<p>Module that defines the class dedicated to the widget that supports the visualization of the initial automated mapping matches via embedding.</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mip_dmp.qt5.components.embedding_visualization_widget.</span></span><span class="sig-name descname"><span class="pre">WordEmbeddingVisualizationWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>Class for the widget that supports the visualization of the automated column / CDE code matches via embedding.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">adjustWindow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.adjustWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Adjust the window size, Qt Style Sheet, and title.</p>
+<section id="id8">
+<h4>Parameters<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">generate_embedding_figure</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.generate_embedding_figure"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Generate 3D scatter plot showing dimensionality-reduced embedding vectors of the words.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">generate_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputDatasetColumns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targetCDECodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matchingMethod</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.generate_embeddings"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Generate the embeddings of the columns and CDE codes.</p>
+<p>Set the input dataset columns (<code class="xref py py-obj docutils literal notranslate"><span class="pre">self.inputDatasetColumns</span></code>), the target CDE codes (<code class="xref py py-obj docutils literal notranslate"><span class="pre">self.targetCDECodes</span></code>),
+the input dataset column embeddings (<code class="xref py py-obj docutils literal notranslate"><span class="pre">self.inputDatasetColumnEmbeddings</span></code>) and the target CDE code embeddings
+(<code class="xref py py-obj docutils literal notranslate"><span class="pre">self.targetCDECodeEmbeddings</span></code>).</p>
+<p>The embeddings are generated using the specified matching method (<code class="xref py py-obj docutils literal notranslate"><span class="pre">matchingMethod</span></code>).
+The matching method can be “glove” or “chars2vec”.</p>
+<dl class="simple">
+<dt>inputDatasetColumns: list</dt><dd><p>List of the input dataset columns.</p>
+</dd>
+<dt>targetCDECodes: list</dt><dd><p>List of the target CDE codes.</p>
+</dd>
+<dt>matchingMethod: str</dt><dd><p>Matching method. Can be “glove” or “chars2vec”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">set_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputDatasetColumnEmbeddings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputDatasetColumns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targetCDECodeEmbeddings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targetCDECodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matchedCdeCodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matchingMethod</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.set_embeddings"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Set the input dataset column and target CDE code embeddings.</p>
+<dl>
+<dt>inputDatasetColumnEmbeddings: list</dt><dd><p>List of the input dataset column embeddings.</p>
+</dd>
+<dt>inputDatasetColumns: list</dt><dd><p>List of the input dataset columns.</p>
+</dd>
+<dt>targetCDECodeEmbeddings: list</dt><dd><p>List of the target CDE code embeddings.</p>
+</dd>
+<dt>targetCDECodes: list</dt><dd><p>List of the target CDE codes.</p>
+</dd>
+<dt>matchedCdeCodes: dict</dt><dd><p>Dictionary of the matched CDE codes in the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;input_dataset_column1&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;cde_code1&quot;</span><span class="p">,</span> <span class="s2">&quot;cde_code2&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;embeddings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">embedding_vector1</span><span class="p">,</span> <span class="n">embedding_vector2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="s2">&quot;distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">distance1</span><span class="p">,</span> <span class="n">distance2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;input_dataset_column2&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;cde_code1&quot;</span><span class="p">,</span> <span class="s2">&quot;cde_code2&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s2">&quot;embeddings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">embedding_vector1</span><span class="p">,</span> <span class="n">embedding_vector2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="s2">&quot;distances&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">distance1</span><span class="p">,</span> <span class="n">distance2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>matchingMethod: str</dt><dd><p>Matching method. Can be “glove” or “chars2vec”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">set_matching_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matchingMethod</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.set_matching_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Set the matching method.</p>
+<dl class="simple">
+<dt>matchingMethod: str</dt><dd><p>Matching method. Can be “glove” or “chars2vec”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">set_word_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wordList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.set_word_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Set the list of words that can be visualized in the 3D scatter plot.</p>
+<dl class="simple">
+<dt>wordList: list</dt><dd><p>List of words to visualize in the 3D scatter plot</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">set_wordcombobox_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wordList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/embedding_visualization_widget.html#WordEmbeddingVisualizationWidget.set_wordcombobox_items"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Set the items of the word combo box.</p>
+<dl class="simple">
+<dt>wordList: list</dt><dd><p>List of words to visualize in the combo box of the widget
+that controls the selection of the word to visualize in the
+3D scatter plot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">staticMetaObject</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;PySide2.QtCore.QMetaObject</span> <span class="pre">object&gt;</span></em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="mip-dmp-qt5-components-matching-visualization-widget">
+<h3><a class="reference internal" href="api/generated/mip_dmp.qt5.components.matching_visualization_widget.html#module-mip_dmp.qt5.components.matching_visualization_widget" title="mip_dmp.qt5.components.matching_visualization_widget"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.qt5.components.matching_visualization_widget</span></code></a><a class="headerlink" href="#mip-dmp-qt5-components-matching-visualization-widget" title="Permalink to this heading"></a></h3>
+<p>Module that defines the class for the widget that supports the visualization of the distances obtained by the automated mapping matches for the n most similar CDE codes.</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mip_dmp.qt5.components.matching_visualization_widget.</span></span><span class="sig-name descname"><span class="pre">MatchingVisualizationWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputDatasetColumns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targetCDECodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matchedCdeCodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matchingMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/matching_visualization_widget.html#MatchingVisualizationWidget"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>Class for the widget that supports the visualization of the distances / similarity measures obtained by the automated mapping matches for the n most similar CDE codes.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">adjustWindow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/matching_visualization_widget.html#MatchingVisualizationWidget.adjustWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Adjust the window size, Qt Style Sheet, and title.</p>
+<section id="id9">
+<h4>Parameters<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>mainWindow<span class="classifier">QMainWindow</span></dt><dd><p>The main window of the application.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">generate_heatmap_figure</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/matching_visualization_widget.html#MatchingVisualizationWidget.generate_heatmap_figure"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Generate a heatmap figure with seaborn that shows the similarity / distance matrix of the input dataset columns and the target CDE codes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">set_wordcombobox_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wordList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/components/matching_visualization_widget.html#MatchingVisualizationWidget.set_wordcombobox_items"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Set the items of the word combo box.</p>
+<section id="id10">
+<h4>Parameters<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h4>
+<dl class="simple">
+<dt>wordList: list</dt><dd><p>List of the words to add to the combo box.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">staticMetaObject</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;PySide2.QtCore.QMetaObject</span> <span class="pre">object&gt;</span></em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="mip-dmp-qt5-model-sub-package">
+<h2><a class="reference internal" href="api/generated/mip_dmp.qt5.model.html#module-mip_dmp.qt5.model" title="mip_dmp.qt5.model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.qt5.model</span></code></a> sub-package<a class="headerlink" href="#mip-dmp-qt5-model-sub-package" title="Permalink to this heading"></a></h2>
+<section id="mip-dmp-qt5-model-table-model">
+<h3><a class="reference internal" href="api/generated/mip_dmp.qt5.model.table_model.html#module-mip_dmp.qt5.model.table_model" title="mip_dmp.qt5.model.table_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mip_dmp.qt5.model.table_model</span></code></a><a class="headerlink" href="#mip-dmp-qt5-model-table-model" title="Permalink to this heading"></a></h3>
+<p>Module to describe Qt/PySide2 Table Models.</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mip_dmp.qt5.model.table_model.</span></span><span class="sig-name descname"><span class="pre">NoEditorDelegate</span></span><a class="reference internal" href="_modules/mip_dmp/qt5/model/table_model.html#NoEditorDelegate"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QItemDelegate</span></code></p>
+<p>Class to define a custom item delegate with no editor.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">createEditor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/model/table_model.html#NoEditorDelegate.createEditor"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create the editor for the given index.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">staticMetaObject</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;PySide2.QtCore.QMetaObject</span> <span class="pre">object&gt;</span></em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mip_dmp.qt5.model.table_model.</span></span><span class="sig-name descname"><span class="pre">PandasTableModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/model/table_model.html#PandasTableModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QAbstractTableModel</span></code></p>
+<p>Qt Table Model for Pandas DataFrames.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">columnCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/model/table_model.html#PandasTableModel.columnCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return the number of columns in the table.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/model/table_model.html#PandasTableModel.data"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return the data for the given index and role.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/model/table_model.html#PandasTableModel.flags"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return the flags for the given index.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">headerData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orientation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/model/table_model.html#PandasTableModel.headerData"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return the header data for the given section.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">rowCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/model/table_model.html#PandasTableModel.rowCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Return the number of rows in the table.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">setData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/model/table_model.html#PandasTableModel.setData"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Set the data for the given index and role.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">staticMetaObject</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;PySide2.QtCore.QMetaObject</span> <span class="pre">object&gt;</span></em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mip_dmp.qt5.model.table_model.</span></span><span class="sig-name descname"><span class="pre">QComboBoxDelegate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/model/table_model.html#QComboBoxDelegate"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QItemDelegate</span></code></p>
+<p>Class to define a custom item delegate with QComboBox editor.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">createEditor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PySide2.QtWidgets.QWidget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PySide2.QtWidgets.QStyleOptionViewItem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PySide2.QtCore.QModelIndex</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PySide2.QtWidgets.QWidget</span></span></span><a class="reference internal" href="_modules/mip_dmp/qt5/model/table_model.html#QComboBoxDelegate.createEditor"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">setItems</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mip_dmp/qt5/model/table_model.html#QComboBoxDelegate.setItems"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">staticMetaObject</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;PySide2.QtCore.QMetaObject</span> <span class="pre">object&gt;</span></em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api_process_subpackage.html" class="btn btn-neutral float-left" title="mip_dmp.process" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api_gui_subpackage.html" class="btn btn-neutral float-right" title="mip_dmp.ui" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The MIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors.
+      <span class="lastupdated">Last updated on Aug 14, 2023.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

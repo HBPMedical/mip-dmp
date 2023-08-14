@@ -1,0 +1,7 @@
+mip\_dmp.plot.embedding module
+==============================
+
+.. automodule:: mip_dmp.plot.embedding
+   :members:
+   :undoc-members:
+   :show-inheritance:

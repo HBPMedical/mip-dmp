@@ -1,0 +1,7 @@
+mip\_dmp.cli.mip\_dataset\_mapper\_cli module
+=============================================
+
+.. automodule:: mip_dmp.cli.mip_dataset_mapper_cli
+   :members:
+   :undoc-members:
+   :show-inheritance:

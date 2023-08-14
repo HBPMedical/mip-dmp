@@ -1,0 +1,7 @@
+mip\_dmp.qt5.components.embedding\_visualization\_widget module
+===============================================================
+
+.. automodule:: mip_dmp.qt5.components.embedding_visualization_widget
+   :members:
+   :undoc-members:
+   :show-inheritance:

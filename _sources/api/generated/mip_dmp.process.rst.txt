@@ -1,0 +1,21 @@
+mip\_dmp.process package
+========================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   mip_dmp.process.embedding
+   mip_dmp.process.mapping
+   mip_dmp.process.matching
+   mip_dmp.process.utils
+
+Module contents
+---------------
+
+.. automodule:: mip_dmp.process
+   :members:
+   :undoc-members:
+   :show-inheritance:

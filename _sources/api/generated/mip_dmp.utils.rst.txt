@@ -1,0 +1,20 @@
+mip\_dmp.utils package
+======================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   mip_dmp.utils.io
+   mip_dmp.utils.logger
+   mip_dmp.utils.parser
+
+Module contents
+---------------
+
+.. automodule:: mip_dmp.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+mip\_dmp.qt5.components.dataset\_mapper\_window module
+======================================================
+
+.. automodule:: mip_dmp.qt5.components.dataset_mapper_window
+   :members:
+   :undoc-members:
+   :show-inheritance:

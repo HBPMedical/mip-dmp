@@ -1,0 +1,10 @@
+mip\_dmp.qt5.assets package
+===========================
+
+Module contents
+---------------
+
+.. automodule:: mip_dmp.qt5.assets
+   :members:
+   :undoc-members:
+   :show-inheritance:

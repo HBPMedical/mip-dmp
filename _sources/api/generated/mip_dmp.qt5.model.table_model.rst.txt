@@ -1,0 +1,7 @@
+mip\_dmp.qt5.model.table\_model module
+======================================
+
+.. automodule:: mip_dmp.qt5.model.table_model
+   :members:
+   :undoc-members:
+   :show-inheritance:

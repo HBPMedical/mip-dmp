@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mip_dmp.qt5.components package &mdash; mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/twemoji.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/mip_dmp_icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="../../_static/twemoji.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/mip_dmp_icon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation Instructions for Users</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../cmd_usage.html">Commandline Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ui_user_guide.html">Grahical User Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer.html">Instructions for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api_cli_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.cli</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_plot_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_process_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.process</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_qt5_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_gui_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.ui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_utils_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About mip_dmp</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">How to cite?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">mip_dmp.qt5.components package</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mip-dmp-qt5-components-package">
+<h1>mip_dmp.qt5.components package<a class="headerlink" href="#mip-dmp-qt5-components-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html">mip_dmp.qt5.components.dataset_mapper_window module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.addMappingTableRow"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.addMappingTableRow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.adjustWidgetsAndLayouts"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.adjustWidgetsAndLayouts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.adjustWindow"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.adjustWindow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.cdeCode"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.cdeCode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.cdeType"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.cdeType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.centralWidgetGridLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.centralWidgetGridLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.centralWidgetSplitter"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.centralWidgetSplitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.centralwidget"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.centralwidget</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.checkMapping"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.checkMapping()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingData"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.columnsCDEsMappingData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingGroupBox"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.columnsCDEsMappingGroupBox</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingGroupBoxLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.columnsCDEsMappingGroupBoxLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingPandasModel"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.columnsCDEsMappingPandasModel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.columnsCDEsMappingSplitter"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.columnsCDEsMappingSplitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.connectButtons"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.connectButtons()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createComponents"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.createComponents()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createInputDatasetComponents"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.createInputDatasetComponents()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createMappingComponents"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.createMappingComponents()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createMappingTableRowViewComponents"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.createMappingTableRowViewComponents()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createTargetCDEsComponents"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.createTargetCDEsComponents()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.createToolBar"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.createToolBar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.datasetColumn"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.datasetColumn</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.deleteMappingTableRow"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.deleteMappingTableRow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.disableMappingComponents"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.disableMappingComponents()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.disableMappingInitItems"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.disableMappingInitItems()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.disableMappingMapButtons"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.disableMappingMapButtons()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingCanvas"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.embeddingCanvas</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingFigure"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.embeddingFigure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingViz"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.embeddingViz()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingVizButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.embeddingVizButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingWidget"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.embeddingWidget</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.embeddingWidgetLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.embeddingWidgetLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.enableMappingButtons"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.enableMappingButtons()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.enableMappingComponents"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.enableMappingComponents()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.enableMappingInitItems"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.enableMappingInitItems()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.initMapping"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.initMapping()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.initMatchingMethod"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.initMatchingMethod</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.initializeMappingEditForm"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.initializeMappingEditForm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDataset"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.inputDataset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetColumnEmbeddings"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.inputDatasetColumnEmbeddings</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetColumns"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.inputDatasetColumns</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetFormLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.inputDatasetFormLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetFormLayoutWidget"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.inputDatasetFormLayoutWidget</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetGroupBox"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.inputDatasetGroupBox</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetGroupBoxLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.inputDatasetGroupBoxLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetLoadButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.inputDatasetLoadButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetPandasModel"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.inputDatasetPandasModel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetPath"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.inputDatasetPath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetPathLabel"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.inputDatasetPathLabel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.inputDatasetTableView"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.inputDatasetTableView</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.leftCentralWidgetSplitter"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.leftCentralWidgetSplitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.loadCDEsFile"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.loadCDEsFile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.loadInputDataset"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.loadInputDataset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.loadMapping"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.loadMapping()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.map"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.map()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mapButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mapButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingCheckButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingCheckButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingFilePath"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingFilePath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingFilePathLabel"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingFilePathLabel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingFormLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingFormLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingFormLayoutWidget"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingFormLayoutWidget</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingInitButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingInitButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingInitLabel"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingInitLabel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingLoadButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingLoadButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingMatch"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingMatch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingRowIndex"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingRowIndex</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingSaveButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingSaveButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableRowUpdateGroupBox"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingTableRowUpdateGroupBox</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableRowUpdateGroupBoxLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingTableRowUpdateGroupBoxLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableView"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingTableView</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewAddDeleteRowLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingTableViewAddDeleteRowLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewAddDeleteRowWidget"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingTableViewAddDeleteRowWidget</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewAddRowButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingTableViewAddRowButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewDeleteRowButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingTableViewDeleteRowButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingTableViewLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.mappingTableViewWidget"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.mappingTableViewWidget</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.matchedCdeCodes"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.matchedCdeCodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.matchingViz"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.matchingViz()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.matchingVizButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.matchingVizButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.matchingWidget"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.matchingWidget</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputDirectoryLabel"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.outputDirectoryLabel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputDirectoryPath"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.outputDirectoryPath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputDirectorySelectButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.outputDirectorySelectButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFilename"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.outputFilename</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFilenameLabel"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.outputFilenameLabel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFilenameSelectButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.outputFilenameSelectButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFormLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.outputFormLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputFormLayoutWidget"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.outputFormLayoutWidget</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputGroupBox"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.outputGroupBox</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.outputGroupBoxLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.outputGroupBoxLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.rightCentralWidgetSplitter"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.rightCentralWidgetSplitter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.saveMapping"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.saveMapping()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.selectOutputFilename"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.selectOutputFilename()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.statusbar"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.statusbar</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEs"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.targetCDEs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsEmbeddings"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.targetCDEsEmbeddings</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsFormLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.targetCDEsFormLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsFormLayoutWidget"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.targetCDEsFormLayoutWidget</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsGroupBox"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.targetCDEsGroupBox</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsGroupBoxLayout"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.targetCDEsGroupBoxLayout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsLoadButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.targetCDEsLoadButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsPandasModel"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.targetCDEsPandasModel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsPath"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.targetCDEsPath</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsPathLabel"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.targetCDEsPathLabel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.targetCDEsTableView"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.targetCDEsTableView</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.toolBar"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.toolBar</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.transform"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.transform</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.transformType"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.transformType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.updateMappingEditForm"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.updateMappingEditForm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.updateMappingRowButton"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.updateMappingRowButton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.updateMappingTableRow"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.updateMappingTableRow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.dataset_mapper_window.html#mip_dmp.qt5.components.dataset_mapper_window.MIPDatasetMapperWindow.updateStatusbar"><code class="docutils literal notranslate"><span class="pre">MIPDatasetMapperWindow.updateStatusbar()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mip_dmp.qt5.components.embedding_visualization_widget.html">mip_dmp.qt5.components.embedding_visualization_widget module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mip_dmp.qt5.components.embedding_visualization_widget.html#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget"><code class="docutils literal notranslate"><span class="pre">WordEmbeddingVisualizationWidget</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.embedding_visualization_widget.html#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.adjustWindow"><code class="docutils literal notranslate"><span class="pre">WordEmbeddingVisualizationWidget.adjustWindow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.embedding_visualization_widget.html#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.generate_embedding_figure"><code class="docutils literal notranslate"><span class="pre">WordEmbeddingVisualizationWidget.generate_embedding_figure()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.embedding_visualization_widget.html#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.generate_embeddings"><code class="docutils literal notranslate"><span class="pre">WordEmbeddingVisualizationWidget.generate_embeddings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.embedding_visualization_widget.html#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.set_embeddings"><code class="docutils literal notranslate"><span class="pre">WordEmbeddingVisualizationWidget.set_embeddings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.embedding_visualization_widget.html#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.set_matching_method"><code class="docutils literal notranslate"><span class="pre">WordEmbeddingVisualizationWidget.set_matching_method()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.embedding_visualization_widget.html#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.set_word_list"><code class="docutils literal notranslate"><span class="pre">WordEmbeddingVisualizationWidget.set_word_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.embedding_visualization_widget.html#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.set_wordcombobox_items"><code class="docutils literal notranslate"><span class="pre">WordEmbeddingVisualizationWidget.set_wordcombobox_items()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.embedding_visualization_widget.html#mip_dmp.qt5.components.embedding_visualization_widget.WordEmbeddingVisualizationWidget.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">WordEmbeddingVisualizationWidget.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mip_dmp.qt5.components.matching_visualization_widget.html">mip_dmp.qt5.components.matching_visualization_widget module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mip_dmp.qt5.components.matching_visualization_widget.html#mip_dmp.qt5.components.matching_visualization_widget.MatchingVisualizationWidget"><code class="docutils literal notranslate"><span class="pre">MatchingVisualizationWidget</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.matching_visualization_widget.html#mip_dmp.qt5.components.matching_visualization_widget.MatchingVisualizationWidget.adjustWindow"><code class="docutils literal notranslate"><span class="pre">MatchingVisualizationWidget.adjustWindow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.matching_visualization_widget.html#mip_dmp.qt5.components.matching_visualization_widget.MatchingVisualizationWidget.generate_heatmap_figure"><code class="docutils literal notranslate"><span class="pre">MatchingVisualizationWidget.generate_heatmap_figure()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.matching_visualization_widget.html#mip_dmp.qt5.components.matching_visualization_widget.MatchingVisualizationWidget.set_wordcombobox_items"><code class="docutils literal notranslate"><span class="pre">MatchingVisualizationWidget.set_wordcombobox_items()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mip_dmp.qt5.components.matching_visualization_widget.html#mip_dmp.qt5.components.matching_visualization_widget.MatchingVisualizationWidget.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">MatchingVisualizationWidget.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-mip_dmp.qt5.components">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mip_dmp.qt5.components" title="Permalink to this heading"></a></h2>
+<p>Sub-package containing the PySide2 UI component modules of the MIP Dataset Mapper.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The MIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors.
+      <span class="lastupdated">Last updated on Aug 14, 2023.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

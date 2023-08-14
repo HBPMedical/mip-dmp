@@ -1,0 +1,7 @@
+mip\_dmp.process.matching module
+================================
+
+.. automodule:: mip_dmp.process.matching
+   :members:
+   :undoc-members:
+   :show-inheritance:

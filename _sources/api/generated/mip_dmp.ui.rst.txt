@@ -1,0 +1,18 @@
+mip\_dmp.ui package
+===================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   mip_dmp.ui.mip_dataset_mapper_ui
+
+Module contents
+---------------
+
+.. automodule:: mip_dmp.ui
+   :members:
+   :undoc-members:
+   :show-inheritance:

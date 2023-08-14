@@ -1,0 +1,7 @@
+mip\_dmp.ui.mip\_dataset\_mapper\_ui module
+===========================================
+
+.. automodule:: mip_dmp.ui.mip_dataset_mapper_ui
+   :members:
+   :undoc-members:
+   :show-inheritance:

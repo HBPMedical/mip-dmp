@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grahical User Interface &mdash; mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/twemoji.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/mip_dmp_icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="_static/twemoji.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Instructions for Developers" href="developer.html" />
+    <link rel="prev" title="Commandline Usage" href="cmd_usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/mip_dmp_icon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Instructions for Users</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cmd_usage.html">Commandline Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Grahical User Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#launch-the-ui">0. Launch the UI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#load-a-source-dataset">1. Load a source dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#load-a-target-cdes-metadata-schema">2. Load a target CDEs metadata schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-the-mappings">3. Create the mappings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manual-approach">3.1 Manual approach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#semi-automatic-approach">3.2 Semi-automatic approach</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#check-save-the-mappings">4. Check / Save the mappings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#map-a-dataset">5. Map a dataset</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Instructions for Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_cli_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.cli</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_plot_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_process_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.process</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_qt5_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.qt5</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_gui_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.ui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_utils_subpackage.html"><code class="docutils literal notranslate"><span class="pre">mip_dmp.utils</span></code></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About mip_dmp</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">How to cite?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mip_dmp: Assistant for mapping datasets to the common schema of a federation of the Medical Informatics Platform</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Grahical User Interface</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="grahical-user-interface">
+<span id="userguide"></span><h1>Grahical User Interface<a class="headerlink" href="#grahical-user-interface" title="Permalink to this heading"></a></h1>
+<p>This page provides a user guide the MIP Dataset Mapper (<code class="docutils literal notranslate"><span class="pre">mip_dmp</span></code>) UI tool.</p>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#launch-the-ui" id="id1">0. Launch the UI</a></p></li>
+<li><p><a class="reference internal" href="#load-a-source-dataset" id="id2">1. Load a source dataset</a></p></li>
+<li><p><a class="reference internal" href="#load-a-target-cdes-metadata-schema" id="id3">2. Load a target CDEs metadata schema</a></p></li>
+<li><p><a class="reference internal" href="#create-the-mappings" id="id4">3. Create the mappings</a></p>
+<ul>
+<li><p><a class="reference internal" href="#manual-approach" id="id5">3.1 Manual approach</a></p></li>
+<li><p><a class="reference internal" href="#semi-automatic-approach" id="id6">3.2 Semi-automatic approach</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#check-save-the-mappings" id="id7">4. Check / Save the mappings</a></p></li>
+<li><p><a class="reference internal" href="#map-a-dataset" id="id8">5. Map a dataset</a></p></li>
+</ul>
+</nav>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The UI is based on the <a class="reference external" href="https://wiki.qt.io/Qt_for_Python">PySide2</a> Python binding for the <a class="reference external" href="https://www.qt.io/">Qt</a> cross-platform application framework.</p>
+</div>
+<section id="launch-the-ui">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">0. Launch the UI</a><a class="headerlink" href="#launch-the-ui" title="Permalink to this heading"></a></h2>
+<p>The UI can be launched by running the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mip_dataset_mapper_ui
+</pre></div>
+</div>
+<p>This will display the main window of the UI:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_0.png"><img alt="_images/mip-dmp_ui_illustration_0.png" src="_images/mip-dmp_ui_illustration_0.png" style="width: 100%;" /></a>
+</figure>
+<p>The UI is composed of 3 main parts:</p>
+<ul class="simple">
+<li><p>The <strong>menu bar</strong> (at the top of the window) provides access to the different functionalities of the UI.</p></li>
+<li><p>The <strong>main window panel</strong> (in the middle of the window) displays the different components of the UI:</p>
+<ul>
+<li><p>The <strong>Source Dataset</strong> component (on the top left) displays the content of the source dataset.</p></li>
+<li><p>The <strong>Target CDEs Metadata Schema</strong> component (on the bottom left) displays the content of the target Common Data Elements (CDEs) metatadata schema.</p></li>
+<li><p>The <strong>Columns / CDEs Mapping</strong> component (on the right) displays the different mappings between the columns of the source dataset and the CDEs of the target metadata schema, and provide mapping table row editor.</p></li>
+</ul>
+</li>
+<li><p>The <strong>status bar</strong> (at the bottom of the window) displays the status of the UI.</p></li>
+</ul>
+<p>The different steps of the UI workflow are described in the following sections.</p>
+</section>
+<section id="load-a-source-dataset">
+<span id="load-source-dataset"></span><h2><a class="toc-backref" href="#id2" role="doc-backlink">1. Load a source dataset</a><a class="headerlink" href="#load-a-source-dataset" title="Permalink to this heading"></a></h2>
+<p>The first step of the UI workflow is to load a source dataset. This can be done by clicking on the <strong>Load CSV</strong> button of the <strong>Source Dataset</strong> component of the menu bar:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_1_1.png"><img alt="_images/mip-dmp_ui_illustration_1_1.png" src="_images/mip-dmp_ui_illustration_1_1.png" style="width: 100%;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This will open a file dialog window allowing to select a CSV file. Once a CSV file is selected, the content of the file is displayed in the <strong>Source Dataset</strong> component of the main window panel:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_1_2.png"><img alt="_images/mip-dmp_ui_illustration_1_2.png" src="_images/mip-dmp_ui_illustration_1_2.png" style="width: 100%;" /></a>
+</figure>
+</section>
+<section id="load-a-target-cdes-metadata-schema">
+<span id="load-target-cdes-metadata-schema"></span><h2><a class="toc-backref" href="#id3" role="doc-backlink">2. Load a target CDEs metadata schema</a><a class="headerlink" href="#load-a-target-cdes-metadata-schema" title="Permalink to this heading"></a></h2>
+<p>The second step of the UI workflow is to load a target CDEs metadata schema. This can be done by clicking on the <strong>Load XLXS</strong> button of the <strong>Target Schema</strong> component of the menu bar:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_2_1.png"><img alt="_images/mip-dmp_ui_illustration_2_1.png" src="_images/mip-dmp_ui_illustration_2_1.png" style="width: 100%;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This will open a file dialog window allowing to select a XLSX file. Once a XLSX file is selected, the content of the file is displayed in the <strong>Target Schema</strong> component of the main window panel:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_2_2.png"><img alt="_images/mip-dmp_ui_illustration_2_2.png" src="_images/mip-dmp_ui_illustration_2_2.png" style="width: 100%;" /></a>
+</figure>
+</section>
+<section id="create-the-mappings">
+<span id="create-mappings"></span><h2><a class="toc-backref" href="#id4" role="doc-backlink">3. Create the mappings</a><a class="headerlink" href="#create-the-mappings" title="Permalink to this heading"></a></h2>
+<p>The third step of the UI workflow is to create the mappings between the columns of the source dataset and the CDEs of the target metadata schema. This can be done following (1) a manual or (2) a semi-automatic approach.</p>
+<section id="manual-approach">
+<span id="create-mappings-manual"></span><h3><a class="toc-backref" href="#id5" role="doc-backlink">3.1 Manual approach</a><a class="headerlink" href="#manual-approach" title="Permalink to this heading"></a></h3>
+<p>The manual approach consists in creating the mappings manually by clicking on the <strong>Add</strong> button below the table of the <strong>Columns /CDEs Mappings</strong> component of the menu bar:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_3_1.png"><img alt="_images/mip-dmp_ui_illustration_3_1.png" src="_images/mip-dmp_ui_illustration_3_1.png" style="width: 100%;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This will open a dialog window allowing to select a column of the source dataset. A first matched CDE code is still proposed automatically by leveraging Fuzzy Text Matching from the <a class="reference external" href="https://github.com/seatgeek/fuzzywuzzy">fuzzywuzzy</a> Python library. A new row is then added to the table of the <strong>Columns /CDEs Mappings</strong> component and the user can edit the mapping (change the CDE code, define the transformation to apply to the column values, etc.) by using the <strong>Mapping Row Editor</strong>:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_3_2.png"><img alt="_images/mip-dmp_ui_illustration_3_2.png" src="_images/mip-dmp_ui_illustration_3_2.png" style="width: 100%;" /></a>
+</figure>
+</section>
+<section id="semi-automatic-approach">
+<span id="create-mappings-semi-automatic"></span><h3><a class="toc-backref" href="#id6" role="doc-backlink">3.2 Semi-automatic approach</a><a class="headerlink" href="#semi-automatic-approach" title="Permalink to this heading"></a></h3>
+<p>The semi-automatic approach consists in initializing the mapping of all columns of the source dataset automatically by using one of three Natural Language Processing (NLP) methods (<code class="xref py py-obj docutils literal notranslate"><span class="pre">fuzzy</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">glove</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">chars2vec</span></code>). The method can be selected from the dropdown list and then can be performed by clicking on the <strong>Magic Stick</strong> button of the <strong>Mapping Initialization</strong> component of the menu bar:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_4_1.png"><img alt="_images/mip-dmp_ui_illustration_4_1.png" src="_images/mip-dmp_ui_illustration_4_1.png" style="width: 100%;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This will initialize the mapping of all columns of the source dataset automatically by leveraging the selected NLP method. The user can then edit the mapping (change the CDE code, define the transformation to apply to the column values, etc.) by using the <strong>Mapping Row Editor</strong>:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_4_2.png"><img alt="_images/mip-dmp_ui_illustration_4_2.png" src="_images/mip-dmp_ui_illustration_4_2.png" style="width: 100%;" /></a>
+</figure>
+</section>
+</section>
+<section id="check-save-the-mappings">
+<span id="check-mappings"></span><h2><a class="toc-backref" href="#id7" role="doc-backlink">4. Check / Save the mappings</a><a class="headerlink" href="#check-save-the-mappings" title="Permalink to this heading"></a></h2>
+<p>The fourth step of the UI workflow is to check the mappings. This can be done by clicking on the <strong>Check</strong> button (magnifying glass) of the <strong>Mapping (Load) / Check / Save</strong> component of the menu bar:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_5_1.png"><img alt="_images/mip-dmp_ui_illustration_5_1.png" src="_images/mip-dmp_ui_illustration_5_1.png" style="width: 100%;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This will check the mappings and display the result in a pop-up window:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_5_2.png"><img alt="_images/mip-dmp_ui_illustration_5_2.png" src="_images/mip-dmp_ui_illustration_5_2.png" style="width: 100%;" /></a>
+</figure>
+<p>Once the mappings of the table are validated, the fourth step of the UI workflow is to save the mappings. This can be done by clicking on the <strong>Save JSON</strong> button of the <strong>Columns /CDEs Mappings</strong> component of the menu bar:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_6_1.png"><img alt="_images/mip-dmp_ui_illustration_6_1.png" src="_images/mip-dmp_ui_illustration_6_1.png" style="width: 100%;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This will open a file dialog window allowing to select a JSON file. Once a JSON file is selected, the mappings are saved in the file, and the result is displayed in a pop-up window:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_6_2.png"><img alt="_images/mip-dmp_ui_illustration_6_2.png" src="_images/mip-dmp_ui_illustration_6_2.png" style="width: 100%;" /></a>
+</figure>
+<p>This file can be then used by both the commandline and the UI applications of the MIP Dataset Mapper (<code class="docutils literal notranslate"><span class="pre">mip_dataset_mapper</span></code> and <code class="docutils literal notranslate"><span class="pre">mip_dataset_mapper_ui</span></code>).</p>
+</section>
+<section id="map-a-dataset">
+<span id="map-dataset"></span><h2><a class="toc-backref" href="#id8" role="doc-backlink">5. Map a dataset</a><a class="headerlink" href="#map-a-dataset" title="Permalink to this heading"></a></h2>
+<p>Once the mappings are saved / loaded, the user can map a dataset by clicking on the button of the <strong>Map</strong> component of the menu bar:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_7_1.png"><img alt="_images/mip-dmp_ui_illustration_7_1.png" src="_images/mip-dmp_ui_illustration_7_1.png" style="width: 100%;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This will open a file dialog window allowing to select a CSV file. Once a CSV file is selected, the source dataset is mapped and the result status is displayed in status bar of the window:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mip-dmp_ui_illustration_7_2.png"><img alt="_images/mip-dmp_ui_illustration_7_2.png" src="_images/mip-dmp_ui_illustration_7_2.png" style="width: 100%;" /></a>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cmd_usage.html" class="btn btn-neutral float-left" title="Commandline Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="developer.html" class="btn btn-neutral float-right" title="Instructions for Developers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, The MIP team, University Hospital of Lausanne (CHUV), Switzerland &amp; Contributors.
+      <span class="lastupdated">Last updated on Aug 14, 2023.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
