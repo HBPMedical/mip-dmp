@@ -98,4 +98,5 @@ Contents
 
    LICENSE
    citing
+   contributors
    contributing
