@@ -6,7 +6,7 @@ fuzzywuzzy==0.18.0
 python-Levenshtein==0.20.9
 gensim==4.3.1
 tensorflow==2.12.0
-chars2vec @ git+https://github.com/HIP-infrastructure/chars2vec.git@master
+git+https://github.com/HIP-infrastructure/chars2vec.git@master#egg=chars2vec
 scikit-learn==1.2.2
 matplotlib==3.7.1
 seaborn==0.12.2
