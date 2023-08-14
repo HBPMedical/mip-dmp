@@ -242,7 +242,13 @@ class MIPDatasetMapperWindow(object):
         self.statusbar = QStatusBar(mainWindow)
 
     def createToolBar(self, mainWindow):
-        """Create the tool bar."""
+        """Create the tool bar.
+        
+        Parameters
+        ----------
+        mainWindow : QMainWindow
+            The main window of the application.
+        """
         # Initialize the tool bar
         self.toolBar = QToolBar()
         self.toolBar.setIconSize(QSize(48, 48))
@@ -352,7 +358,13 @@ class MIPDatasetMapperWindow(object):
         self.toolBar.addAction(self.mapButton)
 
     def createInputDatasetComponents(self, mainWindow):
-        """Create the components of the input dataset group box."""
+        """Create the components of the input dataset group box.
+        
+        Parameters
+        ----------
+        mainWindow : QMainWindow
+            The main window of the application.
+        """
         self.inputDatasetGroupBox = QGroupBox(self.centralwidget)
         # Set the layout of the group box
         self.inputDatasetGroupBoxLayout = QGridLayout()
@@ -389,7 +401,13 @@ class MIPDatasetMapperWindow(object):
         )
 
     def createTargetCDEsComponents(self, mainWindow):
-        """Create the components of the target CDEs group box."""
+        """Create the components of the target CDEs group box.
+        
+        Parameters
+        ----------
+        mainWindow : QMainWindow
+            The main window of the application.
+        """
         self.targetCDEsGroupBox = QGroupBox(self.centralwidget)
         # Set the layout of the group box
         self.targetCDEsGroupBoxLayout = QGridLayout()
@@ -428,7 +446,13 @@ class MIPDatasetMapperWindow(object):
         )
 
     def createMappingComponents(self, mainWindow):
-        """Create the components of the mapping group box."""
+        """Create the components of the mapping group box.
+        
+        Parameters
+        ----------
+        mainWindow : QMainWindow
+            The main window of the application.
+        """
         self.columnsCDEsMappingGroupBox = QGroupBox(self.centralwidget)
         # Set the layout of the group box
         self.columnsCDEsMappingGroupBoxLayout = QGridLayout()
@@ -756,6 +780,13 @@ class MIPDatasetMapperWindow(object):
         self.statusbar.repaint()
 
     def initializeMappingEditForm(self, index):
+        """Initialize the mapping row editor form with the data of the selected row.
+        
+        Parameters
+        ----------
+        index : QModelIndex
+            The index of the selected row in the mapping table.
+        """
         # Get the data for the current row and update the widgets in the form
         rowData = self.columnsCDEsMappingData.iloc[index.row(), :]
         self.mappingRowIndex.setText(str(index.row()))
@@ -780,6 +811,13 @@ class MIPDatasetMapperWindow(object):
             self.transform.setText(str(rowData["transform"]))
 
     def updateMappingEditForm(self, index):
+        """Update the mapping table row form for a given index.
+        
+        Parameters
+        ----------
+        index : QModelIndex
+            The index of the selected row to be updated in the mapping table.
+        """
         # Get the data for the current row and update the widgets in the form
         rowIndex = int(self.mappingRowIndex.text())
         rowData = self.columnsCDEsMappingData.iloc[rowIndex, :]
@@ -807,6 +845,7 @@ class MIPDatasetMapperWindow(object):
                 self.transform.setText('{ "X": "Y", "Y": "X" }')
 
     def updateMappingTableRow(self):
+        """Update the selected row of the mapping table with the data of the form."""
         # Get the data from the form
         rowIndex = int(self.mappingRowIndex.text())
         datasetColumn = self.datasetColumn.text()
@@ -1062,8 +1101,16 @@ class MIPDatasetMapperWindow(object):
         self.mappingFilePathLabel.setEnabled(True)
 
     def checkMapping(self):
-        """Check the mapping."""
-        # Check if the mapping contains unique column / CDE pairs
+        """Check the content of the mapping table.
+        
+        This function checks if:
+        
+            *   The mapping table contains unique mapping to a specific CDE code.
+            *   The mapping contains only valid CDE codes.
+            *   The mapping transform is correctly formatted.
+
+        """
+        # Check if the mapping table contains unique mapping to a specific CDE code
         if len(self.columnsCDEsMappingData["cde_code"].unique()) != len(
             self.columnsCDEsMappingData["cde_code"]
         ):
@@ -1081,6 +1128,10 @@ class MIPDatasetMapperWindow(object):
             self.updateStatusbar(errMsg)
             self.disableMappingMapButtons()
             return
+        # Check if the mapping table contains unique mapping of a column of the input dataset
+        # COMMENTED - Otherwise, this would not allow to map a column of the input dataset
+        # to the different CDE codes.
+        # UNCOMMENT IF NEEDED
         # if len(self.columnsCDEsMappingData["dataset_column"].unique()) != len(
         #     self.columnsCDEsMappingData["dataset_column"]
         # ):
