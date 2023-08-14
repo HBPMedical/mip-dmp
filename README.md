@@ -23,7 +23,8 @@ $ virtualenv venv -p python3.9
 
 ```bash
 $ source ./venv/bin/activate
-(venv) $ pip install git+https://github.com/HBPMedical/mip-dmp.git@0.0.5
+(venv)$ pip install -r https://raw.githubusercontent.com/HBPMedical/mip-dmp/main/requirements.txt
+(venv)$ pip install git+https://github.com/HBPMedical/mip-dmp.git@0.0.5
 ```
 
 ### For the developer
@@ -46,7 +47,8 @@ $ virtualenv venv -p python3.9
 
 ```bash
 $ source ./venv/bin/activate
-(venv) $ pip install -e .
+(venv)$ pip install -r requirements.txt
+(venv)$ pip install -e .
 ```
 
 ## Usage
