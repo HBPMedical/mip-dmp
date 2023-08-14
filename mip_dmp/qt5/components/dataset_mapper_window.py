@@ -48,7 +48,7 @@ from PySide2.QtWidgets import (
 import pkg_resources
 
 # Internal imports
-from mip_dmp.io import load_mapping_json
+from mip_dmp.utils.io import load_mapping_json
 from mip_dmp.process.mapping import (
     map_dataset,
     MAPPING_TABLE_COLUMNS,
