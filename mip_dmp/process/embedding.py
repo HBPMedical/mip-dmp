@@ -21,7 +21,7 @@ from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
 
 # Internal imports
-from mip_dmp.io import load_glove_model, load_c2v_model
+from mip_dmp.utils.io import load_glove_model, load_c2v_model
 
 
 def glove_embedding(text, glove_model):
